@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -45,6 +46,9 @@ export const metadata: Metadata = {
     description:
       "あなたの好きな色を1677万色の中から特定します。bit診断方式による色の好み診断。",
   },
+  verification: {
+    google: "TaOm_LAGUp_4fRTmzV_USJgAIEUimwfCDb5l-Q-DsPY",
+  },
   alternates: {
     canonical: "/",
   },
@@ -66,6 +70,9 @@ export default function RootLayout({
       >
         {children}
         <SpeedInsights />
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
       </body>
     </html>
   );
