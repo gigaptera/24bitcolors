@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -62,6 +64,23 @@ export const viewport: { themeColor: string } = {
   themeColor: "#E8E8E8",
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "24bitColors",
+  url: "https://24bitcolors.com",
+  description:
+    "20の質問であなたの好きな色を1677万色の中から特定します。bit診断方式による色の好み診断。",
+  publisher: {
+    "@type": "Organization",
+    name: "24bitColors Team",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://24bitcolors.com/icon.png",
+    },
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -72,7 +91,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <div className="flex min-h-screen flex-col">
+          <Header />
+          <main className="flex-grow flex flex-col">{children}</main>
+          <Footer />
+        </div>
+        <Script
+          id="json-ld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <SpeedInsights />
         {process.env.NEXT_PUBLIC_GA_ID && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />

@@ -83,7 +83,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex min-h-screen items-center justify-center p-4">
+    <div className="flex flex-grow w-full items-center justify-center p-4">
       <main className="w-full max-w-md p-8">
         {screen === "start" && <StartScreen onStart={handleStart} />}
 

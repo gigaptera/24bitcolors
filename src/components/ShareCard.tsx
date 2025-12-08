@@ -158,7 +158,7 @@ export function ShareCard({ color, hex, onClose }: ShareCardProps) {
             className="mb-6 max-h-[70vh] w-auto shadow-2xl"
           />
         ) : (
-          <div className="mb-6 flex h-96 w-64 items-center justify-center bg-gray-200">
+          <div className="mb-6 flex h-96 w-64 items-center justify-center bg-[#E8E8E8]">
             <span
               className="text-gray-500"
               style={{ fontFamily: "Georgia, serif" }}
