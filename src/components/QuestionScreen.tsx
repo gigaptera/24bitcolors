@@ -12,6 +12,7 @@ interface QuestionScreenProps {
   confidence: number;
   onSelectA: () => void;
   onSelectB: () => void;
+  onUndo?: () => void;
 }
 
 export function QuestionScreen({
@@ -20,55 +21,71 @@ export function QuestionScreen({
   colorA,
   colorB,
   prediction,
-  confidence,
   onSelectA,
   onSelectB,
+  onUndo,
 }: QuestionScreenProps) {
   const progress = (questionNumber / totalQuestions) * 100;
 
   return (
     <div className="flex w-full flex-col items-center">
       {/* プログレスバー */}
-      <div className="mb-4 h-1.5 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
+      <div className="mb-6 h-px w-full bg-gray-400">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 transition-all duration-300"
+          className="h-full bg-black transition-all duration-300"
           style={{ width: `${progress}%` }}
         />
       </div>
 
-      {/* 質問カウント */}
-      <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
-        質問 {questionNumber + 1} / {totalQuestions}
-      </p>
+      {/* 質問カウント + 戻るボタン */}
+      <div className="mb-4 flex w-full items-center justify-between">
+        <div className="w-16">
+          {onUndo && (
+            <button
+              onClick={onUndo}
+              className="text-sm text-gray-500 transition-colors hover:text-black"
+              style={{ fontFamily: "Georgia, serif" }}
+            >
+              ← 戻る
+            </button>
+          )}
+        </div>
+        <p
+          className="text-sm tracking-wider text-gray-500"
+          style={{ fontFamily: '"SF Mono", monospace' }}
+        >
+          {questionNumber + 1} / {totalQuestions}
+        </p>
+        <div className="w-16" />
+      </div>
 
       {/* 質問テキスト */}
-      <h2 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white">
+      <h2
+        className="mb-8 text-xl font-normal"
+        style={{ fontFamily: "Georgia, serif" }}
+      >
         どちらの色がお好みですか？
       </h2>
 
       {/* 色選択 */}
-      <div className="mb-6 grid w-full grid-cols-2 gap-4">
+      <div className="mb-8 grid w-full max-w-md grid-cols-2 gap-6">
         <ColorButton color={colorA} onClick={onSelectA} />
         <ColorButton color={colorB} onClick={onSelectB} />
       </div>
 
       {/* 予測表示 */}
       {prediction && (
-        <div className="flex items-center gap-3 rounded-xl bg-gray-100 px-4 py-3 dark:bg-gray-800">
+        <div className="flex items-center gap-4">
           <div
-            className="h-8 w-8 rounded-full shadow-inner"
+            className="h-6 w-6 border border-black"
             style={{ backgroundColor: oklchToHex(prediction) }}
           />
-          <div className="text-sm">
-            <span className="text-gray-600 dark:text-gray-400">
-              現在の予想:{" "}
-            </span>
-            <span className="font-medium text-gray-900 dark:text-white">
-              {oklchToHex(prediction)}
-            </span>
-            <span className="ml-2 text-gray-500 dark:text-gray-500">
-              ({Math.round(confidence)}%)
-            </span>
+          <div
+            className="text-sm"
+            style={{ fontFamily: '"SF Mono", monospace' }}
+          >
+            <span className="text-gray-500">Prediction: </span>
+            <span className="text-gray-800">{oklchToHex(prediction)}</span>
           </div>
         </div>
       )}

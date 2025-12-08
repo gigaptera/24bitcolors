@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { OklchColor } from "@/lib/oklch";
 
 interface ShareCardProps {
@@ -27,20 +27,20 @@ function generateGalleryShareCard(
   ctx.fillStyle = "#E8E8E8";
   ctx.fillRect(0, 0, 1080, 1920);
 
-  // アートワーク配置
-  const artX = 180;
-  const artY = 480;
-  const artWidth = 720;
-  const artHeight = 480;
+  // アートワーク配置（より大きく、上寄り）
+  const artX = 80;
+  const artY = 200;
+  const artWidth = 920;
+  const artHeight = 920; // 正方形に近い大きなサイズ
 
   // シャドウ
-  ctx.shadowColor = "rgba(0, 0, 0, 0.12)";
-  ctx.shadowBlur = 35;
+  ctx.shadowColor = "rgba(0, 0, 0, 0.15)";
+  ctx.shadowBlur = 40;
   ctx.shadowOffsetX = 0;
-  ctx.shadowOffsetY = 12;
+  ctx.shadowOffsetY = 15;
 
   // 黒フレーム
-  const frameThickness = 8;
+  const frameThickness = 6;
   ctx.fillStyle = "#000000";
   ctx.fillRect(
     artX - frameThickness,
@@ -58,32 +58,32 @@ function generateGalleryShareCard(
 
   // ミュージアムラベル
   const labelX = artX;
-  const labelBaseY = artY + artHeight + 100;
+  const labelBaseY = artY + artHeight + 80;
 
   // "Your Color"
   ctx.fillStyle = "#2C2C2C";
-  ctx.font = '500 52px Georgia, "Times New Roman", serif';
+  ctx.font = '500 64px Georgia, "Times New Roman", serif';
   ctx.textAlign = "left";
   ctx.textBaseline = "top";
   ctx.fillText("Your Color", labelX, labelBaseY);
 
   // HEXコード
-  ctx.font = '400 46px "SF Mono", "Courier New", Courier, monospace';
+  ctx.font = '400 56px "SF Mono", "Courier New", Courier, monospace';
   ctx.fillStyle = "#000000";
-  ctx.fillText(colorHex.toUpperCase(), labelX, labelBaseY + 70);
+  ctx.fillText(colorHex.toUpperCase(), labelX, labelBaseY + 90);
 
-  // "24bitColors, 2025"
-  ctx.font = "300 36px Georgia, serif";
+  // "24bitcolors.com 2025"
+  ctx.font = "300 42px Georgia, serif";
   ctx.fillStyle = "#666666";
-  ctx.fillText("24bitColors, 2025", labelX, labelBaseY + 135);
+  ctx.fillText("24bitcolors.com 2025", labelX, labelBaseY + 170);
 
   // OKLCH値
-  ctx.font = '300 30px "SF Mono", monospace';
+  ctx.font = '300 36px "SF Mono", monospace';
   ctx.fillStyle = "#999999";
   const oklchText = `L:${Math.round(oklchData.l * 100)}  C:${Math.round(
     oklchData.c * 100
   )}  H:${Math.round(oklchData.h)}°`;
-  ctx.fillText(oklchText, labelX, labelBaseY + 190);
+  ctx.fillText(oklchText, labelX, labelBaseY + 235);
 
   return canvas.toDataURL("image/png");
 }
@@ -128,7 +128,6 @@ export function ShareCard({ color, hex, onClose }: ShareCardProps) {
           text: `私の好きな色は ${hex} です! #24bitColors #YourColor`,
         });
       } else {
-        // シェアAPIが使えない場合はダウンロード
         handleDownload();
       }
     } catch (error) {
@@ -142,48 +141,52 @@ export function ShareCard({ color, hex, onClose }: ShareCardProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
-      <div className="flex max-w-md flex-col items-center">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }}
+      onClick={onClose}
+    >
+      <div
+        className="flex max-w-md flex-col items-center"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* プレビュー */}
         {imageDataUrl ? (
           <img
             src={imageDataUrl}
             alt="Share Card"
-            className="mb-6 max-h-[70vh] w-auto rounded-2xl shadow-2xl"
+            className="mb-6 max-h-[70vh] w-auto shadow-2xl"
           />
         ) : (
-          <div className="mb-6 flex h-96 w-64 items-center justify-center rounded-2xl bg-gray-800">
-            <span className="text-white">生成中...</span>
+          <div className="mb-6 flex h-96 w-64 items-center justify-center bg-gray-200">
+            <span
+              className="text-gray-500"
+              style={{ fontFamily: "Georgia, serif" }}
+            >
+              生成中...
+            </span>
           </div>
         )}
 
         {/* アクションボタン */}
-        <div className="flex gap-3">
+        <div className="flex w-full gap-3">
           <button
             onClick={handleShare}
             disabled={isGenerating || !imageDataUrl}
-            className="flex items-center gap-2 rounded-full bg-blue-500 px-6 py-3 font-medium text-white transition-all hover:bg-blue-600 disabled:opacity-50"
+            className="flex-1 bg-white py-4 text-black shadow-lg transition-all hover:bg-gray-100 disabled:opacity-50"
+            style={{ fontFamily: "Georgia, serif" }}
           >
-            {isGenerating ? "処理中..." : "📤 シェア"}
+            {isGenerating ? "処理中..." : "シェア"}
           </button>
           <button
             onClick={handleDownload}
             disabled={!imageDataUrl}
-            className="flex items-center gap-2 rounded-full bg-emerald-500 px-6 py-3 font-medium text-white transition-all hover:bg-emerald-600 disabled:opacity-50"
+            className="flex-1 border border-white bg-transparent py-4 text-white shadow-lg transition-all hover:bg-white hover:text-black disabled:opacity-50"
+            style={{ fontFamily: "Georgia, serif" }}
           >
-            💾 保存
-          </button>
-          <button
-            onClick={onClose}
-            className="flex items-center justify-center rounded-full bg-gray-700 px-4 py-3 text-white transition-all hover:bg-gray-600"
-          >
-            ✕
+            保存
           </button>
         </div>
-
-        <p className="mt-4 text-center text-sm text-gray-400">
-          Instagram Story サイズ (1080 x 1920)
-        </p>
       </div>
     </div>
   );

@@ -1,26 +1,70 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #e8e8e8;
+  --foreground: #2c2c2c;
+  --accent: #000000;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-serif: Georgia, "Times New Roman", serif;
+  --font-mono: "SF Mono", "Courier New", Courier, monospace;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Georgia, "Times New Roman", serif;
+  min-height: 100vh;
+}
+
+/* 美術館風ボタン */
+.btn-museum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  background: #000000;
+  color: #ffffff;
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-museum:hover {
+  background: #333333;
+}
+
+.btn-museum-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  background: transparent;
+  color: #000000;
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  border: 1px solid #000000;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-museum-outline:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+/* 黒フレーム付きカラーカード */
+.color-frame {
+  padding: 4px;
+  background: #000000;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }

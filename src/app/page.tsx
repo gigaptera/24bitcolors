@@ -17,6 +17,11 @@ import {
 
 type Screen = "start" | "question" | "result";
 
+interface HistoryEntry {
+  state: DiagnosisState;
+  pair: ColorPair;
+}
+
 export default function Home() {
   const [screen, setScreen] = useState<Screen>("start");
   const [diagnosisState, setDiagnosisState] = useState<DiagnosisState | null>(
@@ -24,18 +29,26 @@ export default function Home() {
   );
   const [colorPair, setColorPair] = useState<ColorPair | null>(null);
   const [result, setResult] = useState<DiagnosisResult | null>(null);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
 
   const handleStart = useCallback(() => {
     const state = createDiagnosisState();
     const pair = selectOptimalColorPair(state);
     setDiagnosisState(state);
     setColorPair(pair);
+    setHistory([]);
     setScreen("question");
   }, []);
 
   const handleSelect = useCallback(
     (choice: "A" | "B") => {
       if (!diagnosisState || !colorPair) return;
+
+      // 現在の状態を履歴に追加
+      setHistory((prev) => [
+        ...prev,
+        { state: diagnosisState, pair: colorPair },
+      ]);
 
       const newState = processChoice(diagnosisState, choice, colorPair);
       setDiagnosisState(newState);
@@ -52,16 +65,26 @@ export default function Home() {
     [diagnosisState, colorPair]
   );
 
+  const handleUndo = useCallback(() => {
+    if (history.length === 0) return;
+
+    const lastEntry = history[history.length - 1];
+    setDiagnosisState(lastEntry.state);
+    setColorPair(lastEntry.pair);
+    setHistory((prev) => prev.slice(0, -1));
+  }, [history]);
+
   const handleRestart = useCallback(() => {
     setDiagnosisState(null);
     setColorPair(null);
     setResult(null);
+    setHistory([]);
     setScreen("start");
   }, []);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 p-4 dark:from-gray-900 dark:to-gray-800">
-      <main className="w-full max-w-md rounded-3xl bg-white p-8 shadow-xl dark:bg-gray-900">
+    <div className="flex min-h-screen items-center justify-center p-4">
+      <main className="w-full max-w-md p-8">
         {screen === "start" && <StartScreen onStart={handleStart} />}
 
         {screen === "question" && diagnosisState && colorPair && (
@@ -74,6 +97,7 @@ export default function Home() {
             confidence={diagnosisState.confidence}
             onSelectA={() => handleSelect("A")}
             onSelectB={() => handleSelect("B")}
+            onUndo={history.length > 0 ? handleUndo : undefined}
           />
         )}
 

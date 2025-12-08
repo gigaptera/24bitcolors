@@ -7,22 +7,32 @@ interface StartScreenProps {
 export function StartScreen({ onStart }: StartScreenProps) {
   return (
     <div className="flex flex-col items-center text-center">
-      <div className="mb-4 text-6xl">🎨</div>
-      <h1 className="mb-2 text-3xl font-bold text-gray-900 dark:text-white">
+      {/* タイトル */}
+      <h1
+        className="mb-3 text-4xl font-normal tracking-wide"
+        style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
+      >
         24bitColors
       </h1>
-      <p className="mb-6 text-gray-600 dark:text-gray-400">
-        20の質問であなたの好きな色を特定します
-      </p>
-      <div className="mb-8 max-w-xs text-sm text-gray-500 dark:text-gray-500">
-        bit診断方式で1677万色の中から
-        <br />
-        あなたの真の好みを見つけ出します
-      </div>
-      <button
-        onClick={onStart}
-        className="rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl"
+
+      {/* サブタイトル */}
+      <p
+        className="mb-8 text-lg text-gray-600"
+        style={{ fontFamily: "Georgia, serif" }}
       >
+        Discover Your Favorite Color
+      </p>
+
+      {/* 説明文 */}
+      <div
+        className="mb-10 max-w-sm text-sm leading-relaxed text-gray-500"
+        style={{ fontFamily: "Georgia, serif" }}
+      >
+        20の質問への回答から、1677万色の中であなたが最も好む色を統計的に特定します。
+      </div>
+
+      {/* 開始ボタン */}
+      <button onClick={onStart} className="btn-museum">
         診断を開始する
       </button>
     </div>
