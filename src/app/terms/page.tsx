@@ -1,16 +1,16 @@
 export default function TermsPage() {
   return (
     <div className="container mx-auto max-w-3xl px-space-5 py-space-6 font-serif">
-      <h1 className="mb-space-5 text-[length:var(--text-large)] font-medium tracking-wide text-[var(--foreground)]">
+      <h1 className="mb-space-5 text-[length:var(--text-large)] font-medium tracking-wide text-foreground">
         利用規約
       </h1>
-      <div className="space-y-space-4 text-[length:var(--text-base)] leading-8 text-[var(--foreground)]">
+      <div className="space-y-space-4 text-[length:var(--text-base)] leading-8 text-foreground">
         <p>
           この利用規約（以下，「本規約」といいます。）は，24bitColors（以下，「当サイト」といいます。）がこのウェブサイト上で提供するサービス（以下，「本サービス」といいます。）の利用条件を定めるものです。登録ユーザーの皆さま（以下，「ユーザー」といいます。）には，本規約に従って，本サービスをご利用いただきます。
         </p>
 
         <section>
-          <h2 className="mb-space-3 text-[length:var(--text-medium)] font-medium text-[var(--foreground)]">
+          <h2 className="mb-space-3 text-[length:var(--text-medium)] font-medium text-foreground">
             第1条（適用）
           </h2>
           <p>
@@ -19,7 +19,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="mb-space-3 text-[length:var(--text-medium)] font-medium text-[var(--foreground)]">
+          <h2 className="mb-space-3 text-[length:var(--text-medium)] font-medium text-foreground">
             第2条（禁止事項）
           </h2>
           <p>
@@ -36,7 +36,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="mb-space-3 text-[length:var(--text-medium)] font-medium text-[var(--foreground)]">
+          <h2 className="mb-space-3 text-[length:var(--text-medium)] font-medium text-foreground">
             第3条（免責事項）
           </h2>
           <p>
@@ -48,7 +48,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="mb-space-3 text-[length:var(--text-medium)] font-medium text-[var(--foreground)]">
+          <h2 className="mb-space-3 text-[length:var(--text-medium)] font-medium text-foreground">
             第4条（利用規約の変更）
           </h2>
           <p>
@@ -56,7 +56,7 @@ export default function TermsPage() {
           </p>
         </section>
 
-        <div className="mt-space-6 text-right text-[length:var(--text-micro)] text-[var(--muted-foreground)]">
+        <div className="mt-space-6 text-right text-[length:var(--text-micro)] text-muted-foreground">
           2025年12月1日 制定
         </div>
       </div>

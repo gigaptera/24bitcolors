@@ -13,7 +13,8 @@ interface ShareActionsProps {
 export function ShareActions({ url, colors }: ShareActionsProps) {
   const [copied, setCopied] = useState(false);
 
-  const text = `私の好きな色は「${colors.name} (${colors.code})」でした。\n\n24bitColors - あなたの好きな色を見つけよう`;
+  const cleanHex = colors.code.replace("#", "");
+  const text = `美しい色を見つけました。\n\nPigment No. ${cleanHex}\n\n#24bitColors`;
 
   const handleCopy = async () => {
     try {
@@ -31,7 +32,7 @@ export function ShareActions({ url, colors }: ShareActionsProps) {
       <div className="relative">
         <button
           onClick={handleCopy}
-          className="group relative flex h-11 w-11 items-center justify-center rounded-full border border-[var(--foreground)] bg-[var(--card)] transition-all hover:bg-[var(--foreground)] hover:text-[var(--background)]"
+          className="group relative flex h-11 w-11 items-center justify-center rounded-full border border-foreground bg-card transition-all hover:bg-foreground hover:text-background"
           aria-label="リンクをコピー"
         >
           {copied ? (
@@ -42,7 +43,7 @@ export function ShareActions({ url, colors }: ShareActionsProps) {
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
-              className="text-[var(--foreground)] group-hover:text-[var(--background)]"
+              className="text-foreground group-hover:text-background"
             >
               <polyline points="20 6 9 17 4 12" />
             </svg>
@@ -54,14 +55,14 @@ export function ShareActions({ url, colors }: ShareActionsProps) {
               fill="none"
               stroke="currentColor"
               strokeWidth="1.5"
-              className="text-[var(--muted-foreground)] transition-colors group-hover:text-[var(--background)]"
+              className="text-muted-foreground transition-colors group-hover:text-background"
             >
               <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
               <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
             </svg>
           )}
           {copied && (
-            <span className="absolute -top-10 whitespace-nowrap bg-[var(--foreground)] px-2 py-1 text-[length:var(--text-micro)] text-[var(--background)] opacity-0 transition-opacity animate-fade-in-up">
+            <span className="absolute -top-10 whitespace-nowrap bg-foreground px-2 py-1 text-[length:var(--text-micro)] text-background opacity-0 transition-opacity animate-fade-in-up">
               Copied!
             </span>
           )}
@@ -75,7 +76,7 @@ export function ShareActions({ url, colors }: ShareActionsProps) {
         )}&url=${encodeURIComponent(url)}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="group flex h-11 w-11 items-center justify-center rounded-full border border-[var(--foreground)] bg-[var(--card)] transition-all hover:bg-[var(--foreground)] hover:text-[var(--background)]"
+        className="group flex h-11 w-11 items-center justify-center rounded-full border border-foreground bg-card transition-all hover:bg-foreground hover:text-background"
         aria-label="X (Twitter)でシェア"
       >
         <svg
@@ -83,7 +84,7 @@ export function ShareActions({ url, colors }: ShareActionsProps) {
           height="18"
           viewBox="0 0 24 24"
           fill="currentColor"
-          className="text-[var(--muted-foreground)] transition-colors group-hover:text-[var(--background)]"
+          className="text-muted-foreground transition-colors group-hover:text-background"
         >
           <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
         </svg>
@@ -95,7 +96,7 @@ export function ShareActions({ url, colors }: ShareActionsProps) {
         href="https://instagram.com"
         target="_blank"
         rel="noopener noreferrer"
-        className="group flex h-11 w-11 items-center justify-center rounded-full border border-[var(--foreground)] bg-[var(--card)] transition-all hover:bg-[var(--foreground)] hover:text-[var(--background)]"
+        className="group flex h-11 w-11 items-center justify-center rounded-full border border-foreground bg-card transition-all hover:bg-foreground hover:text-background"
         aria-label="Instagramを開く"
         onClick={() => {
           // Instagramはテキストシェアできないので、画像保存を促すトーストなどを出すのが親切だが、今回はリンクのみ
@@ -108,7 +109,7 @@ export function ShareActions({ url, colors }: ShareActionsProps) {
           fill="none"
           stroke="currentColor"
           strokeWidth="1.5"
-          className="text-[var(--muted-foreground)] transition-colors group-hover:text-[var(--background)]"
+          className="text-muted-foreground transition-colors group-hover:text-background"
         >
           <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
           <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />

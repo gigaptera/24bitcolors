@@ -38,7 +38,7 @@ export function ThemeToggle() {
         height="20"
         fill="currentColor"
         viewBox="0 0 32 32"
-        className="text-[var(--accent)] transition-transform duration-500 ease-in-out"
+        className="text-foreground transition-transform duration-500 ease-in-out"
         style={{
           transform: isDark ? "rotate(180deg)" : "rotate(0deg)",
         }}

@@ -1,12 +1,12 @@
 export default function PrivacyPage() {
   return (
     <div className="container mx-auto max-w-3xl px-space-5 py-space-6 font-serif">
-      <h1 className="mb-space-5 text-[length:var(--text-large)] font-medium tracking-wide text-[var(--foreground)]">
+      <h1 className="mb-space-5 text-[length:var(--text-large)] font-medium tracking-wide text-foreground">
         プライバシーポリシー
       </h1>
-      <div className="space-y-space-5 text-[length:var(--text-base)] leading-8 text-[var(--foreground)]">
+      <div className="space-y-space-5 text-[length:var(--text-base)] leading-8 text-foreground">
         <section>
-          <h2 className="mb-space-3 text-[length:var(--text-medium)] font-medium text-[var(--foreground)]">
+          <h2 className="mb-space-3 text-[length:var(--text-medium)] font-medium text-foreground">
             個人情報の利用目的
           </h2>
           <p>
@@ -16,7 +16,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="mb-space-3 text-[length:var(--text-medium)] font-medium text-[var(--foreground)]">
+          <h2 className="mb-space-3 text-[length:var(--text-medium)] font-medium text-foreground">
             広告について
           </h2>
           <p>
@@ -29,7 +29,7 @@ export default function PrivacyPage() {
               href="https://policies.google.com/technologies/ads?hl=ja"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[var(--foreground)] underline decoration-1 underline-offset-4 hover:text-[var(--muted-foreground)]"
+              className="text-foreground underline decoration-1 underline-offset-4 hover:text-muted-foreground"
             >
               「広告 – ポリシーと規約 – Google」
             </a>
@@ -38,7 +38,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="mb-space-3 text-[length:var(--text-medium)] font-medium text-[var(--foreground)]">
+          <h2 className="mb-space-3 text-[length:var(--text-medium)] font-medium text-foreground">
             アクセス解析ツールについて
           </h2>
           <p>
@@ -46,7 +46,7 @@ export default function PrivacyPage() {
           </p>
         </section>
 
-        <div className="mt-space-6 text-right text-[length:var(--text-micro)] text-[var(--muted-foreground)]">
+        <div className="mt-space-6 text-right text-[length:var(--text-micro)] text-muted-foreground">
           2025年12月1日 制定
         </div>
       </div>

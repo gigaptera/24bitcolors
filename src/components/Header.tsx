@@ -3,10 +3,10 @@ import { ThemeToggle } from "./ThemeToggle";
 
 export function Header() {
   return (
-    <header className="flex w-full items-center justify-between px-space-5 py-space-3">
+    <header className="fixed top-0 z-50 flex w-full items-center justify-between border-b border-border/40 bg-background/80 backdrop-blur-md px-space-5 py-space-3 transition-all">
       <Link href="/" className="group">
         <h1
-          className="text-[length:var(--text-medium)] font-normal tracking-wide text-[var(--accent)] transition-opacity group-hover:opacity-70"
+          className="text-[length:var(--text-medium)] font-normal tracking-wide text-foreground transition-opacity group-hover:opacity-70"
           style={{ fontFamily: '"Times New Roman", serif' }}
         >
           24bitColors
