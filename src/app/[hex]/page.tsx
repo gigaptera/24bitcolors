@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getColorInfo, isValidHex } from "@/lib/color-utils";
 import { ShareActions } from "@/components/ShareActions";
+import { Button } from "@/components/ui/button";
 
 type Params = Promise<{ hex: string }>;
 
@@ -161,9 +162,9 @@ export default async function ColorDetailPage({ params }: PageProps) {
 
           {/* 別のアクション */}
           <div className="flex flex-col items-center justify-center gap-space-4">
-            <Link href="/" className="btn-museum">
-              新しい色を探す（最初から）
-            </Link>
+            <Button asChild className="btn-museum">
+              <Link href="/">新しい色を探す（最初から）</Link>
+            </Button>
           </div>
         </div>
       </div>

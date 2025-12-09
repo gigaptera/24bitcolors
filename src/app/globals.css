@@ -1,42 +1,83 @@
 @import "tailwindcss";
 
-:root {
-  /* 
-   * Museum Custom Palette (Light)
-   * Background: #F9F9F9 (Neutral-50) - Airy, Gallery-like
-   * Foreground: #1A1A1A (Neutral-800) - Soft Black
-   * Muted: #666666 (Neutral-600) - AA Safe (4.5:1+)
-   */
-  --background: #f9f9f9;
-  --foreground: #1a1a1a;
-  --muted-foreground: #666666;
-  --accent: #000000;
-  --btn-bg: #1a1a1a;
-  --btn-text: #f9f9f9;
-  --btn-hover: #2a2a2a;
-  --shadow-floating: 0 30px 60px -10px rgba(0, 0, 0, 0.2);
-}
+@layer base {
+  :root {
+    --background: 0 0% 97.6%; /* Neutral-50 #F9F9F9 */
+    --foreground: 0 0% 10.2%; /* Neutral-800 #1A1A1A */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10.2%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10.2%;
+    --primary: 0 0% 10.2%; /* #1A1A1A */
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 10.2%;
+    --radius: 0px;
 
-.dark {
-  /* 
-   * Museum Custom Palette (Dark)
-   * Background: #080808 (Neutral-900) - Deep Ink
-   * Foreground: #E5E5E5 (Neutral-100) - Soft White
-   * Muted: #808080 (Neutral-500)
-   */
-  --background: #080808;
-  --foreground: #e5e5e5;
-  --muted-foreground: #808080;
-  --accent: #ffffff;
-  --btn-bg: #e5e5e5;
-  --btn-text: #080808;
-  --btn-hover: #d4d4d4;
-  --shadow-floating: 0 30px 60px -10px rgba(255, 255, 255, 0.15);
+    /* Museum Custom */
+    --shadow-floating: 0 30px 60px -10px rgba(0, 0, 0, 0.2);
+  }
+
+  .dark {
+    --background: 0 0% 3.1%; /* Neutral-900 #080808 */
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.1%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.1%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+
+    --shadow-floating: 0 30px 60px -10px rgba(255, 255, 255, 0.15);
+  }
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* Shadcn Colors */
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --radius: var(--radius);
+
+  /* Museum Theme Extended */
+
   --font-serif: Georgia, "Times New Roman", serif;
   --font-mono: "SF Mono", "Courier New", Courier, monospace;
 
@@ -64,55 +105,6 @@ body {
   color: var(--foreground);
   font-family: Georgia, "Times New Roman", serif;
   min-height: 100vh;
-}
-
-/* 美術館風ボタン */
-.btn-museum {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 32px;
-  background: var(--btn-bg);
-  color: var(--btn-text);
-  font-family: Georgia, serif;
-  font-weight: 400;
-  font-size: 14px;
-  letter-spacing: 0.05em;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn-museum:hover {
-  background: var(--btn-hover);
-}
-
-.btn-museum-outline {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 32px;
-  background: transparent;
-  color: var(--btn-bg);
-  font-family: Georgia, serif;
-  font-weight: 400;
-  font-size: 14px;
-  letter-spacing: 0.05em;
-  border: 1px solid var(--btn-bg);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn-museum-outline:hover {
-  background: var(--btn-bg);
-  color: var(--btn-text);
-}
-
-/* 黒フレーム付きカラーカード */
-.color-frame {
-  padding: 4px;
-  background: #000000;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
 /* 浮遊感のあるシャドウ (Light: Black / Dark: White) */

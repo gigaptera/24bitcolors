@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { OklchColor } from "@/lib/oklch";
 import { useTheme } from "./ThemeProvider";
+import { Button } from "@/components/ui/button";
 
 interface ShareCardProps {
   color: OklchColor;
@@ -317,28 +318,21 @@ export function ShareCard({ color, hex, onClose }: ShareCardProps) {
 
         {/* アクションボタン */}
         <div className="flex w-full gap-space-3">
-          <button
+          <Button
             onClick={handleShare}
             disabled={isGenerating || !imageDataUrl}
-            className={`flex-1 py-space-4 shadow-lg transition-all hover:opacity-90 disabled:opacity-50 ${
-              isDark ? "bg-white text-black" : "bg-black text-white"
-            }`}
-            style={{ fontFamily: "Georgia, serif" }}
+            className="h-auto flex-1 py-space-4 text-base shadow-lg"
           >
             {isGenerating ? "処理中..." : "シェア"}
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={handleDownload}
             disabled={!imageDataUrl}
-            className={`flex-1 border py-space-4 shadow-lg transition-all disabled:opacity-50 ${
-              isDark
-                ? "border-white bg-transparent text-white hover:bg-white hover:text-black"
-                : "border-black bg-transparent text-black hover:bg-black hover:text-white"
-            }`}
-            style={{ fontFamily: "Georgia, serif" }}
+            variant="outline"
+            className="h-auto flex-1 py-space-4 text-base shadow-lg"
           >
             保存
-          </button>
+          </Button>
         </div>
 
         {/* SNS Links (Manual Attach) */}

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "24bitColors - あなたの好きな色を見つけよう",
@@ -40,9 +41,9 @@ export default function Home() {
 
         {/* 開始ボタン (LP -> Diagnosis) */}
         <div className="animate-fade-in delay-300">
-          <Link href="/diagnosis" className="btn-museum">
-            診断を開始する
-          </Link>
+          <Button asChild className="btn-museum">
+            <Link href="/diagnosis">診断を開始する</Link>
+          </Button>
         </div>
       </main>
     </div>

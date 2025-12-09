@@ -5,6 +5,8 @@ import { DiagnosisResult } from "@/lib/color-diagnosis";
 import { saveFeedback } from "@/lib/feedback";
 import { ShareCard } from "./ShareCard";
 import { ShareActions } from "./ShareActions";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface ResultScreenProps {
   result: DiagnosisResult;
@@ -206,17 +208,17 @@ export function ResultScreen({ result }: ResultScreenProps) {
                 {ratingLabels[rating - 1].label}
               </div>
             )}
-            <button
+            <Button
               onClick={handleRatingSubmit}
               disabled={rating === null}
-              className={`text-[length:var(--text-base)] ${
-                rating !== null
-                  ? "btn-museum"
-                  : "cursor-not-allowed border border-transparent bg-[var(--muted-foreground)]/20 px-6 py-3 text-[var(--muted-foreground)]"
-              }`}
+              className={
+                rating === null
+                  ? "cursor-not-allowed opacity-50 bg-muted text-muted-foreground"
+                  : ""
+              }
             >
               評価を送信
-            </button>
+            </Button>
           </div>
         ) : (
           <div className="mb-space-6 w-full animate-fade-in">
@@ -235,18 +237,12 @@ export function ResultScreen({ result }: ResultScreenProps) {
 
             {/* アクションボタン */}
             <div className="flex justify-center gap-4">
-              <button
-                onClick={() => setShowShareCard(true)}
-                className="btn-museum"
-              >
+              <Button onClick={() => setShowShareCard(true)}>
                 画像でシェア
-              </button>
-              <a
-                href={`/${result.hex.replace("#", "")}`}
-                className="btn-museum-outline"
-              >
-                詳細を見る
-              </a>
+              </Button>
+              <Button variant="outline" asChild>
+                <Link href={`/${result.hex.replace("#", "")}`}>詳細を見る</Link>
+              </Button>
             </div>
           </div>
         )}

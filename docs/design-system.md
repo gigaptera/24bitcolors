@@ -120,4 +120,40 @@ Base Size: **16px (1rem)**
 
 ---
 
-_This document serves as the single source of truth for design decisions._
+## 6. UI Component Architecture (shadcn/ui "Museum Theme")
+
+開発効率とデザインの一貫性を両立するため、ヘッドレス UI ライブラリ（Radix UI）をベースにした **shadcn/ui** を採用しますが、そのスタイルは**「Museum Theme」で完全に上書き**します。
+
+### Strategy: "Museum Overwrite"
+
+shadcn の標準スタイル（`default`）をそのまま使うのではなく、本デザインシステムの定義（セリフ体、角丸なし、特殊なシャドウ）をデフォルトとして適用します。
+これにより、開発者は `class` 指定を意識することなく、コンポーネントを配置するだけで美術館の世界観を再現できます。
+
+### Technologies
+
+- **Core**: Radix UI (Accessibility & Logic)
+- **Styling**: Tailwind CSS v4 (Alpha)
+- **Utils**: `cva` (Class Variance Authority), `clsx`, `tailwind-merge`
+
+### Component Rules
+
+> [!NOTE] > **On-Demand Strategy**:
+> `Button` や `Card` 以外のコンポーネント（Dialog, Input, Select 等）が必要になった際は、shadcn のコードをコピーし、必ず **Museum Theme に適合するようにスタイルを書き換えてから** `src/components/ui/` に追加すること。
+> デザインシステムに適合しない生の shadcn コンポーネントをそのまま使用しない。
+
+#### Buttons
+
+- **Shape**: Always `rounded-none` (Sharp) to match the framed aesthetic.
+- **Font**: Always `serif` (Georgia).
+- **Variants**:
+  - `default`: **Primary Action**. Solid Black (Light) / White (Dark). `.btn-museum` equivalent.
+  - `secondary`: **Alternative Action**. Solid White (Light) / dark Gray (Dark) with delicate border.
+  - `destructive`: **Danger**. Deep Red text, borders, or background depending on importance.
+  - `outline`: **Bordered**. Transparent background with `foreground` border. `.btn-museum-outline` equivalent.
+  - `ghost`: **Subtle**. Hover effect only. Used for icon buttons or less prominent actions.
+  - `link`: **Hyperlink**. Underline on hover, `serif`.
+
+#### Cards
+
+- **Default Variant**: 額縁スタイル（Black Border / White Border）を適用。
+- **Shadow**: `shadow-sm` の代わりに `floating-shadow` を使用。
