@@ -1,5 +1,12 @@
 import Link from "next/link";
+import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
+
+export const metadata: Metadata = {
+  title: "OKLCH色空間とは",
+  description:
+    "なぜHSLやRGBではなくOKLCHなのか。人間の知覚に忠実な最新の色空間がもたらす「正しい色診断」の科学的根拠。",
+};
 
 export default function OklchLogicPage() {
   return (

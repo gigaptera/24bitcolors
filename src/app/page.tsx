@@ -13,13 +13,13 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="h-screen w-full snap-y snap-mandatory overflow-y-scroll overflow-x-hidden bg-background text-foreground scroll-smooth selection:bg-foreground selection:text-background">
+    <main className="h-[calc(100vh-4rem)] w-full snap-y snap-mandatory overflow-y-scroll overflow-x-hidden bg-background text-foreground scroll-smooth selection:bg-foreground selection:text-background">
       {/* 
         HERO SECTION 
         - Snap Start
         - Full Height
       */}
-      <section className="relative flex h-screen w-full snap-start flex-col items-center justify-center p-6">
+      <section className="relative flex h-full w-full snap-start flex-col items-center justify-center p-6">
         {/* Background Effect: Color Prism / Aurora */}
         <div className="aurora-gradient absolute inset-0 -z-10 animate-pulse-slow opacity-30 dark:opacity-20" />
 
@@ -84,7 +84,7 @@ export default function Home() {
       */}
       <section
         id="about"
-        className="flex h-screen w-full snap-start flex-col items-center justify-center bg-muted/20 p-6 text-center"
+        className="flex h-full w-full snap-start flex-col items-center justify-center bg-muted/20 p-6 text-center"
       >
         <div className="max-w-xl">
           <p className="mb-6 text-xs font-bold uppercase tracking-widest text-muted-foreground opacity-70">

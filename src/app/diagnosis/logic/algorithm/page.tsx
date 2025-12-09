@@ -1,5 +1,12 @@
 import Link from "next/link";
+import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
+
+export const metadata: Metadata = {
+  title: "アルゴリズムの仕組み",
+  description:
+    "ベイズ推定と情報理論を用いた独自の対話エンジン。1677万色からあなたの好みを特定する統計的プロセスの全貌。",
+};
 
 export default function AlgorithmLogicPage() {
   return (
