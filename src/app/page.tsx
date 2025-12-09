@@ -74,17 +74,9 @@ export default function Home() {
     setHistory((prev) => prev.slice(0, -1));
   }, [history]);
 
-  const handleRestart = useCallback(() => {
-    setDiagnosisState(null);
-    setColorPair(null);
-    setResult(null);
-    setHistory([]);
-    setScreen("start");
-  }, []);
-
   return (
-    <div className="flex flex-grow w-full items-center justify-center p-4">
-      <main className="w-full max-w-md p-8">
+    <div className="flex w-full flex-grow items-center justify-center p-space-4">
+      <main className="w-full max-w-md p-space-5">
         {screen === "start" && <StartScreen onStart={handleStart} />}
 
         {screen === "question" && diagnosisState && colorPair && (
@@ -101,9 +93,7 @@ export default function Home() {
           />
         )}
 
-        {screen === "result" && result && (
-          <ResultScreen result={result} onRestart={handleRestart} />
-        )}
+        {screen === "result" && result && <ResultScreen result={result} />}
       </main>
     </div>
   );

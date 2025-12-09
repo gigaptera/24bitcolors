@@ -4,10 +4,10 @@ import { useState } from "react";
 import { DiagnosisResult } from "@/lib/color-diagnosis";
 import { saveFeedback } from "@/lib/feedback";
 import { ShareCard } from "./ShareCard";
+import { ShareActions } from "./ShareActions";
 
 interface ResultScreenProps {
   result: DiagnosisResult;
-  onRestart: () => void;
 }
 
 const ratingLabels = [
@@ -105,7 +105,7 @@ function GalleryCardPreview({
   );
 }
 
-export function ResultScreen({ result, onRestart }: ResultScreenProps) {
+export function ResultScreen({ result }: ResultScreenProps) {
   const [rating, setRating] = useState<number | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [showShareCard, setShowShareCard] = useState(false);
@@ -129,14 +129,14 @@ export function ResultScreen({ result, onRestart }: ResultScreenProps) {
       <div className="flex flex-col items-center text-center">
         {/* タイトル */}
         <h2
-          className="mb-8 text-2xl font-normal"
+          className="mb-space-5 text-[length:var(--text-medium)] font-normal text-[var(--foreground)]"
           style={{ fontFamily: "Georgia, serif" }}
         >
           Diagnosis Complete
         </h2>
 
         {/* ギャラリー風カードプレビュー */}
-        <div className="mb-8">
+        <div className="mb-space-6">
           <GalleryCardPreview
             hex={result.hex}
             lightness={result.color.lightness}
@@ -147,22 +147,22 @@ export function ResultScreen({ result, onRestart }: ResultScreenProps) {
 
         {/* 5段階評価 */}
         {!submitted ? (
-          <div className="mb-8 w-full">
+          <div className="mb-space-6 w-full">
             <p
-              className="mb-4 text-sm text-gray-600"
+              className="mb-space-4 text-[length:var(--text-base)] text-[var(--muted-foreground)]"
               style={{ fontFamily: "Georgia, serif" }}
             >
               この診断結果はいかがでしたか？
             </p>
-            <div className="mb-4 flex justify-center gap-2">
+            <div className="mb-space-4 flex justify-center gap-space-2">
               {ratingLabels.map(({ value, emoji }) => (
                 <button
                   key={value}
                   onClick={() => setRating(value)}
-                  className={`flex h-10 w-10 items-center justify-center border text-sm transition-all ${
+                  className={`flex h-10 w-10 items-center justify-center border text-[length:var(--text-base)] transition-all ${
                     rating === value
-                      ? "border-black bg-black text-white"
-                      : "border-gray-400 bg-transparent text-gray-600 hover:border-black"
+                      ? "border-[var(--foreground)] bg-[var(--foreground)] text-[var(--background)]"
+                      : "border-[var(--muted-foreground)] bg-transparent text-[var(--muted-foreground)] hover:border-[var(--foreground)] hover:text-[var(--foreground)]"
                   }`}
                   style={{ fontFamily: '"SF Mono", monospace' }}
                   aria-label={ratingLabels[value - 1].label}
@@ -173,7 +173,7 @@ export function ResultScreen({ result, onRestart }: ResultScreenProps) {
             </div>
             {rating && (
               <div
-                className="mb-3 text-sm text-gray-500"
+                className="mb-space-3 text-[length:var(--text-base)] text-[var(--muted-foreground)]"
                 style={{ fontFamily: "Georgia, serif" }}
               >
                 {ratingLabels[rating - 1].label}
@@ -182,19 +182,19 @@ export function ResultScreen({ result, onRestart }: ResultScreenProps) {
             <button
               onClick={handleRatingSubmit}
               disabled={rating === null}
-              className={`text-sm ${
+              className={`text-[length:var(--text-base)] ${
                 rating !== null
                   ? "btn-museum"
-                  : "cursor-not-allowed bg-gray-300 px-6 py-3 text-gray-500"
+                  : "cursor-not-allowed border border-transparent bg-[var(--muted-foreground)]/20 px-6 py-3 text-[var(--muted-foreground)]"
               }`}
             >
               評価を送信
             </button>
           </div>
         ) : (
-          <div className="mb-8">
+          <div className="mb-space-6">
             <p
-              className="text-sm text-gray-600"
+              className="text-[length:var(--text-base)] text-[var(--muted-foreground)]"
               style={{ fontFamily: "Georgia, serif" }}
             >
               ✓ フィードバックありがとうございます
@@ -202,14 +202,23 @@ export function ResultScreen({ result, onRestart }: ResultScreenProps) {
           </div>
         )}
 
+        {/* URLシェア (Phase 1.5) */}
+        <ShareActions
+          url={`https://24bitcolors.com/${result.hex.replace("#", "")}`}
+          colors={{ name: result.hex.toUpperCase(), code: result.hex }}
+        />
+
         {/* アクションボタン */}
         <div className="flex gap-4">
           <button onClick={() => setShowShareCard(true)} className="btn-museum">
             画像でシェア
           </button>
-          <button onClick={onRestart} className="btn-museum-outline">
-            もう一度診断
-          </button>
+          <a
+            href={`/${result.hex.replace("#", "")}`}
+            className="btn-museum-outline"
+          >
+            詳細を見る
+          </a>
         </div>
       </div>
 

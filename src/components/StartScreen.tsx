@@ -17,7 +17,7 @@ export function StartScreen({ onStart }: StartScreenProps) {
 
       {/* サブタイトル */}
       <p
-        className="mb-8 text-lg text-gray-600"
+        className="mb-space-5 text-[length:var(--text-medium)] text-[var(--muted-foreground)]"
         style={{ fontFamily: "Georgia, serif" }}
       >
         Discover Your Favorite Color
@@ -25,7 +25,7 @@ export function StartScreen({ onStart }: StartScreenProps) {
 
       {/* 説明文 */}
       <div
-        className="mb-10 max-w-sm text-sm leading-relaxed text-gray-500"
+        className="mb-space-6 max-w-lg text-[length:var(--text-base)] leading-relaxed text-[var(--muted-foreground)]"
         style={{ fontFamily: "Georgia, serif" }}
       >
         20の質問への回答から、1677万色の中であなたが最も好む色を統計的に特定します。

@@ -1,9 +1,35 @@
 @import "tailwindcss";
 
 :root {
-  --background: #e8e8e8;
-  --foreground: #2c2c2c;
+  /* 
+   * Museum Custom Palette (Light)
+   * Background: #F9F9F9 (Neutral-50) - Airy, Gallery-like
+   * Foreground: #1A1A1A (Neutral-800) - Soft Black
+   * Muted: #666666 (Neutral-600) - AA Safe (4.5:1+)
+   */
+  --background: #f9f9f9;
+  --foreground: #1a1a1a;
+  --muted-foreground: #666666;
   --accent: #000000;
+  --btn-bg: #1a1a1a;
+  --btn-text: #f9f9f9;
+  --btn-hover: #2a2a2a;
+}
+
+.dark {
+  /* 
+   * Museum Custom Palette (Dark)
+   * Background: #080808 (Neutral-900) - Deep Ink
+   * Foreground: #E5E5E5 (Neutral-100) - Soft White
+   * Muted: #808080 (Neutral-500)
+   */
+  --background: #080808;
+  --foreground: #e5e5e5;
+  --muted-foreground: #808080;
+  --accent: #ffffff;
+  --btn-bg: #e5e5e5;
+  --btn-text: #080808;
+  --btn-hover: #d4d4d4;
 }
 
 @theme inline {
@@ -11,6 +37,24 @@
   --color-foreground: var(--foreground);
   --font-serif: Georgia, "Times New Roman", serif;
   --font-mono: "SF Mono", "Courier New", Courier, monospace;
+
+  /* Typography: Golden Ratio Scale (1.618) */
+  --text-micro: 10px;
+  --text-base: 16px;
+  --text-medium: 26px;
+  --text-large: 42px;
+  --text-xlarge: 68px;
+  --text-display: 110px;
+
+  /* Spacing: Fibonacci Sequence */
+  --spacing-space-1: 5px;
+  --spacing-space-2: 8px;
+  --spacing-space-3: 13px;
+  --spacing-space-4: 21px;
+  --spacing-space-5: 34px;
+  --spacing-space-6: 55px;
+  --spacing-space-7: 89px;
+  --spacing-space-8: 144px;
 }
 
 body {
@@ -26,8 +70,8 @@ body {
   align-items: center;
   justify-content: center;
   padding: 14px 32px;
-  background: #000000;
-  color: #ffffff;
+  background: var(--btn-bg);
+  color: var(--btn-text);
   font-family: Georgia, serif;
   font-weight: 400;
   font-size: 14px;
@@ -38,7 +82,7 @@ body {
 }
 
 .btn-museum:hover {
-  background: #333333;
+  background: var(--btn-hover);
 }
 
 .btn-museum-outline {
@@ -47,19 +91,19 @@ body {
   justify-content: center;
   padding: 14px 32px;
   background: transparent;
-  color: #000000;
+  color: var(--btn-bg);
   font-family: Georgia, serif;
   font-weight: 400;
   font-size: 14px;
   letter-spacing: 0.05em;
-  border: 1px solid #000000;
+  border: 1px solid var(--btn-bg);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .btn-museum-outline:hover {
-  background: #000000;
-  color: #ffffff;
+  background: var(--btn-bg);
+  color: var(--btn-text);
 }
 
 /* 黒フレーム付きカラーカード */

@@ -81,6 +81,10 @@ const jsonLd = {
   },
 };
 
+import { ThemeProvider } from "@/components/ThemeProvider";
+
+// ... imports
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -91,11 +95,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="flex min-h-screen flex-col">
-          <Header />
-          <main className="flex-grow flex flex-col">{children}</main>
-          <Footer />
-        </div>
+        <ThemeProvider>
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-grow flex flex-col">{children}</main>
+            <Footer />
+          </div>
+        </ThemeProvider>
+        {/* scripts ... */}
         <Script
           id="json-ld"
           type="application/ld+json"

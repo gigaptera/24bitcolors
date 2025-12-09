@@ -1,12 +1,12 @@
 export default function PrivacyPage() {
   return (
-    <div className="container mx-auto max-w-3xl px-6 py-12 font-serif">
-      <h1 className="mb-8 text-3xl font-medium tracking-wide">
+    <div className="container mx-auto max-w-3xl px-space-5 py-space-6 font-serif">
+      <h1 className="mb-space-5 text-[length:var(--text-large)] font-medium tracking-wide text-[var(--foreground)]">
         プライバシーポリシー
       </h1>
-      <div className="space-y-8 text-sm leading-8 text-gray-800">
+      <div className="space-y-space-5 text-[length:var(--text-base)] leading-8 text-[var(--foreground)]">
         <section>
-          <h2 className="mb-3 text-lg font-medium text-black">
+          <h2 className="mb-space-3 text-[length:var(--text-medium)] font-medium text-[var(--foreground)]">
             個人情報の利用目的
           </h2>
           <p>
@@ -16,7 +16,9 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-lg font-medium text-black">広告について</h2>
+          <h2 className="mb-space-3 text-[length:var(--text-medium)] font-medium text-[var(--foreground)]">
+            広告について
+          </h2>
           <p>
             当サイトでは、第三者配信の広告サービス（Googleアドセンス）を利用しており、ユーザーの興味に応じた商品やサービスの広告を表示するため、クッキー（Cookie）を使用しております。
             クッキーを使用することで当サイトはお客様のコンピュータを識別できるようになりますが、お客様個人を特定できるものではありません。
@@ -27,7 +29,7 @@ export default function PrivacyPage() {
               href="https://policies.google.com/technologies/ads?hl=ja"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
+              className="text-[var(--foreground)] underline decoration-1 underline-offset-4 hover:text-[var(--muted-foreground)]"
             >
               「広告 – ポリシーと規約 – Google」
             </a>
@@ -36,7 +38,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-lg font-medium text-black">
+          <h2 className="mb-space-3 text-[length:var(--text-medium)] font-medium text-[var(--foreground)]">
             アクセス解析ツールについて
           </h2>
           <p>
@@ -44,7 +46,7 @@ export default function PrivacyPage() {
           </p>
         </section>
 
-        <div className="mt-12 text-right text-xs text-gray-400">
+        <div className="mt-space-6 text-right text-[length:var(--text-micro)] text-[var(--muted-foreground)]">
           2025年12月1日 制定
         </div>
       </div>

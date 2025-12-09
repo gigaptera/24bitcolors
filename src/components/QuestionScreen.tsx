@@ -30,20 +30,20 @@ export function QuestionScreen({
   return (
     <div className="flex w-full flex-col items-center">
       {/* プログレスバー */}
-      <div className="mb-6 h-px w-full bg-gray-400">
+      <div className="mb-space-4 h-px w-full bg-gray-300 dark:bg-gray-700">
         <div
-          className="h-full bg-black transition-all duration-300"
+          className="h-full bg-[var(--foreground)] transition-all duration-300"
           style={{ width: `${progress}%` }}
         />
       </div>
 
       {/* 質問カウント + 戻るボタン */}
-      <div className="mb-4 flex w-full items-center justify-between">
+      <div className="mb-space-4 flex w-full items-center justify-between">
         <div className="w-16">
           {onUndo && (
             <button
               onClick={onUndo}
-              className="text-sm text-gray-500 transition-colors hover:text-black"
+              className="text-[length:var(--text-base)] text-[var(--muted-foreground)] transition-colors hover:text-[var(--foreground)]"
               style={{ fontFamily: "Georgia, serif" }}
             >
               ← 戻る
@@ -51,7 +51,7 @@ export function QuestionScreen({
           )}
         </div>
         <p
-          className="text-sm tracking-wider text-gray-500"
+          className="text-[length:var(--text-base)] tracking-wider text-[var(--muted-foreground)]"
           style={{ fontFamily: '"SF Mono", monospace' }}
         >
           {questionNumber + 1} / {totalQuestions}
@@ -61,7 +61,7 @@ export function QuestionScreen({
 
       {/* 質問テキスト */}
       <h2
-        className="mb-8 text-xl font-normal"
+        className="mb-space-5 text-[length:var(--text-medium)] font-normal text-[var(--foreground)]"
         style={{ fontFamily: "Georgia, serif" }}
       >
         どちらの色がお好みですか？
@@ -75,17 +75,19 @@ export function QuestionScreen({
 
       {/* 予測表示 */}
       {prediction && (
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-space-3">
           <div
-            className="h-6 w-6 border border-black"
+            className="h-6 w-6 border border-[var(--foreground)]"
             style={{ backgroundColor: oklchToHex(prediction) }}
           />
           <div
-            className="text-sm"
+            className="text-[length:var(--text-base)]"
             style={{ fontFamily: '"SF Mono", monospace' }}
           >
-            <span className="text-gray-500">Prediction: </span>
-            <span className="text-gray-800">{oklchToHex(prediction)}</span>
+            <span className="text-[var(--muted-foreground)]">Prediction: </span>
+            <span className="text-[var(--foreground)]">
+              {oklchToHex(prediction)}
+            </span>
           </div>
         </div>
       )}
