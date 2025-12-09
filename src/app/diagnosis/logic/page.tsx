@@ -1,5 +1,12 @@
 import Link from "next/link";
+import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
+
+export const metadata: Metadata = {
+  title: "診断ロジックの裏側",
+  description:
+    "24bitColorsの診断精度を支える、科学と統計に基づいた「透明性」「OKLCH色空間」「対話アルゴリズム」について解説します。",
+};
 
 export default function DiagnosisLogicPage() {
   return (
