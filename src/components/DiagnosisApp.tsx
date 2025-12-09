@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { QuestionScreen } from "@/components/QuestionScreen";
 import { ResultScreen } from "@/components/ResultScreen";
 import {
@@ -13,6 +13,8 @@ import {
   getFinalResult,
   isDiagnosisComplete,
 } from "@/lib/color-diagnosis";
+import { saveDiagnosisAction } from "@/app/actions/saveDiagnosis";
+import { useTheme } from "./ThemeProvider";
 
 type Screen = "question" | "result";
 
@@ -23,11 +25,20 @@ interface HistoryEntry {
 
 export function DiagnosisApp() {
   const [screen, setScreen] = useState<Screen>("question");
+  const { theme } = useTheme();
+
+  // Analytics State
+  const startTimeRef = useRef<number>(0);
+  useEffect(() => {
+    startTimeRef.current = Date.now();
+  }, []);
+  const [anonymousId, setAnonymousId] = useState<string>("");
 
   // 初期化: ページロード時に同期的に診断を開始（Lazy initialization）
   const [initialData] = useState(() => {
     const state = createDiagnosisState();
-    const pair = selectOptimalColorPair(state);
+    // 初期は履歴なし
+    const pair = selectOptimalColorPair(state, []);
     return { state, pair };
   });
 
@@ -38,8 +49,21 @@ export function DiagnosisApp() {
   const [result, setResult] = useState<DiagnosisResult | null>(null);
   const [history, setHistory] = useState<HistoryEntry[]>([]);
 
+  // Initialize Anonymous ID
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      let id = localStorage.getItem("anonymous_id");
+      if (!id) {
+        id = crypto.randomUUID();
+        localStorage.setItem("anonymous_id", id);
+      }
+      setAnonymousId(id);
+    }, 0);
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleSelect = useCallback(
-    (choice: "A" | "B") => {
+    async (choice: "A" | "B") => {
       if (!diagnosisState || !colorPair) return;
 
       // 現在の状態を履歴に追加
@@ -54,13 +78,55 @@ export function DiagnosisApp() {
       if (isDiagnosisComplete(newState)) {
         const finalResult = getFinalResult(newState);
         setResult(finalResult);
+
+        // --- Data Collection v2 Start ---
+        const endTime = Date.now();
+        const durationSeconds = Math.round(
+          (endTime - startTimeRef.current) / 1000
+        );
+
+        // Client-side save for feedback form UI
+        if (typeof window !== "undefined") {
+          localStorage.setItem(
+            "lastDiagnosisResult",
+            JSON.stringify(finalResult)
+          );
+        }
+
         setScreen("result");
+
+        // Server Action Call (Background)
+        try {
+          const response = await saveDiagnosisAction({
+            hex: finalResult.hex,
+            hue: finalResult.color.hue,
+            lightness: finalResult.color.lightness,
+            chroma: finalResult.color.chroma,
+            theme: theme, // from useTheme
+            duration_seconds: durationSeconds,
+            algorithm_version: "v1.0.0",
+            locale: navigator.language,
+            anonymous_id: anonymousId || "unknown", // Fallback if state not yet set (unlikely)
+          });
+
+          if (response.success && response.id) {
+            // Save Diagnosis ID for Feedback
+            localStorage.setItem("lastDiagnosisId", response.id);
+          }
+        } catch (e) {
+          console.error("Auto-save failed", e);
+        }
+        // --- Data Collection v2 End ---
       } else {
-        const newPair = selectOptimalColorPair(newState);
+        // 現在までの履歴ペア（今回答えたものも含む）を作成して渡す
+        const pastPairs = history.map((h) => h.pair);
+        const currentHistory = [...pastPairs, colorPair];
+
+        const newPair = selectOptimalColorPair(newState, currentHistory);
         setColorPair(newPair);
       }
     },
-    [diagnosisState, colorPair]
+    [diagnosisState, colorPair, history, theme, anonymousId]
   );
 
   const handleUndo = useCallback(() => {

@@ -103,6 +103,92 @@
   --spacing-space-8: 144px;
 }
 
+/* Animations */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out forwards;
+    opacity: 0;
+  }
+  .animate-pulse-slow {
+    animation: pulseSlow 8s ease-in-out infinite;
+  }
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Aurora / Prism Effect */
+  .aurora-gradient {
+    background: radial-gradient(
+        circle at 50% 50%,
+        rgba(100, 100, 255, 0.15),
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 0% 0%,
+        rgba(255, 100, 100, 0.1),
+        transparent 40%
+      ),
+      radial-gradient(
+        circle at 100% 100%,
+        rgba(100, 255, 100, 0.1),
+        transparent 40%
+      );
+    filter: blur(60px);
+  }
+
+  /* Dark mode adjustment for aurora */
+  .dark .aurora-gradient {
+    background: radial-gradient(
+        circle at 50% 50%,
+        rgba(60, 60, 180, 0.2),
+        transparent 60%
+      ),
+      radial-gradient(
+        circle at 10% 20%,
+        rgba(180, 40, 40, 0.15),
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 90% 80%,
+        rgba(40, 180, 40, 0.15),
+        transparent 50%
+      );
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseSlow {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
 body {
   background: hsl(var(--background));
   color: hsl(var(--foreground));

@@ -45,18 +45,39 @@ export function createDiagnosisState(): DiagnosisState {
 /**
  * 最適な2色のペアを選択（情報量最大化 + ランダム性）
  */
-export function selectOptimalColorPair(state: DiagnosisState): ColorPair {
+export function selectOptimalColorPair(
+  state: DiagnosisState,
+  history: ColorPair[] = []
+): ColorPair {
   const validColors = state.colorSpace.filter((c) => c.weight > 0.001);
 
   if (validColors.length < 2) {
     return { colorA: validColors[0], colorB: validColors[0] };
   }
 
+  // 過去に出題されたペアのシグネチャセットを作成 (重複防止)
+  const historySignatures = new Set(
+    history.map((h) => {
+      const h1 = oklchToHex(h.colorA);
+      const h2 = oklchToHex(h.colorB);
+      return h1 < h2 ? `${h1}-${h2}` : `${h2}-${h1}`;
+    })
+  );
+
+  const isDuplicate = (c1: OklchColor, c2: OklchColor) => {
+    const h1 = oklchToHex(c1);
+    const h2 = oklchToHex(c2);
+    const signature = h1 < h2 ? `${h1}-${h2}` : `${h2}-${h1}`;
+    return historySignatures.has(signature);
+  };
+
+  const MIN_DISTANCE = 0.15; // 似すぎている色を防止する閾値
+
   // 初回質問の場合、よりランダムに色を選択
   if (state.currentQuestion === 0) {
     // ランダムに候補を選択
     const shuffled = [...validColors].sort(() => Math.random() - 0.5);
-    const candidates = shuffled.slice(0, 20);
+    const candidates = shuffled.slice(0, 30);
 
     // 距離が大きいペアを探索
     let bestPair: ColorPair = { colorA: candidates[0], colorB: candidates[1] };
@@ -64,10 +85,20 @@ export function selectOptimalColorPair(state: DiagnosisState): ColorPair {
 
     for (let i = 0; i < candidates.length; i++) {
       for (let j = i + 1; j < candidates.length; j++) {
-        const distance = colorDistance(candidates[i], candidates[j]);
+        const c1 = candidates[i];
+        const c2 = candidates[j];
+
+        // 重複チェック
+        if (isDuplicate(c1, c2)) continue;
+
+        const distance = colorDistance(c1, c2);
+
+        // 類似すぎチェック
+        if (distance < MIN_DISTANCE) continue;
+
         if (distance > maxDistance) {
           maxDistance = distance;
-          bestPair = { colorA: candidates[i], colorB: candidates[j] };
+          bestPair = { colorA: c1, colorB: c2 };
         }
       }
     }
@@ -82,21 +113,53 @@ export function selectOptimalColorPair(state: DiagnosisState): ColorPair {
   // 通常の選択ロジック
   // 重み付きでサンプリング（上位色を優先的に選択）
   const sortedByWeight = [...validColors].sort((a, b) => b.weight - a.weight);
+
+  // 候補プールを広げて多様性を確保 (30 -> 50)
   const candidates = sortedByWeight.slice(
     0,
-    Math.min(30, sortedByWeight.length)
+    Math.min(50, sortedByWeight.length)
   );
 
   let bestPair: ColorPair = { colorA: candidates[0], colorB: candidates[1] };
   let maxDistance = 0;
 
-  // 距離が最大のペアを探索
+  // 距離が最大のペアを探索、ただし重複と類似は避ける
+  let foundValidPair = false;
+
   for (let i = 0; i < candidates.length; i++) {
     for (let j = i + 1; j < candidates.length; j++) {
-      const distance = colorDistance(candidates[i], candidates[j]);
+      const c1 = candidates[i];
+      const c2 = candidates[j];
+
+      if (isDuplicate(c1, c2)) continue;
+
+      const distance = colorDistance(c1, c2);
+
+      // 類似の排除（ただし後半で候補がない場合は緩和するロジックも検討可だが、一旦厳格に）
+      if (distance < MIN_DISTANCE) continue;
+
       if (distance > maxDistance) {
         maxDistance = distance;
-        bestPair = { colorA: candidates[i], colorB: candidates[j] };
+        bestPair = { colorA: c1, colorB: c2 };
+        foundValidPair = true;
+      }
+    }
+  }
+
+  // もし有効なペアが見つからなかった場合（収束しすぎて候補が近い場合など）、
+  // 距離条件を無視して、重複チェックのみで最大距離を選ぶ
+  if (!foundValidPair) {
+    maxDistance = 0;
+    for (let i = 0; i < candidates.length; i++) {
+      for (let j = i + 1; j < candidates.length; j++) {
+        const c1 = candidates[i];
+        const c2 = candidates[j];
+        if (isDuplicate(c1, c2)) continue;
+        const distance = colorDistance(c1, c2);
+        if (distance > maxDistance) {
+          maxDistance = distance;
+          bestPair = { colorA: c1, colorB: c2 };
+        }
       }
     }
   }

@@ -95,5 +95,17 @@ export function initializeColorSpace(): OklchColor[] {
     }
   }
 
+  // 無彩色 (Achromatic) の追加
+  // 彩度をほぼ0 (0.01) に設定し、明度のバリエーションを持たせる
+  const achromaticLightness = [0.1, 0.25, 0.4, 0.55, 0.7, 0.85, 0.95];
+  for (const l of achromaticLightness) {
+    colors.push({
+      hue: 0, // 無彩色なので色相は無視されるが便宜上0
+      lightness: l,
+      chroma: 0.01, // ほぼ無彩色
+      weight: 1.0,
+    });
+  }
+
   return colors;
 }

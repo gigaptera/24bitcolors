@@ -1,6 +1,4 @@
-"use client";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DiagnosisResult } from "@/lib/color-diagnosis";
 import { saveFeedback } from "@/lib/feedback";
 import { ShareCard } from "./ShareCard";
@@ -138,11 +136,22 @@ export function ResultScreen({ result }: ResultScreenProps) {
   const [rating, setRating] = useState<number | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [showShareCard, setShowShareCard] = useState(false);
+  const [diagnosisId, setDiagnosisId] = useState<string | undefined>(undefined);
+
+  // Load diagnosis ID on mount
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const id = localStorage.getItem("lastDiagnosisId");
+      if (id) setDiagnosisId(id);
+    }, 0);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleRatingSubmit = async () => {
     if (rating === null) return;
 
     await saveFeedback({
+      diagnosis_id: diagnosisId,
       hex: result.hex,
       hue: result.color.hue,
       lightness: result.color.lightness,
@@ -242,6 +251,29 @@ export function ResultScreen({ result }: ResultScreenProps) {
               </Button>
               <Button variant="outline" asChild>
                 <Link href={`/${result.hex.replace("#", "")}`}>詳細を見る</Link>
+              </Button>
+            </div>
+
+            {/* Detailed Feedback CTA */}
+            <div className="mt-8 border-t border-border/40 pt-4">
+              <p className="mb-2 text-xs text-muted-foreground font-serif">
+                もしよろしければ、アルゴリズム精度向上のために
+                <br />
+                詳細なフィードバックにご協力ください。
+              </p>
+              <Button
+                variant="link"
+                size="sm"
+                asChild
+                className="text-xs text-muted-foreground hover:text-foreground underline-offset-4"
+              >
+                <Link
+                  href="/diagnosis/logic/feedback"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  詳細フィードバックフォームへ進む &rarr;
+                </Link>
               </Button>
             </div>
           </div>

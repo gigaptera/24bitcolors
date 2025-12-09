@@ -5,11 +5,16 @@
 import { supabase, isSupabaseConfigured } from "./supabase";
 
 export interface FeedbackEntry {
+  diagnosis_id?: string; // New Link
   hex: string;
   hue: number;
   lightness: number;
   chroma: number;
-  rating: number;
+  rating?: number;
+  agreement_score?: number;
+  expected_color?: string;
+  actual_impression?: string;
+  comment?: string;
   timestamp?: string;
   userAgent?: string;
 }
@@ -29,17 +34,22 @@ export async function saveFeedback(
   if (isSupabaseConfigured() && supabase) {
     try {
       const { error } = await supabase.from("feedback").insert({
-        hex: entry.hex,
-        hue: entry.hue,
-        lightness: entry.lightness,
-        chroma: entry.chroma,
+        diagnosis_id: entry.diagnosis_id, // Link to diagnosis
         rating: entry.rating,
-        user_agent: userAgent,
+        agreement_score: entry.agreement_score,
+        expected_color: entry.expected_color,
+        actual_impression: entry.actual_impression,
+        comment: entry.comment,
       });
+
+      // Note: hex/hue/etc are now in 'diagnoses' table, so 'feedback' doesn't need them,
+      // but for localStorage fallback we might still want them or for debugging.
+      // The SQL definition for 'feedback' REMOVED hex/hue columns.
+      // So I must NOT remove them from the Interface (used by UI to pass data),
+      // but I should NOT send them to Supabase 'feedback' table insert if they don't exist.
 
       if (error) {
         console.error("Supabase error:", error);
-        // Supabaseエラー時はlocalStorageにフォールバック
         saveToLocalStorage(entry, userAgent);
         return {
           success: true,
@@ -121,6 +131,10 @@ export function exportFeedbackAsCSV(): string {
     "lightness",
     "chroma",
     "rating",
+    "agreement_score",
+    "expected_color",
+    "actual_impression",
+    "comment",
     "timestamp",
     "userAgent",
   ];
@@ -132,7 +146,11 @@ export function exportFeedbackAsCSV(): string {
       entry.hue.toFixed(2),
       entry.lightness.toFixed(3),
       entry.chroma.toFixed(3),
-      entry.rating.toString(),
+      (entry.rating || "").toString(),
+      (entry.agreement_score || "").toString(),
+      entry.expected_color || "",
+      entry.actual_impression || "",
+      `"${(entry.comment || "").replace(/"/g, '""')}"`,
       entry.timestamp || "",
       `"${(entry.userAgent || "").replace(/"/g, '""')}"`,
     ];

@@ -70,11 +70,11 @@ export default async function ColorDetailPage({ params }: PageProps) {
       {/* Shared Container for Vertical Flow */}
       <div className="w-full max-w-3xl px-6 flex flex-col items-center">
         {/* 1. HERO: The "Color Monolith" (Exhibition Poster) */}
-        <div className="relative mb-32 w-full perspective-1000">
+        <div className="relative mb-16 md:mb-32 w-full perspective-1000">
           {/* The Frame - Full Width of Container */}
           <div className="relative mx-auto bg-white p-[15px] shadow-[var(--shadow-museum)] duration-700 ease-out hover:scale-[1.01] hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.4)] dark:bg-[#111] dark:hover:shadow-[0_40px_80px_-15px_rgba(255,255,255,0.1)]">
             {/* The Matting (Passe-Partout) */}
-            <div className="flex aspect-[3/4] md:aspect-[4/3] w-full flex-col bg-white p-[40px] dark:bg-[#1a1a1a] sm:p-[60px]">
+            <div className="flex aspect-[5/6] md:aspect-[4/3] w-full flex-col bg-white p-6 dark:bg-[#1a1a1a] sm:p-[60px]">
               {/* The Artwork (Color) */}
               <CopyableHex
                 hex={colorInfo.hex}
@@ -100,11 +100,11 @@ export default async function ColorDetailPage({ params }: PageProps) {
               </CopyableHex>
 
               {/* The Caption (Bottom of Mat - integrated for simpler look in wider view) */}
-              <div className="mt-6 flex flex-col items-center space-y-4">
+              <div className="mt-4 md:mt-6 flex flex-col items-center space-y-4">
                 {/* Exhibition Notes (Tech Data) */}
-                <div className="w-full grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] lg:gap-4 gap-y-8 pt-8 font-mono tracking-wider text-black/70 dark:text-white/70">
-                  {/* RGB */}
-                  <div className="flex justify-center lg:justify-between px-4 lg:px-0">
+                <div className="w-full grid grid-cols-2 lg:grid-cols-[1fr_auto_1fr] lg:gap-4 gap-y-6 pt-4 md:pt-8 font-mono tracking-wider text-black/70 dark:text-white/70">
+                  {/* RGB (Row 1 Left) */}
+                  <div className="flex justify-center lg:justify-between px-2 lg:px-0">
                     <div className="flex gap-4 sm:gap-6 lg:gap-5 w-full justify-center lg:justify-around text-center">
                       <div className="flex flex-col items-center min-w-[1.5rem]">
                         <span className="mb-3 text-[10px] opacity-40">R</span>
@@ -121,30 +121,8 @@ export default async function ColorDetailPage({ params }: PageProps) {
                     </div>
                   </div>
 
-                  {/* CMYK */}
-                  <div className="flex justify-center lg:border-l lg:border-r border-black/5 dark:border-white/5 px-4 lg:px-6">
-                    <div className="flex gap-4 sm:gap-6 lg:gap-5 w-full justify-center lg:justify-around text-center">
-                      <div className="flex flex-col items-center min-w-[1.5rem]">
-                        <span className="mb-3 text-[10px] opacity-40">C</span>
-                        <span className="text-xs">{colorInfo.cmyk.c}</span>
-                      </div>
-                      <div className="flex flex-col items-center min-w-[1.5rem]">
-                        <span className="mb-3 text-[10px] opacity-40">M</span>
-                        <span className="text-xs">{colorInfo.cmyk.m}</span>
-                      </div>
-                      <div className="flex flex-col items-center min-w-[1.5rem]">
-                        <span className="mb-3 text-[10px] opacity-40">Y</span>
-                        <span className="text-xs">{colorInfo.cmyk.y}</span>
-                      </div>
-                      <div className="flex flex-col items-center min-w-[1.5rem]">
-                        <span className="mb-3 text-[10px] opacity-40">K</span>
-                        <span className="text-xs">{colorInfo.cmyk.k}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* OKLCH */}
-                  <div className="flex justify-center lg:justify-between px-4 lg:px-0">
+                  {/* OKLCH (Row 1 Right on Mobile) */}
+                  <div className="flex justify-center lg:justify-between px-2 lg:px-0">
                     <div className="flex gap-4 sm:gap-6 lg:gap-5 w-full justify-center lg:justify-around text-center">
                       <div className="flex flex-col items-center min-w-[1.5rem]">
                         <span className="mb-3 text-[10px] opacity-40">L</span>
@@ -163,6 +141,28 @@ export default async function ColorDetailPage({ params }: PageProps) {
                         <span className="text-xs">
                           {Math.round(colorInfo.oklch.h)}°
                         </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* CMYK (Row 2 Spans Full) */}
+                  <div className="col-span-2 lg:col-span-1 flex justify-center lg:border-l lg:border-r border-black/5 dark:border-white/5 px-4 lg:px-6">
+                    <div className="flex gap-4 sm:gap-6 lg:gap-5 w-full justify-center lg:justify-around text-center">
+                      <div className="flex flex-col items-center min-w-[1.5rem]">
+                        <span className="mb-3 text-[10px] opacity-40">C</span>
+                        <span className="text-xs">{colorInfo.cmyk.c}</span>
+                      </div>
+                      <div className="flex flex-col items-center min-w-[1.5rem]">
+                        <span className="mb-3 text-[10px] opacity-40">M</span>
+                        <span className="text-xs">{colorInfo.cmyk.m}</span>
+                      </div>
+                      <div className="flex flex-col items-center min-w-[1.5rem]">
+                        <span className="mb-3 text-[10px] opacity-40">Y</span>
+                        <span className="text-xs">{colorInfo.cmyk.y}</span>
+                      </div>
+                      <div className="flex flex-col items-center min-w-[1.5rem]">
+                        <span className="mb-3 text-[10px] opacity-40">K</span>
+                        <span className="text-xs">{colorInfo.cmyk.k}</span>
                       </div>
                     </div>
                   </div>

@@ -27,7 +27,7 @@
 
 ---
 
-## 🚀 Phase 1.5: UX Optimization (磨き込み) - Next Focus
+## 🚀 Phase 1.5: UX Optimization (磨き込み) - v1.1.0 Released
 
 Z 世代視点の UX レビューに基づき、ユーザビリティと拡散力を強化します。
 
@@ -39,6 +39,12 @@ Z 世代視点の UX レビューに基づき、ユーザビリティと拡散�
   - OS 設定に応じた自動切り替え
 - [x] **診断プロセスの最適化**
   - 離脱率の計測強化（Google Analytics）
+- [x] **Landing Page Redesign (v1.1.0)**
+  - Fullscreen Hero Section with "Aurora Prism" effect.
+  - Scroll Snap interaction.
+- [x] **Data Architecture v2 (v1.1.0)**
+  - Separation of "Facts" (Diagnoses) and "Opinions" (Feedback).
+  - Server-side location tracking (Country/Region).
 
 ---
 

@@ -13,39 +13,106 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="flex w-full flex-grow items-center justify-center p-space-2">
-      <main className="flex w-full max-w-lg flex-col items-center text-center p-space-4">
-        {/* タイトル */}
-        <h1
-          className="mb-3 text-4xl font-normal tracking-wide animate-fade-in"
-          style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
-        >
-          24bitColors
-        </h1>
+    <main className="h-screen w-full snap-y snap-mandatory overflow-y-scroll overflow-x-hidden bg-background text-foreground scroll-smooth selection:bg-foreground selection:text-background">
+      {/* 
+        HERO SECTION 
+        - Snap Start
+        - Full Height
+      */}
+      <section className="relative flex h-screen w-full snap-start flex-col items-center justify-center p-6">
+        {/* Background Effect: Color Prism / Aurora */}
+        <div className="aurora-gradient absolute inset-0 -z-10 animate-pulse-slow opacity-30 dark:opacity-20" />
 
-        {/* サブタイトル */}
-        <p
-          className="mb-space-5 text-[length:var(--text-medium)] text-muted-foreground animate-fade-in delay-100"
-          style={{ fontFamily: "Georgia, serif" }}
-        >
-          Discover Your Favorite Color
-        </p>
+        {/* Floating Abstract Shapes */}
+        <div className="animate-float absolute -left-20 top-20 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl filter dark:bg-blue-400/5" />
+        <div className="animate-float absolute -right-20 bottom-20 h-80 w-80 rounded-full bg-rose-500/10 blur-3xl filter transition-transform delay-1000 dark:bg-rose-400/5" />
 
-        {/* 説明文 */}
-        <div
-          className="mb-space-6 max-w-md text-[length:var(--text-base)] leading-relaxed text-muted-foreground animate-fade-in delay-200"
-          style={{ fontFamily: "Georgia, serif" }}
-        >
-          20の質問への回答から、1677万色の中であなたが最も好む色を統計的に特定します。
+        {/* Main Content Container */}
+        <div className="z-10 flex max-w-3xl flex-col items-center text-center">
+          {/* Main Title */}
+          <h1
+            className="mb-8 animate-fade-in text-6xl font-medium tracking-tight md:text-8xl"
+            style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
+          >
+            24bitColors
+          </h1>
+
+          {/* Tagline */}
+          <p
+            className="mb-12 animate-fade-in text-sm font-light uppercase tracking-[0.25em] text-muted-foreground delay-100 md:text-base"
+            style={{ fontFamily: '"Inter", sans-serif' }}
+          >
+            Discover Your True Color
+          </p>
+
+          {/* Description */}
+          <p
+            className="mb-12 max-w-md animate-fade-in text-sm leading-relaxed text-muted-foreground delay-200 md:text-base"
+            style={{ fontFamily: "Georgia, serif" }}
+          >
+            20の質問への回答から、
+            <br className="md:hidden" />
+            1677万色の中であなたが最も好む色を
+            <br className="md:hidden" />
+            統計的に特定します。
+          </p>
+
+          {/* CTA Button */}
+          <div className="animate-fade-in delay-300">
+            <Button
+              asChild
+              size="lg"
+              className="px-10 py-7 text-lg shadow-lg transition-all hover:scale-105 hover:shadow-xl"
+            >
+              <Link href="/diagnosis">診断を開始する</Link>
+            </Button>
+          </div>
         </div>
 
-        {/* 開始ボタン (LP -> Diagnosis) */}
-        <div className="animate-fade-in delay-300">
-          <Button asChild>
-            <Link href="/diagnosis">診断を開始する</Link>
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-12 animate-bounce opacity-50">
+          <p className="text-[10px] tracking-[0.3em] text-muted-foreground">
+            SCROLL
+          </p>
+        </div>
+      </section>
+
+      {/* 
+        LOGIC SECTION 
+        - Snap Start
+        - Full Height
+      */}
+      <section
+        id="about"
+        className="flex h-screen w-full snap-start flex-col items-center justify-center bg-muted/20 p-6 text-center"
+      >
+        <div className="max-w-xl">
+          <p className="mb-6 text-xs font-bold uppercase tracking-widest text-muted-foreground opacity-70">
+            The Logic
+          </p>
+          <h2
+            className="mb-8 text-3xl font-normal md:text-4xl"
+            style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
+          >
+            色彩の統計学
+          </h2>
+          <p className="mb-10 leading-loose text-muted-foreground">
+            色彩心理学と情報工学に基づいた独自のアルゴリズムが、
+            <br />
+            あなたの潜在的な色の好みを分析します。
+            <br className="mb-4 block" />
+            単純なランダム抽出ではなく、
+            <br />
+            あなたの選択履歴から「好みの傾向」を学習し、
+            <br />
+            1677万色の中から最適解へと収束させます。
+          </p>
+
+          <Button variant="outline" asChild className="border-foreground/20">
+            <Link href="/diagnosis/logic">ロジックの裏側を見る</Link>
           </Button>
         </div>
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }
