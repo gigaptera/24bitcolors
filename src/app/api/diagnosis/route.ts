@@ -66,23 +66,31 @@ export async function POST(request: NextRequest) {
     const region =
       request.headers.get("x-vercel-ip-country-region") || "unknown";
 
+    // Build insert data - use client-provided ID if present
+    const insertData: Record<string, unknown> = {
+      hex: body.hex,
+      hue: body.hue,
+      lightness: body.lightness,
+      chroma: body.chroma,
+      theme: body.theme || "light",
+      duration_seconds: body.duration_seconds || 0,
+      algorithm_version: body.algorithm_version || "v1.0.0",
+      locale: body.locale || "unknown",
+      anonymous_id: body.anonymous_id,
+      user_agent: userAgent,
+      country,
+      region,
+    };
+
+    // If client provides an ID, use it (for instant UX pattern)
+    if (body.id) {
+      insertData.id = body.id;
+    }
+
     // Insert diagnosis
     const { data, error } = await supabase
       .from("diagnoses")
-      .insert({
-        hex: body.hex,
-        hue: body.hue,
-        lightness: body.lightness,
-        chroma: body.chroma,
-        theme: body.theme || "light",
-        duration_seconds: body.duration_seconds || 0,
-        algorithm_version: body.algorithm_version || "v1.0.0",
-        locale: body.locale || "unknown",
-        anonymous_id: body.anonymous_id,
-        user_agent: userAgent,
-        country,
-        region,
-      })
+      .insert(insertData)
       .select("id")
       .single();
 
