@@ -287,6 +287,8 @@ export function getFinalResult(state: DiagnosisState): DiagnosisResult {
 
 /**
  * 診断が完了したかどうか
+ * currentQuestion は 0-indexed なので、totalQuestions (20) に達したら完了
+ * 表示は +1 されるので「20/20」で選択後に完了
  */
 export function isDiagnosisComplete(state: DiagnosisState): boolean {
   return state.currentQuestion >= state.totalQuestions;

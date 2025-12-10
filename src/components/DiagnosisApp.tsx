@@ -76,8 +76,8 @@ export function DiagnosisApp() {
       ]);
 
       const newState = processChoice(diagnosisState, choice, colorPair);
-      setDiagnosisState(newState);
 
+      // Check completion BEFORE updating state to prevent "21/20" flash
       if (isDiagnosisComplete(newState)) {
         const finalResult = getFinalResult(newState);
 
@@ -127,6 +127,9 @@ export function DiagnosisApp() {
         // Navigate to Result Page AFTER saving data
         router.push(`/result/${groupSlug}?hex=${safeHex}`);
       } else {
+        // Update state only if not complete (prevents "21/20" flash)
+        setDiagnosisState(newState);
+
         // 現在までの履歴ペア（今回答えたものも含む）を作成して渡す
         const pastPairs = history.map((h) => h.pair);
         const currentHistory = [...pastPairs, colorPair];
