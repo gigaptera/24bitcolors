@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
+import { ArticleJsonLd } from "@/components/ArticleJsonLd";
 
 export const metadata: Metadata = {
   title: "OKLCH色空間とは",
@@ -219,6 +220,12 @@ export default function OklchLogicPage() {
           </Button>
         </div>
       </div>
+      <ArticleJsonLd
+        title="OKLCH色空間とは"
+        description="なぜHSLやRGBではなくOKLCHなのか。人間の知覚に忠実な最新の色空間がもたらす「正しい色診断」の科学的根拠。"
+        publishedTime="2025-12-01T00:00:00+09:00"
+        url="https://24bitcolors.com/diagnosis/logic/oklch"
+      />
     </div>
   );
 }

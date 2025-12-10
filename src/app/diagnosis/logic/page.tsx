@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
+import { ArticleJsonLd } from "@/components/ArticleJsonLd";
 
 export const metadata: Metadata = {
   title: "診断ロジックの裏側",
@@ -136,6 +137,12 @@ export default function DiagnosisLogicPage() {
           </Button>
         </div>
       </div>
+      <ArticleJsonLd
+        title="診断ロジックの裏側"
+        description="24bitColorsの診断精度を支える、科学と統計に基づいた「透明性」「OKLCH色空間」「対話アルゴリズム」について解説します。"
+        publishedTime="2025-12-01T00:00:00+09:00"
+        url="https://24bitcolors.com/diagnosis/logic"
+      />
     </div>
   );
 }

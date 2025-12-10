@@ -5,6 +5,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { GoogleAdsense } from "@/components/GoogleAdsense";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -76,7 +78,7 @@ const jsonLd = {
     name: "24bitColors Team",
     logo: {
       "@type": "ImageObject",
-      url: "https://24bitcolors.com/icon.png",
+      url: "https://24bitcolors.com/icon",
     },
   },
 };
@@ -100,7 +102,10 @@ export default function RootLayout({
           <div className="flex min-h-screen flex-col">
             <ScrollToTop />
             <Header />
-            <main className="flex-grow flex flex-col">{children}</main>
+            <main className="flex-grow flex flex-col">
+              <Breadcrumbs />
+              {children}
+            </main>
             <Footer />
           </div>
         </ThemeProvider>
@@ -115,12 +120,7 @@ export default function RootLayout({
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         )}
         {process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID && (
-          <Script
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID}`}
-            crossOrigin="anonymous"
-            strategy="lazyOnload"
-          />
+          <GoogleAdsense pId={process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID} />
         )}
       </body>
     </html>
