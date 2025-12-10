@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="w-full snap-end py-space-6 text-center text-[length:var(--text-micro)] text-[var(--muted-foreground)]">
+    <footer className="w-full py-space-6 text-center text-[length:var(--text-micro)] text-[var(--muted-foreground)]">
       <div className="mb-space-4 flex justify-center gap-space-4">
         <Link
           href="/about"

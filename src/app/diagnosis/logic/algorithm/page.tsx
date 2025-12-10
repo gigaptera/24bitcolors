@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
+import { ArticleJsonLd } from "@/components/ArticleJsonLd";
 
 export const metadata: Metadata = {
   title: "アルゴリズムの仕組み",
@@ -237,6 +238,12 @@ export default function AlgorithmLogicPage() {
           </Button>
         </div>
       </div>
+      <ArticleJsonLd
+        title="アルゴリズムの仕組み"
+        description="ベイズ推定と情報理論を用いた独自の対話エンジン。1677万色からあなたの好みを特定する統計的プロセスの全貌。"
+        publishedTime="2025-12-01T00:00:00+09:00"
+        url="https://24bitcolors.com/diagnosis/logic/algorithm"
+      />
     </div>
   );
 }
