@@ -119,34 +119,41 @@ function isInGamut(l: number, c: number, h: number): boolean {
 }
 
 /**
- * 診断用の初期色空間を生成
- * Oklab直交座標 (L, a, b) で均等配置することで
- * 無彩色も自然に含まれる
+ * 診断用の初期色空間を生成（ハイブリッド方式）
+ * 無彩色の安定性と有彩色の解像度を両立
  */
 export function initializeColorSpace(): OklchColor[] {
   const colors: OklchColor[] = [];
 
-  // Oklab空間での高密度均等配置
-  // L: 0.12 ~ 0.95 (9段階)
-  // a: -0.16 ~ 0.16 (7段階)
-  // b: -0.16 ~ 0.16 (7段階)
-  const L_STEPS = linspace(0.12, 0.95, 9);
-  const AB_STEPS = linspace(-0.16, 0.16, 7);
+  // 1. 無彩色 (Achromatic) - Chroma = 0
+  // 明度 (Lightness) を0.0〜1.0の間で細かく刻む（16段階）
+  const achromaticL = linspace(0.0, 1.0, 16);
+  for (const l of achromaticL) {
+    colors.push({
+      hue: 0, // 無彩色なので色相は無視
+      lightness: l,
+      chroma: 0, // 完全な無彩色
+      weight: 1.0,
+    });
+  }
 
-  for (const L of L_STEPS) {
-    for (const a of AB_STEPS) {
-      for (const b of AB_STEPS) {
-        // Oklab(L,a,b) → Oklch(L,C,H) に変換
-        const chroma = Math.sqrt(a ** 2 + b ** 2);
-        let hue = (Math.atan2(b, a) * 180) / Math.PI;
-        if (hue < 0) hue += 360;
+  // 2. 有彩色 (Chromatic) - 極座標ベース
+  // 色相 (Hue): 15度刻みで均等配置 (24分割)
+  for (let h = 0; h < 360; h += 15) {
+    // 明度 (Lightness): 0.25 ~ 0.85 (5段階)
+    const L_STEPS = [0.25, 0.4, 0.55, 0.7, 0.85];
+    for (const l of L_STEPS) {
+      // 彩度 (Chroma): 0.06 ~ 色域限界 (4段階)
+      // 無彩色判定の閾値(0.04)より大きい値からスタートして有彩色を保証
+      const C_STEPS = [0.06, 0.11, 0.16, 0.22];
 
+      for (const c of C_STEPS) {
         // sRGB色域内のみ追加
-        if (isInGamut(L, chroma, hue)) {
+        if (isInGamut(l, c, h)) {
           colors.push({
-            hue,
-            lightness: L,
-            chroma,
+            hue: h,
+            lightness: l,
+            chroma: c,
             weight: 1.0,
           });
         }
