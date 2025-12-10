@@ -108,6 +108,7 @@ export default async function Image() {
                       width: 30,
                       height: 30,
                       backgroundColor: color,
+                      borderRadius: 2,
                     }}
                   />
                 ))}
