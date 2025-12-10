@@ -33,11 +33,13 @@ export async function generateMetadata({
     title: `${info.hex} - Color Analysis | 24bitColors`,
     description: `Scientific color analysis of ${info.hex}. Harmonies, Shades, Tints, and Technical conversions (RGB, CMYK, OKLCH).`,
     openGraph: {
-      title: `${info.hex}`,
-      description: `Scientific Color Analysis on 24bitColors.`,
+      title: `${info.hex} | 24bitColors`,
+      description: `Scientific Color Analysis: RGB, CMYK, OKLCH, Harmonies, Tints & Shades`,
       images: [
         {
-          url: `https://api.clrs.page/${hex}`,
+          url: `/api/og-hex?hex=${hex}`,
+          width: 1200,
+          height: 630,
         },
       ],
     },
@@ -60,13 +62,8 @@ export default async function ColorDetailPage({ params }: PageProps) {
   const shades = getShades(`#${hex}`, 5);
   const tints = getTints(`#${hex}`, 5);
 
-  const yiq =
-    (colorInfo.rgb.r * 299 + colorInfo.rgb.g * 587 + colorInfo.rgb.b * 114) /
-    1000;
-  const onColorText = yiq >= 128 ? "text-black/50" : "text-white/50";
-
   return (
-    <div className="flex min-h-[calc(100vh-80px)] w-full flex-col items-center bg-background py-12 md:py-20 animate-in fade-in duration-1000">
+    <div className="flex min-h-[calc(100vh-80px)] w-full flex-col items-center bg-background pt-20 pb-12 md:py-20 animate-in fade-in duration-1000">
       {/* Shared Container for Vertical Flow */}
       <div className="w-full max-w-3xl px-6 flex flex-col items-center">
         {/* 1. HERO: The "Color Monolith" (Exhibition Poster) */}
@@ -75,32 +72,24 @@ export default async function ColorDetailPage({ params }: PageProps) {
           <div className="relative mx-auto bg-white p-[15px] shadow-[var(--shadow-museum)] duration-700 ease-out hover:scale-[1.01] hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.4)] dark:bg-[#111] dark:hover:shadow-[0_40px_80px_-15px_rgba(255,255,255,0.1)]">
             {/* The Matting (Passe-Partout) */}
             <div className="flex aspect-[5/6] md:aspect-[4/3] w-full flex-col bg-white p-6 dark:bg-[#1a1a1a] sm:p-[60px]">
-              {/* The Artwork (Color) */}
+              {/* The Artwork (Color) - Clean, no overlay */}
               <CopyableHex
                 hex={colorInfo.hex}
                 className="group/art relative flex-1 w-full overflow-hidden shadow-inner cursor-pointer"
                 style={{ backgroundColor: colorInfo.hex }}
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 transition-opacity duration-500 group-hover/art:opacity-100" />
-
-                {/* Overlay Text (Museum Label Style on Canvas) */}
-                <div
-                  className={`flex h-full w-full flex-col items-center justify-center text-center opacity-90 transition-all duration-500 hover:scale-105 ${onColorText}`}
-                >
-                  <span className="mb-4 font-serif text-sm font-light tracking-[0.3em] uppercase opacity-70">
-                    Pigment No.
-                  </span>
-                  <span
-                    className="font-serif text-5xl sm:text-7xl font-normal tracking-wider"
-                    style={{ fontFamily: '"Times New Roman", Times, serif' }}
-                  >
-                    {colorInfo.hex.replace("#", "")}
-                  </span>
-                </div>
               </CopyableHex>
 
+              {/* Hex Code - Left aligned */}
+              <div className="mt-4 md:mt-6 text-left">
+                <span className="font-mono text-2xl md:text-3xl tracking-wider text-foreground">
+                  {colorInfo.hex}
+                </span>
+              </div>
+
               {/* The Caption (Bottom of Mat - integrated for simpler look in wider view) */}
-              <div className="mt-4 md:mt-6 flex flex-col items-center space-y-4">
+              <div className="flex flex-col items-center space-y-4">
                 {/* Exhibition Notes (Tech Data) */}
                 <div className="w-full grid grid-cols-2 lg:grid-cols-[1fr_auto_1fr] lg:gap-4 gap-y-6 pt-4 md:pt-8 font-mono tracking-wider text-black/70 dark:text-white/70">
                   {/* RGB (Row 1 Left) */}
