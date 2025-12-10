@@ -120,12 +120,9 @@ export function ResultInteraction({
             <Button
               variant="outline"
               className="btn-museum h-12 w-full text-xs tracking-[0.2em] uppercase border-foreground/20 hover:bg-foreground hover:text-background transition-colors"
-              onClick={() => {
-                const detailsElement = document.getElementById("color-details");
-                detailsElement?.scrollIntoView({ behavior: "smooth" });
-              }}
+              asChild
             >
-              詳細を見る
+              <Link href={`/${safeHex.replace("#", "")}`}>詳細を見る</Link>
             </Button>
           </div>
         </div>

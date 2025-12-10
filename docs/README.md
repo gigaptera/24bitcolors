@@ -7,13 +7,15 @@
 ## 📁 フォルダ構成
 
 ```
+24bitColors/
 docs/
 ├── design/          # デザイン関連
 ├── development/     # 開発ルール・技術仕様
 ├── seo/             # SEO戦略・レポート
 ├── database/        # DBスキーマ (ローカルのみ)
 ├── planning/        # ロードマップ (ローカルのみ)
-└── review/          # レビュー (ローカルのみ)
+├── review/          # レビュー (ローカルのみ)
+└── history/         # 開発履歴 (ローカルのみ)
 ```
 
 ---
