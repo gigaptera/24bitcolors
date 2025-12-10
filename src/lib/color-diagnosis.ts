@@ -226,9 +226,6 @@ function calculatePrediction(colorSpace: OklchColor[]): OklchColor {
   const validColors = colorSpace.filter((c) => c.weight > 0.001);
   const weights = validColors.map((c) => c.weight);
 
-  // 色相の加重平均（円形座標で計算）
-  const avgHue = weightedAverageHue(validColors, weights);
-
   // 明度と彩度の加重平均
   let avgLightness = 0;
   let avgChroma = 0;
@@ -240,10 +237,20 @@ function calculatePrediction(colorSpace: OklchColor[]): OklchColor {
     totalWeight += weights[i];
   });
 
+  avgLightness = avgLightness / totalWeight;
+  avgChroma = avgChroma / totalWeight;
+
+  // 無彩色判定: 平均彩度が閾値以下なら無彩色として扱う
+  const ACHROMATIC_THRESHOLD = 0.04;
+  const isAchromatic = avgChroma < ACHROMATIC_THRESHOLD;
+
+  const avgHue = isAchromatic ? 0 : weightedAverageHue(validColors, weights);
+  const finalChroma = isAchromatic ? 0 : avgChroma;
+
   return {
     hue: avgHue,
-    lightness: avgLightness / totalWeight,
-    chroma: avgChroma / totalWeight,
+    lightness: avgLightness,
+    chroma: finalChroma,
     weight: 1,
   };
 }
@@ -259,7 +266,6 @@ export function getFinalResult(state: DiagnosisState): DiagnosisResult {
     .slice(0, 5);
 
   const weights = topColors.map((c) => c.weight);
-  const avgHue = weightedAverageHue(topColors, weights);
 
   let avgLightness = 0;
   let avgChroma = 0;
@@ -271,10 +277,20 @@ export function getFinalResult(state: DiagnosisState): DiagnosisResult {
     totalWeight += weights[i];
   });
 
+  avgLightness = avgLightness / totalWeight;
+  avgChroma = avgChroma / totalWeight;
+
+  // 無彩色判定: 平均彩度が閾値以下なら無彩色として扱う
+  const ACHROMATIC_THRESHOLD = 0.04;
+  const isAchromatic = avgChroma < ACHROMATIC_THRESHOLD;
+
+  const avgHue = isAchromatic ? 0 : weightedAverageHue(topColors, weights);
+  const finalChroma = isAchromatic ? 0 : avgChroma;
+
   const finalColor: OklchColor = {
     hue: avgHue,
-    lightness: avgLightness / totalWeight,
-    chroma: avgChroma / totalWeight,
+    lightness: avgLightness,
+    chroma: finalChroma,
     weight: 1,
   };
 

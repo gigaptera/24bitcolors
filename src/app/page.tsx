@@ -87,7 +87,7 @@ export default function Home() {
       */}
       <section className="flex h-[100vh] w-full snap-start flex-col items-center justify-center bg-foreground/5 p-6 text-center">
         <div className="max-w-xl space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
-          <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground opacity-70">
+          <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
             The Concept
           </p>
           <h2
@@ -129,7 +129,7 @@ export default function Home() {
         className="flex h-[100vh] w-full snap-start flex-col items-center justify-center p-6 text-center"
       >
         <div className="max-w-xl">
-          <p className="mb-6 text-xs font-bold uppercase tracking-widest text-muted-foreground opacity-70">
+          <p className="mb-6 text-xs font-bold uppercase tracking-widest text-muted-foreground">
             The Logic
           </p>
           <h2

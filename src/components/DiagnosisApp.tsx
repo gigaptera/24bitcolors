@@ -118,7 +118,7 @@ export function DiagnosisApp() {
             chroma: finalResult.color.chroma,
             theme: theme,
             duration_seconds: durationSeconds,
-            algorithm_version: "v1.0.0",
+            algorithm_version: "v1.2.0",
             locale: navigator.language,
             anonymous_id: anonymousId || "unknown",
           }),

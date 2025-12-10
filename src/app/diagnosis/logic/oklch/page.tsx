@@ -24,36 +24,46 @@ export default function OklchLogicPage() {
         </div>
 
         {/* Header */}
-        <header className="space-y-6">
+        <header className="space-y-8">
           <h1 className="font-serif text-4xl md:text-5xl tracking-widest text-foreground">
-            THE SCIENCE OF <br /> OKLCH
+            THE SCIENCE OF <br /> OKLCH & OKLAB
           </h1>
-          <p className="font-sans text-base text-muted-foreground tracking-wide leading-relaxed max-w-xl">
-            2020年に生まれた、色空間の「最終決定版」。
-            <br />
-            なぜ私たちはHSLやRGBを捨て、OKLCHを選んだのか。
-          </p>
+          <div className="space-y-4 max-w-2xl">
+            <p className="font-sans text-lg text-foreground/80 tracking-wide leading-relaxed font-light">
+              人間の「目」を、そのまま数式にする。
+            </p>
+            <p className="font-sans text-sm text-muted-foreground tracking-wide leading-relaxed">
+              24bitColorsの心臓部で動いているのは、2020年に生まれた最新の色空間「OKLCH」と「OKLAB」です。
+              <br />
+              これは単なる新しいカラーピッカーではありません。コンピュータが初めて、人間と同じように色を感じられるようになった革命的な出来事なのです。
+            </p>
+          </div>
         </header>
 
         {/* Section 1: The "L" Illusion (HSL vs Human Eye) */}
         <section className="space-y-12">
-          <div className="space-y-4">
+          <div className="space-y-6">
             <span className="font-mono text-xs text-muted-foreground tracking-[0.2em] block">
               01. PERCEPTION GAP
             </span>
             <h2 className="font-serif text-2xl tracking-wide">
-              「黄色」は「青」より明るい
+              「黄色」は「青」より、ずっと明るい
             </h2>
-            <p className="text-foreground/90 leading-loose text-justify font-light">
-              従来のWebデザインで愛用されてきた「HSL色空間」には、致命的な欠点があります。
-              それは「数学的な明度」と「人間が感じる明るさ」が一致しないことです。
-              <br />
-              <br />
-              下のグラフを見てください。HSLでは、青も黄色も同じ「明度50%」として扱われます。
-              しかし、人間の目には黄色の方が圧倒的に明るく見えます。 この
-              <strong>「感覚と数値のズレ」</strong>
-              が、デザインの調和を崩す原因となっていました。
-            </p>
+            <div className="space-y-6 text-foreground/90 leading-loose text-justify font-light">
+              <p>
+                従来のWebデザインで使われてきた「HSL色空間」には、致命的な欠陥がありました。それは
+                <strong>
+                  「数値上の明るさと、見た目の明るさが一致しない」
+                </strong>
+                ことです。
+              </p>
+              <p>
+                下の図を見てください。HSLの計算式では、濃い青も鮮やかな黄色も、同じ「明度50%」だと主張します。しかし、人間の目には明らかに黄色の方が眩しく見えますよね？
+              </p>
+              <p>
+                「数値は合っているのに、デザインがなんとなくチグハグになる」。そんなデザイナーたちの長年の悩みを、OKLCHは生物学的なアプローチで解決しました。眼球の網膜が受け取る刺激を計算式に組み込むことで、青も黄色も、人間が感じる通りの「正しい明るさ」で管理できるようになったのです。
+              </p>
+            </div>
           </div>
 
           <div className="p-8 bg-card rounded-xl border border-border space-y-8">
@@ -97,122 +107,104 @@ export default function OklchLogicPage() {
                 </div>
               </div>
               <p className="text-[10px] text-muted-foreground text-center pt-2">
-                ▲
-                HSLの「明度50%」における、実際の見た目の明るさの違い（イメージ）。
+                ▲ HSLの「明度50%」における、実際の見た目の明るさの違い。
               </p>
             </div>
           </div>
         </section>
 
-        {/* Section 2: Origin & Oklab */}
+        {/* Section 2: OKLAB vs OKLCH */}
         <section className="space-y-12">
-          <div className="space-y-4">
+          <div className="space-y-6">
             <span className="font-mono text-xs text-muted-foreground tracking-[0.2em] block">
-              02. ORIGIN
+              02. TWO FACES OF COLOR
             </span>
             <h2 className="font-serif text-2xl tracking-wide">
-              Björn Ottossonと「Oklab」
+              地図で読むか、コンパスで読むか
             </h2>
-            <p className="text-foreground/90 leading-loose text-justify font-light">
-              OKLCHの基礎となる「Oklab」は、2020年にBjörn
-              Ottosson氏によって発表されました。
-              それまでも「CIELAB」などの均等色空間は存在しましたが、計算が複雑で、色相の歪み（青が紫に見える問題）を抱えていました。
-              Oklabはこれらの問題を数学的に洗練させ、
-              <strong>「シンプルで、予測可能で、知覚的に正しい」</strong>
-              という、現代のデジタル色彩における最適解を導き出したのです。
-            </p>
-          </div>
-        </section>
-
-        {/* Section 3: Unbounded Chroma */}
-        <section className="space-y-12">
-          <div className="space-y-4">
-            <span className="font-mono text-xs text-muted-foreground tracking-[0.2em] block">
-              03. UNBOUNDED
-            </span>
-            <h2 className="font-serif text-2xl tracking-wide">
-              「枠」のない世界
-            </h2>
-            <p className="text-foreground/90 leading-loose text-justify font-light">
-              RGBやCMYKといった従来の色空間は、「立方体」のような閉じた箱でした。その箱の外にある色は表現できません。
-              しかし、OKLCHのC（彩度）には理論上の上限がありません。
-              <br />
-              <br />
-              これは、将来的にディスプレイ技術が進化し、より鮮やかな色が表現できるようになったとしても、
-              OKLCHのデータはそのままで対応できることを意味します。 Display
-              P3やRec.2020といった広色域ディスプレイが標準化しつつある今、
-              <strong>「箱（デバイス）に依存しない色定義」</strong>
-              こそが、本質的な色の永続性を保証するのです。
-            </p>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-2 mt-4">
-            <div className="p-4 border border-border rounded-lg bg-card/50">
-              <span className="block text-xs font-mono text-muted-foreground mb-2">
-                sRGB (Standard Web)
-              </span>
-              <div className="h-2 w-full bg-gradient-to-r from-gray-500 to-red-500 rounded-full opacity-50" />
-              <p className="text-[10px] text-right mt-1 opacity-50">
-                Limited Range
+            <div className="space-y-6 text-foreground/90 leading-loose text-justify font-light">
+              <p>
+                このサイトでは、場面に応じて「OKLCH」と「OKLAB」という2つの言葉を使い分けていますが、実はこれらは
+                <strong>全く同じ色空間の「別の表現方法」</strong>
+                です。ちょうど、地図上の場所を「緯度経度」で表すか、「ここから北東に何キロ」で表すかの違いと同じです。
               </p>
-            </div>
-            <div className="p-4 border border-foreground/50 rounded-lg bg-card">
-              <span className="block text-xs font-mono text-foreground mb-2 font-bold">
-                OKLCH (Unlimited)
-              </span>
-              <div className="h-2 w-full bg-gradient-to-r from-gray-500 via-red-500 to-[#ff0080] rounded-full" />
-              <p className="text-[10px] text-right mt-1">Future Proof</p>
-            </div>
-          </div>
-        </section>
 
-        {/* Comparison Section (Reserved from previous) */}
-        <section className="space-y-12">
-          <div className="space-y-4">
-            <span className="font-mono text-xs text-muted-foreground tracking-[0.2em] block">
-              04. CONSISTENCY
-            </span>
-            <h2 className="font-serif text-2xl tracking-wide">
-              グラデーションの純度
-            </h2>
-            <div className="space-y-6 rounded-xl border border-border p-8 bg-card/50">
-              <div className="grid gap-6">
-                <div className="space-y-3">
-                  <div className="flex justify-between text-xs font-mono text-foreground/80 font-medium">
-                    <span>Blue</span>
-                    <span>Linear RGB</span>
-                    <span>White</span>
-                  </div>
-                  <div className="h-16 w-full rounded-md bg-gradient-to-r from-[#0000FF] to-[#FFFFFF] shadow-sm" />
-                  <p className="text-[11px] text-foreground/70 leading-relaxed">
-                    ▲ 中間色が濁り、紫色っぽく見える現象（Hue Shift）。
+              <div className="grid md:grid-cols-2 gap-8 my-8">
+                <div className="border border-border p-6 rounded-lg bg-card/30">
+                  <h3 className="font-serif text-lg mb-2 text-foreground">
+                    OKLAB (Cartesian)
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    L=明度, a=赤緑軸, b=青黄軸
+                  </p>
+                  <p className="text-sm leading-relaxed">
+                    数学的なXY座標のようなもの。「色の距離」を計算するのに最適です。今回の診断でも、無彩色（グレー）の判定や、色同士の近さを計算する裏側ではこのOKLABが活躍しています。
                   </p>
                 </div>
-                <div className="space-y-3 pt-4">
-                  <div className="flex justify-between text-xs font-mono text-foreground font-bold">
-                    <span>Blue</span>
-                    <span>OKLCH Interpolation</span>
-                    <span>White</span>
-                  </div>
-                  <div
-                    className="h-16 w-full rounded-md shadow-sm"
-                    style={{
-                      background:
-                        "linear-gradient(90deg, oklch(0.45 0.26 264), oklch(1 0 0))",
-                    }}
-                  />
-                  <p className="text-[11px] text-foreground/90 font-medium leading-relaxed">
-                    ▲ 鮮やかさを保ったまま、自然に遷移する（Perceptually
-                    Smooth）。
+                <div className="border border-border p-6 rounded-lg bg-card/30">
+                  <h3 className="font-serif text-lg mb-2 text-foreground">
+                    OKLCH (Polar)
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    L=明度, C=彩度, H=色相
+                  </p>
+                  <p className="text-sm leading-relaxed">
+                    コンパスと距離のようなもの。「もっと鮮やかに」「もっと赤く」といった、人間の直感的な操作に適しています。診断結果の表示や、あなたの好みを分析する表側ではこちらを使っています。
                   </p>
                 </div>
               </div>
+
+              <p>
+                この2つを自由に行き来することで、計算の「正確さ」と、人間の「直感」を両立させているのが24bitColorsの特徴です。特に無彩色（白黒）の扱いにおいて、OKLABは「a=0,
+                b=0」という完全な無を定義できるため、美しいグレーを表現するのに不可欠です。
+              </p>
             </div>
-            <p className="text-muted-foreground leading-loose text-justify font-light pt-4">
-              24bitColorsが採用しているのは、単なる「新しい計算式」ではありません。
-              それは、人間の目が捉える「色」の本質を、デジタルの世界で正しく再現するための基盤技術です。
-              この一貫性があるからこそ、あなたの感性に最も近い色を診断することができるのです。
-            </p>
+          </div>
+        </section>
+
+        {/* Section 3: Future Proof */}
+        <section className="space-y-12">
+          <div className="space-y-6">
+            <span className="font-mono text-xs text-muted-foreground tracking-[0.2em] block">
+              03. UNBOUNDED FUTURE
+            </span>
+            <h2 className="font-serif text-2xl tracking-wide">
+              「sRGBの檻」からの脱出
+            </h2>
+            <div className="space-y-6 text-foreground/90 leading-loose text-justify font-light">
+              <p>
+                これまでのWebデザインは「sRGB」という色の檻の中に閉じ込められていました。sRGBは20年以上前のブラウン管モニターを基準に作られた規格で、現実世界の鮮やかな色の半分も表現できません。
+              </p>
+              <p>
+                しかしOKLCHには、理論上の「彩度の上限」がありません。
+                今はまだ、多くのスマホやPCモニターがsRGBの範囲しか出せませんが、最新のiPhoneやMacBook（Display
+                P3対応）は既にその外側の色を表示し始めています。
+              </p>
+              <p>
+                私たちはアルゴリズムをOKLCHで構築することで、将来どのような高性能ディスプレイが登場しても、その性能をフルに活かせる
+                <strong>「未来互換性（Future-Proof）」</strong>
+                を確保しました。今日あなたが選んだその色は、10年後のディスプレイで見れば、もっと鮮やかに、もっと美しく輝くはずです。
+              </p>
+            </div>
+          </div>
+
+          <div className="relative h-24 mt-8 rounded-lg overflow-hidden border border-border">
+            {/* Gamut Visualization */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-[80%] h-2 bg-gradient-to-r from-gray-500 via-red-500 to-[#ff0080] rounded-full opacity-30 blur-sm"></div>
+            </div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-[40%] h-4 border-2 border-foreground/30 bg-background/50 backdrop-blur-sm rounded flex items-center justify-center">
+                <span className="text-[10px] font-mono text-muted-foreground">
+                  Current Web (sRGB)
+                </span>
+              </div>
+            </div>
+            <div className="absolute right-[10%] top-1/2 -translate-y-1/2">
+              <span className="text-[10px] font-mono text-foreground font-bold animate-pulse">
+                Your True Color →
+              </span>
+            </div>
           </div>
         </section>
 
