@@ -11,7 +11,6 @@ import {
   getFinalResult,
   isDiagnosisComplete,
 } from "@/lib/color-diagnosis";
-import { saveDiagnosis } from "@/lib/diagnosis";
 import { useTheme } from "./ThemeProvider";
 
 interface HistoryEntry {
@@ -101,21 +100,28 @@ export function DiagnosisApp() {
           localStorage.setItem("lastDiagnosisHex", finalResult.hex);
         }
 
-        // Save diagnosis using client-side Supabase (same as feedback)
-        saveDiagnosis({
-          hex: finalResult.hex,
-          hue: finalResult.color.hue,
-          lightness: finalResult.color.lightness,
-          chroma: finalResult.color.chroma,
-          theme: theme,
-          duration_seconds: durationSeconds,
-          algorithm_version: "v1.0.0",
-          locale: navigator.language,
-          anonymous_id: anonymousId || "unknown",
+        // API Route with keepalive - survives page navigation
+        // Use SUPABASE_SERVICE_ROLE_KEY on server side
+        fetch("/api/diagnosis", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            hex: finalResult.hex,
+            hue: finalResult.color.hue,
+            lightness: finalResult.color.lightness,
+            chroma: finalResult.color.chroma,
+            theme: theme,
+            duration_seconds: durationSeconds,
+            algorithm_version: "v1.0.0",
+            locale: navigator.language,
+            anonymous_id: anonymousId || "unknown",
+          }),
+          keepalive: true,
         })
-          .then((result) => {
-            if (result.success && result.id) {
-              localStorage.setItem("lastDiagnosisId", result.id);
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.success && data.id) {
+              localStorage.setItem("lastDiagnosisId", data.id);
             }
           })
           .catch((e) => console.error("Diagnosis save failed", e));
