@@ -16,8 +16,11 @@ interface HexShareSectionProps {
 export function HexShareSection({ hex }: HexShareSectionProps) {
   const [showShareCard, setShowShareCard] = useState(false);
 
+  // Ensure hex has # prefix
+  const safeHex = hex.startsWith("#") ? hex : `#${hex}`;
+
   // Prepare color object for ShareCard
-  const parsed = parse(hex);
+  const parsed = parse(safeHex);
   const oklch = parsed ? toOklch(parsed) : { h: 0, l: 0, c: 0 };
 
   // OklchColor type match
@@ -31,14 +34,14 @@ export function HexShareSection({ hex }: HexShareSectionProps) {
   return (
     <>
       <ShareActions
-        url={`https://24bitcolors.com/${hex}`}
+        url={`https://24bitcolors.com/${hex.replace("#", "")}`}
         onShare={() => setShowShareCard(true)}
       />
 
       {showShareCard && (
         <ShareCard
           color={colorData}
-          hex={hex}
+          hex={safeHex}
           onClose={() => setShowShareCard(false)}
         />
       )}

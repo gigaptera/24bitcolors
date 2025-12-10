@@ -218,7 +218,10 @@ export function ShareCard({ color, hex, onClose }: ShareCardProps) {
     try {
       const response = await fetch(imageDataUrl);
       const blob = await response.blob();
-      const file = new File([blob], "24bitcolors.png", { type: "image/png" });
+      const safeHex = hex.replace("#", "").toUpperCase();
+      const file = new File([blob], `24bitcolors-${safeHex}.png`, {
+        type: "image/png",
+      });
 
       if (navigator.share && navigator.canShare({ files: [file] })) {
         await navigator.share({

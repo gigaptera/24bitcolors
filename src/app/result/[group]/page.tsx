@@ -3,6 +3,7 @@ import { redirect, notFound } from "next/navigation";
 import { getNearestPoeticName, getColorFromSlug } from "@/lib/colorNaming";
 import { ResultInteraction } from "@/components/ResultInteraction";
 import { toOklch } from "@/lib/colorNaming";
+import { AmbientBackground } from "@/components/AmbientBackground";
 
 interface Props {
   params: Promise<{ group: string }>;
@@ -70,12 +71,9 @@ export default async function ResultPage({ params, searchParams }: Props) {
   const { groupName, groupSlug } = getNearestPoeticName(safeHex);
 
   return (
-    <div className="min-h-screen w-full bg-background flex flex-col items-center justify-center relative overflow-hidden">
-      {/* Background Ambience */}
-      <div
-        className="absolute inset-0 opacity-20 blur-3xl scale-150 animate-pulse-slow"
-        style={{ backgroundColor: safeHex }}
-      />
+    <div className="min-h-screen w-full bg-background flex flex-col items-center justify-center relative overflow-hidden pt-16 md:pt-0">
+      {/* Background Ambience - theme-aware for text readability */}
+      <AmbientBackground hex={safeHex} />
 
       <main className="z-10 w-full max-w-3xl px-6 py-12 flex flex-col items-center text-center space-y-12">
         {/* Color Card */}

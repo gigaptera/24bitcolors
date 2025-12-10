@@ -1,11 +1,11 @@
 # 24bitColors Design System
 
-**Version 1.0** | **Theme:** Night Museum 🏛️
+**Version 1.0** | **Theme:** Museum 🏛️
 
 ## 1. Design Philosophy
 
 "Universal Beauty & Intellectual Curiosity"
-24bitColors は、色彩を探求する美術館のような空間です。静謐でエレガントな「Night Museum」をテーマとし、コンテンツ（色）が主役となるよう、UI は徹底的にミニマルかつ機能的でなければなりません。また、全てのユーザーに美しい体験を提供するため、最新のアクセシビリティ基準（APCA/WCAG）に準拠します。
+24bitColors は、色彩を探求する美術館のような空間です。静謐でエレガントな「Museum」をテーマとし、コンテンツ（色）が主役となるよう、UI は徹底的にミニマルかつ機能的でなければなりません。また、全てのユーザーに美しい体験を提供するため、最新のアクセシビリティ基準（APCA/WCAG）に準拠します。
 
 ### UX 設計原則
 
