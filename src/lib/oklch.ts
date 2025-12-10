@@ -36,19 +36,43 @@ export function circularHueDistance(h1: number, h2: number): number {
 }
 
 /**
+ * OklchColorをOklab直交座標(L, a, b)に変換
+ * 無彩色（chroma≈0）でもa≈0, b≈0となり安定した距離計算が可能
+ */
+export function toOklabCartesian(color: OklchColor): {
+  L: number;
+  a: number;
+  b: number;
+} {
+  const hueRad = (color.hue * Math.PI) / 180;
+  return {
+    L: color.lightness,
+    a: color.chroma * Math.cos(hueRad),
+    b: color.chroma * Math.sin(hueRad),
+  };
+}
+
+/**
  * OKLCH空間での2色間の距離を計算
+ * Oklab直交座標系でユークリッド距離を計算することで
+ * 無彩色（chroma≈0）でも安定した結果を得る
  */
 export function colorDistance(colorA: OklchColor, colorB: OklchColor): number {
-  const hueDist = circularHueDistance(colorA.hue, colorB.hue) / 180; // 0-2の範囲に正規化
-  const lightnessDist = Math.abs(colorA.lightness - colorB.lightness);
-  const chromaDist = Math.abs(colorA.chroma - colorB.chroma) * 4; // 彩度を重み付け
+  const pA = toOklabCartesian(colorA);
+  const pB = toOklabCartesian(colorB);
 
-  return Math.sqrt(hueDist ** 2 + lightnessDist ** 2 + chromaDist ** 2);
+  // Oklab空間でのユークリッド距離
+  return Math.sqrt(
+    (pA.L - pB.L) ** 2 + (pA.a - pB.a) ** 2 + (pA.b - pB.b) ** 2
+  );
 }
 
 /**
  * 色相の加重平均を計算（円形座標として処理）
+ * 無彩色（chroma < ACHROMATIC_THRESHOLD）は色相が定義できないためスキップ
  */
+const ACHROMATIC_THRESHOLD = 0.02;
+
 export function weightedAverageHue(
   colors: OklchColor[],
   weights: number[]
@@ -59,12 +83,16 @@ export function weightedAverageHue(
 
   colors.forEach((color, i) => {
     const weight = weights[i] || 0;
+    // 無彩色は色相が定義できないためスキップ
+    if (color.chroma < ACHROMATIC_THRESHOLD) return;
+
     const hueRad = (color.hue * Math.PI) / 180;
     sinSum += Math.sin(hueRad) * weight;
     cosSum += Math.cos(hueRad) * weight;
     totalWeight += weight;
   });
 
+  // 有彩色がない場合（全て無彩色）は0を返す
   if (totalWeight === 0) return 0;
 
   let avgHue = (Math.atan2(sinSum, cosSum) * 180) / Math.PI;
@@ -96,14 +124,14 @@ export function initializeColorSpace(): OklchColor[] {
   }
 
   // 無彩色 (Achromatic) の追加
-  // 彩度をほぼ0 (0.01) に設定し、明度のバリエーションを持たせる
+  // 彩度を0に設定し、明度のバリエーションを持たせる
   // 0.0 (Black) と 1.0 (White) を追加してダイナミックレンジを最大化
   const achromaticLightness = [0.0, 0.1, 0.25, 0.4, 0.55, 0.7, 0.85, 0.95, 1.0];
   for (const l of achromaticLightness) {
     colors.push({
-      hue: 0, // 無彩色なので色相は無視されるが便宜上0
+      hue: 0, // 無彩色なので色相は無視される
       lightness: l,
-      chroma: 0.01, // ほぼ無彩色
+      chroma: 0, // 完全な無彩色
       weight: 1.0,
     });
   }
