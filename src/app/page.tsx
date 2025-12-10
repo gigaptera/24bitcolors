@@ -64,10 +64,8 @@ export default function Home() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-12 animate-bounce opacity-50">
-          <p className="text-[10px] tracking-[0.3em] text-foreground/60">
-            SCROLL
-          </p>
+        <div className="absolute bottom-12 animate-bounce opacity-80">
+          <p className="text-[10px] tracking-[0.3em] font-medium">SCROLL</p>
         </div>
       </section>
 
