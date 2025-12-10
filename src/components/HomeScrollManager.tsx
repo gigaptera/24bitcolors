@@ -12,7 +12,7 @@ export function HomeScrollManager() {
 
     // Force mandatory snap on the window
     html.style.scrollSnapType = "y mandatory";
-    html.style.scrollPaddingTop = "4rem"; // Header offset
+    html.style.scrollPaddingTop = "0px"; // Allow content to go behind transparent header
     html.style.scrollBehavior = "smooth";
 
     return () => {

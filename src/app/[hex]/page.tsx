@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { HexShareSection } from "./HexShareSection";
 import {
   getColorInfo,
   isValidHex,
@@ -9,7 +10,6 @@ import {
   getTints,
   isAchromatic,
 } from "@/lib/color-utils";
-import { ShareActions } from "@/components/ShareActions";
 import { Button } from "@/components/ui/button";
 import { CopyableHex } from "@/components/CopyableHex";
 import { HarmonyGallery } from "@/components/HarmonyGallery";
@@ -173,10 +173,7 @@ export default async function ColorDetailPage({ params }: PageProps) {
 
           {/* Share Actions (Below the Frame) */}
           <div className="mt-12 flex justify-center">
-            <ShareActions
-              url={`https://24bitcolors.com/${hex}`}
-              colors={{ name: colorInfo.hex, code: colorInfo.hex }}
-            />
+            <HexShareSection hex={hex} />
           </div>
         </div>
 

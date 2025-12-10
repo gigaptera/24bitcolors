@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { parse, converter } from "culori";
 import { HarmonyDetailModal } from "./HarmonyDetailModal";
-import { Maximize2 } from "lucide-react";
+import { ArrowsOut } from "@phosphor-icons/react";
 
 interface HarmonyGalleryProps {
   hex: string;
@@ -165,7 +165,7 @@ export function HarmonyGallery({ hex, harmonies }: HarmonyGalleryProps) {
                 className="absolute top-2 right-2 p-2 rounded-full bg-black/20 hover:bg-black/50 text-white opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-300 backdrop-blur-sm"
                 title="色相環で見る"
               >
-                <Maximize2 className="w-4 h-4" />
+                <ArrowsOut weight="light" className="w-4 h-4" />
               </button>
             </div>
 

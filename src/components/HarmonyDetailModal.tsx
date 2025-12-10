@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { ColorWheel } from "./ColorWheel";
 import { CopyableHex } from "./CopyableHex";
-import { X } from "lucide-react";
+import { X } from "@phosphor-icons/react";
 
 interface HarmonyDetailModalProps {
   isOpen: boolean;
@@ -58,7 +58,7 @@ export function HarmonyDetailModal({
           onClick={onClose}
           className="absolute right-4 top-4 rounded-full p-2 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
         >
-          <X className="h-5 w-5" />
+          <X weight="light" className="h-6 w-6" />
         </button>
 
         {/* Header */}

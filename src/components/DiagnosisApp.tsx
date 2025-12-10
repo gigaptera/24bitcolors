@@ -2,10 +2,8 @@
 
 import { useState, useCallback, useRef, useEffect } from "react";
 import { QuestionScreen } from "@/components/QuestionScreen";
-import { ResultScreen } from "@/components/ResultScreen";
 import {
   DiagnosisState,
-  DiagnosisResult,
   ColorPair,
   createDiagnosisState,
   selectOptimalColorPair,
@@ -16,15 +14,16 @@ import {
 import { saveDiagnosisAction } from "@/app/actions/saveDiagnosis";
 import { useTheme } from "./ThemeProvider";
 
-type Screen = "question" | "result";
-
 interface HistoryEntry {
   state: DiagnosisState;
   pair: ColorPair;
 }
 
+import { useRouter } from "next/navigation";
+import { getNearestPoeticName } from "@/lib/colorNaming";
+
 export function DiagnosisApp() {
-  const [screen, setScreen] = useState<Screen>("question");
+  const router = useRouter();
   const { theme } = useTheme();
 
   // Analytics State
@@ -46,7 +45,6 @@ export function DiagnosisApp() {
     initialData.state
   );
   const [colorPair, setColorPair] = useState<ColorPair>(initialData.pair);
-  const [result, setResult] = useState<DiagnosisResult | null>(null);
   const [history, setHistory] = useState<HistoryEntry[]>([]);
 
   // Initialize Anonymous ID
@@ -77,7 +75,6 @@ export function DiagnosisApp() {
 
       if (isDiagnosisComplete(newState)) {
         const finalResult = getFinalResult(newState);
-        setResult(finalResult);
 
         // --- Data Collection v2 Start ---
         const endTime = Date.now();
@@ -93,7 +90,14 @@ export function DiagnosisApp() {
           );
         }
 
-        setScreen("result");
+        // setScreen("result"); // Old: Show local result
+        // New: Redirect to Sharable Result Page
+        // Calculate slug for SEO-friendly URL
+        const safeHex = finalResult.hex.replace("#", "");
+        const { groupSlug } = getNearestPoeticName(`#${safeHex}`);
+
+        // Redirect to /result/[group]?hex=[hex]
+        router.push(`/result/${groupSlug}?hex=${safeHex}`);
 
         // Server Action Call (Background)
         try {
@@ -126,7 +130,7 @@ export function DiagnosisApp() {
         setColorPair(newPair);
       }
     },
-    [diagnosisState, colorPair, history, theme, anonymousId]
+    [diagnosisState, colorPair, history, theme, anonymousId, router]
   );
 
   const handleUndo = useCallback(() => {
@@ -146,21 +150,17 @@ export function DiagnosisApp() {
   return (
     <div className="flex w-full flex-grow items-center justify-center p-space-2">
       <main className="w-full max-w-md p-space-4">
-        {screen === "question" && (
-          <QuestionScreen
-            questionNumber={diagnosisState.currentQuestion}
-            totalQuestions={diagnosisState.totalQuestions}
-            colorA={colorPair.colorA}
-            colorB={colorPair.colorB}
-            prediction={diagnosisState.currentPrediction}
-            confidence={diagnosisState.confidence}
-            onSelectA={() => handleSelect("A")}
-            onSelectB={() => handleSelect("B")}
-            onUndo={history.length > 0 ? handleUndo : undefined}
-          />
-        )}
-
-        {screen === "result" && result && <ResultScreen result={result} />}
+        <QuestionScreen
+          questionNumber={diagnosisState.currentQuestion}
+          totalQuestions={diagnosisState.totalQuestions}
+          colorA={colorPair.colorA}
+          colorB={colorPair.colorB}
+          prediction={diagnosisState.currentPrediction}
+          confidence={diagnosisState.confidence}
+          onSelectA={() => handleSelect("A")}
+          onSelectB={() => handleSelect("B")}
+          onUndo={history.length > 0 ? handleUndo : undefined}
+        />
       </main>
     </div>
   );

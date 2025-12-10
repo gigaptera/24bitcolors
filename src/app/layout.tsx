@@ -82,6 +82,7 @@ const jsonLd = {
 };
 
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 // ... imports
 
@@ -96,7 +97,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider>
-          <div className="flex min-h-screen flex-col pt-16">
+          <div className="flex min-h-screen flex-col">
+            <ScrollToTop />
             <Header />
             <main className="flex-grow flex flex-col">{children}</main>
             <Footer />

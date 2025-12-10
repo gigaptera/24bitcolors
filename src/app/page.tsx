@@ -22,7 +22,7 @@ export default function Home() {
         - Snap Start
         - Full Height
       */}
-      <section className="relative flex h-[calc(100vh-4rem)] w-full snap-start flex-col items-center justify-center overflow-hidden p-6">
+      <section className="relative flex h-[100vh] w-full snap-start flex-col items-center justify-center overflow-hidden p-6">
         {/* Background Effect: Color Prism / Aurora */}
         <div className="aurora-gradient absolute inset-0 -z-10 animate-pulse-slow opacity-30 dark:opacity-20" />
 
@@ -81,13 +81,52 @@ export default function Home() {
       </section>
 
       {/* 
+        CONCEPT SECTION 
+        - Snap Start
+        - Full Height
+      */}
+      <section className="flex h-[100vh] w-full snap-start flex-col items-center justify-center bg-foreground/5 p-6 text-center">
+        <div className="max-w-xl space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+          <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground opacity-70">
+            The Concept
+          </p>
+          <h2
+            className="text-3xl font-normal md:text-5xl"
+            style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
+          >
+            Digital Color Museum
+          </h2>
+          <p className="leading-loose text-muted-foreground font-serif text-sm md:text-base">
+            1,677万色の海から、
+            <br />
+            あなたの真実の色を見つける旅へ。
+            <br />
+            ここは、あなたと色だけが存在する静寂な美術館です。
+          </p>
+
+          <div className="pt-8">
+            <Button
+              variant="ghost"
+              asChild
+              className="group text-xs tracking-[0.2em] hover:bg-transparent hover:text-foreground"
+            >
+              <Link href="/about" className="flex items-center gap-2">
+                <span>READ OUR STORY</span>
+                <span className="block h-px w-8 bg-foreground transition-all group-hover:w-16" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* 
         LOGIC SECTION 
         - Snap Start
         - Full Height
       */}
       <section
         id="about"
-        className="flex h-[calc(100vh-4rem)] w-full snap-start flex-col items-center justify-center p-6 text-center"
+        className="flex h-[100vh] w-full snap-start flex-col items-center justify-center p-6 text-center"
       >
         <div className="max-w-xl">
           <p className="mb-6 text-xs font-bold uppercase tracking-widest text-muted-foreground opacity-70">

@@ -5,6 +5,12 @@ export function Footer() {
     <footer className="w-full snap-end py-space-6 text-center text-[length:var(--text-micro)] text-[var(--muted-foreground)]">
       <div className="mb-space-4 flex justify-center gap-space-4">
         <Link
+          href="/about"
+          className="hover:text-[var(--foreground)] transition-colors"
+        >
+          ABOUT
+        </Link>
+        <Link
           href="/terms"
           className="hover:text-[var(--foreground)] transition-colors"
         >

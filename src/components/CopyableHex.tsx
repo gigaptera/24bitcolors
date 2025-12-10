@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Check, Copy } from "lucide-react";
+import { Check, Copy } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 
 interface CopyableHexProps extends React.HTMLAttributes<HTMLDivElement> {

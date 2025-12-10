@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useState, useEffect } from "react";
-import { CheckCircle2, AlertCircle, ArrowRight } from "lucide-react";
+import { CheckCircle, WarningCircle, ArrowRight } from "@phosphor-icons/react";
 import { saveFeedback } from "@/lib/feedback";
 
 // Type for the stored result
@@ -31,7 +31,7 @@ function DiagnosisResultSection({ result }: { result: StoredResult | null }) {
     return (
       <div className="rounded-none border border-dashed border-red-500/50 bg-red-500/5 p-8 text-center space-y-4">
         <div className="flex justify-center text-red-500 mb-2">
-          <AlertCircle className="w-8 h-8" />
+          <WarningCircle weight="light" className="w-8 h-8" />
         </div>
         <h3 className="font-serif text-lg tracking-wide">
           診断履歴が見つかりません
@@ -146,7 +146,10 @@ export default function LogicFeedbackPage() {
       <div className="flex min-h-screen w-full flex-col items-center justify-center bg-background py-20 px-6 animate-in fade-in duration-700">
         <div className="text-center space-y-6 max-w-lg">
           <div className="flex justify-center mb-6">
-            <CheckCircle2 className="w-16 h-16 text-green-500" />
+            <CheckCircle
+              weight="light"
+              className="mx-auto mb-4 h-12 w-12 text-primary"
+            />
           </div>
           <h1 className="font-serif text-3xl tracking-widest text-foreground">
             THANK YOU
@@ -193,8 +196,7 @@ export default function LogicFeedbackPage() {
           </h1>
           <p className="font-sans text-base text-muted-foreground tracking-wide leading-relaxed max-w-xl">
             精度向上のための詳細レポート。
-            <br />
-            あなたの「違和感」や「期待」を教えてください。
+            エラーが発生しました。もう一度お試しください。
           </p>
         </header>
 
