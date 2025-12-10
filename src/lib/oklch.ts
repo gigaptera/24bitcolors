@@ -102,38 +102,56 @@ export function weightedAverageHue(
 }
 
 /**
- * 診断用の初期色空間を生成（288色）
+ * 等間隔の数列を生成
+ */
+function linspace(start: number, end: number, n: number): number[] {
+  const step = (end - start) / (n - 1);
+  return Array.from({ length: n }, (_, i) => start + step * i);
+}
+
+/**
+ * 色がsRGB色域内かチェック
+ */
+function isInGamut(l: number, c: number, h: number): boolean {
+  const oklch = { mode: "oklch" as const, l, c, h };
+  const clamped = clampChroma(oklch, "oklch", "rgb");
+  return Math.abs((clamped.c ?? 0) - c) < 0.005;
+}
+
+/**
+ * 診断用の初期色空間を生成
+ * Oklab直交座標 (L, a, b) で均等配置することで
+ * 無彩色も自然に含まれる
  */
 export function initializeColorSpace(): OklchColor[] {
   const colors: OklchColor[] = [];
 
-  // 色相: 24分割 (0°, 15°, 30°, ..., 345°)
-  // 明度: 3段階 (0.3, 0.55, 0.8)
-  // 彩度: 4段階 (0.08, 0.12, 0.16, 0.20)
-  for (let h = 0; h < 360; h += 15) {
-    for (const l of [0.3, 0.55, 0.8]) {
-      for (const c of [0.08, 0.12, 0.16, 0.2]) {
-        colors.push({
-          hue: h,
-          lightness: l,
-          chroma: c,
-          weight: 1.0,
-        });
+  // Oklab空間での高密度均等配置
+  // L: 0.12 ~ 0.95 (9段階)
+  // a: -0.16 ~ 0.16 (7段階)
+  // b: -0.16 ~ 0.16 (7段階)
+  const L_STEPS = linspace(0.12, 0.95, 9);
+  const AB_STEPS = linspace(-0.16, 0.16, 7);
+
+  for (const L of L_STEPS) {
+    for (const a of AB_STEPS) {
+      for (const b of AB_STEPS) {
+        // Oklab(L,a,b) → Oklch(L,C,H) に変換
+        const chroma = Math.sqrt(a ** 2 + b ** 2);
+        let hue = (Math.atan2(b, a) * 180) / Math.PI;
+        if (hue < 0) hue += 360;
+
+        // sRGB色域内のみ追加
+        if (isInGamut(L, chroma, hue)) {
+          colors.push({
+            hue,
+            lightness: L,
+            chroma,
+            weight: 1.0,
+          });
+        }
       }
     }
-  }
-
-  // 無彩色 (Achromatic) の追加
-  // 彩度を0に設定し、明度のバリエーションを持たせる
-  // 0.0 (Black) と 1.0 (White) を追加してダイナミックレンジを最大化
-  const achromaticLightness = [0.0, 0.1, 0.25, 0.4, 0.55, 0.7, 0.85, 0.95, 1.0];
-  for (const l of achromaticLightness) {
-    colors.push({
-      hue: 0, // 無彩色なので色相は無視される
-      lightness: l,
-      chroma: 0, // 完全な無彩色
-      weight: 1.0,
-    });
   }
 
   return colors;
