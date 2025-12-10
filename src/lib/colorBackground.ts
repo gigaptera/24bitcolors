@@ -8,26 +8,38 @@ const toOklch = converter("oklch");
 const toRgb = converter("rgb");
 
 /**
- * 診断色から背景用のライトバージョンを生成
- * 明度を最低 0.85 以上に調整し、彩度も控えめに
+ * 診断色から背景用の調整済み色を生成
+ * ライトモード: 明度 0.85 以上 (淡い色)
+ * ダークモード: 明度 0.25 以下 (暗い色)
+ *
  * @param hex - 元の色 (#RRGGBB)
- * @returns 背景用の明るい色 (#RRGGBB)
+ * @param isDark - ダークモードかどうか
+ * @returns 背景用の調整済み色 (#RRGGBB)
  */
-export function getLightBackgroundColor(hex: string): string {
+export function getAmbientBackgroundColor(
+  hex: string,
+  isDark: boolean
+): string {
   const oklch = toOklch(hex);
-  if (!oklch) return "#fafafa";
+  if (!oklch) return isDark ? "#1a1a1a" : "#fafafa";
 
-  // 明度を 0.85 以上に制限（暗い色でも明るく）
-  // 彩度を 30% に制限（くすませる）
+  // 彩度を控えめに（くすませる）
+  const adjustedChroma = Math.min(oklch.c ?? 0, 0.06);
+
+  // モードに応じて明度を調整
+  const adjustedLightness = isDark
+    ? Math.min(oklch.l ?? 0.5, 0.25) // ダーク: 暗く
+    : Math.max(oklch.l ?? 0.5, 0.85); // ライト: 明るく
+
   const adjustedOklch = {
     mode: "oklch" as const,
-    l: Math.max(oklch.l ?? 0.5, 0.85),
-    c: Math.min(oklch.c ?? 0, 0.08), // 彩度を控えめに
+    l: adjustedLightness,
+    c: adjustedChroma,
     h: oklch.h ?? 0,
   };
 
   const rgb = toRgb(adjustedOklch);
-  return formatHex(rgb) || "#fafafa";
+  return formatHex(rgb) || (isDark ? "#1a1a1a" : "#fafafa");
 }
 
 /**
