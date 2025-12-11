@@ -13,7 +13,7 @@ export function ColorButton({ color, onClick }: ColorButtonProps) {
   return (
     <button
       onClick={onClick}
-      className="group relative aspect-square w-full transition-transform hover:scale-[1.02] active:scale-[0.98]"
+      className="group relative aspect-square w-full transition-transform hover:scale-[1.02] active:scale-[0.98] border border-border/20"
       style={{ backgroundColor: hex }}
       aria-label={`色を選択: ${hex}`}
     />

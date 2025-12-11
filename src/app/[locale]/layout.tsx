@@ -96,13 +96,13 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html lang={locale}>
       <body
-        className={`${inter.variable} ${notoSansJP.variable} ${mPlusRounded1c.variable} font-sans antialiased`}
+        className={`${inter.variable} ${notoSansJP.variable} ${mPlusRounded1c.variable} font-sans antialiased min-h-screen flex flex-col`}
       >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>
             <Header />
             <Breadcrumbs />
-            {children}
+            <div className="flex-1 flex flex-col w-full">{children}</div>
             <Footer />
           </ThemeProvider>
         </NextIntlClientProvider>
