@@ -59,7 +59,10 @@ export function Breadcrumbs() {
   };
 
   return (
-    <nav aria-label="Breadcrumb" className="w-full px-space-5 pt-20 pb-2">
+    <nav
+      aria-label="Breadcrumb"
+      className="w-full px-space-5 pt-20 pb-2 relative z-10"
+    >
       <div className="flex flex-wrap items-center gap-2 text-[10px] text-muted-foreground font-serif tracking-wider">
         <Link href="/" className="hover:text-foreground transition-colors">
           HOME

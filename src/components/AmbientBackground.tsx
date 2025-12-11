@@ -19,7 +19,7 @@ export function AmbientBackground({ hex }: AmbientBackgroundProps) {
 
   return (
     <div
-      className="absolute inset-0 blur-3xl scale-150 animate-pulse-slow transition-colors duration-700"
+      className="fixed inset-0 z-0 blur-3xl scale-150 animate-pulse-slow transition-colors duration-700 pointer-events-none"
       style={{ backgroundColor: bgColor }}
     />
   );

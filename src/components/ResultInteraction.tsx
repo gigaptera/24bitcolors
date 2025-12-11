@@ -11,8 +11,9 @@ import { OklchColor } from "@/lib/oklch";
 
 interface ResultInteractionProps {
   hex: string;
-  resultColor: OklchColor | null; // Pass detailed color data if available
+  resultColor: OklchColor | null;
   groupSlug: string;
+  fromDiagnosis?: boolean;
 }
 
 const ratingLabels = [
@@ -27,9 +28,12 @@ export function ResultInteraction({
   hex,
   resultColor,
   groupSlug,
+  fromDiagnosis = false,
 }: ResultInteractionProps) {
   const [rating, setRating] = useState<number | null>(null);
-  const [submitted, setSubmitted] = useState(false);
+  // If NOT from diagnosis, treat as already "submitted" (show share options), but don't show success msg
+  const [submitted, setSubmitted] = useState(!fromDiagnosis);
+  const [justSubmitted, setJustSubmitted] = useState(false);
   const [showShareCard, setShowShareCard] = useState(false);
   const diagnosisIdRef = useRef<string | undefined>(undefined);
 
@@ -37,17 +41,10 @@ export function ResultInteraction({
   useEffect(() => {
     const id = localStorage.getItem("lastDiagnosisId");
     if (id) diagnosisIdRef.current = id;
-
-    // Check if we already rated this diagnosis?
-    // Simplified: Just always allow rating for now, or check local storage for "rated_ids" if needed.
-    // For now, let's reset rating state on mount.
   }, []);
 
   const handleRatingSubmit = async () => {
     if (rating === null) return;
-
-    // If resultColor is missing (e.g. direct access), we can't save full details but can save hex.
-    // ResultPage usually has hex.
 
     await saveFeedback({
       diagnosis_id: diagnosisIdRef.current,
@@ -59,6 +56,7 @@ export function ResultInteraction({
     });
 
     setSubmitted(true);
+    setJustSubmitted(true);
   };
 
   const safeHex = hex.startsWith("#") ? hex : `#${hex}`;
@@ -103,9 +101,13 @@ export function ResultInteraction({
         </div>
       ) : (
         <div className="mb-8 w-full animate-in fade-in slide-in-from-bottom-2">
-          <div className="p-4 bg-primary/5 text-primary text-center mb-8 border border-primary/20">
-            <p className="font-serif text-sm">✓ フィードバックを送信しました</p>
-          </div>
+          {justSubmitted && (
+            <div className="p-4 bg-primary/5 text-primary text-center mb-8 border border-primary/20">
+              <p className="font-serif text-sm">
+                ✓ フィードバックを送信しました
+              </p>
+            </div>
+          )}
 
           {/* Share Actions - Unlocked after Rating */}
           <div className="flex flex-col gap-0 w-full">

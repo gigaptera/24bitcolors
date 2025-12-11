@@ -52,7 +52,7 @@ export default function Home() {
           </p>
 
           {/* CTA Button */}
-          <div className="animate-fade-in delay-300">
+          <div className="flex flex-col items-center gap-4 animate-fade-in delay-300">
             <Button
               asChild
               size="lg"
@@ -60,6 +60,9 @@ export default function Home() {
             >
               <Link href="/diagnosis">診断を開始する</Link>
             </Button>
+            <p className="text-xs text-muted-foreground tracking-wider opacity-80">
+              登録不要・無料
+            </p>
           </div>
         </div>
 
@@ -90,7 +93,15 @@ export default function Home() {
             ここは、あなたと色だけが存在する静寂な美術館です。
           </p>
 
-          <div className="pt-8">
+          <div className="pt-8 flex flex-col items-center gap-6">
+            <Button
+              asChild
+              size="lg"
+              className="shadow-md transition-all hover:scale-105"
+            >
+              <Link href="/diagnosis">あなたの色を探しに行く</Link>
+            </Button>
+
             <Button
               variant="ghost"
               asChild
@@ -133,9 +144,18 @@ export default function Home() {
             1677万色の中から最適解へと収束させます。
           </p>
 
-          <Button variant="outline" asChild className="border-foreground/20">
-            <Link href="/diagnosis/logic">ロジックの裏側を見る</Link>
-          </Button>
+          <div className="flex flex-col items-center gap-4">
+            <Button
+              asChild
+              size="lg"
+              className="shadow-md transition-all hover:scale-105"
+            >
+              <Link href="/diagnosis">ロジックを体験する</Link>
+            </Button>
+            <Button variant="link" asChild className="text-muted-foreground">
+              <Link href="/diagnosis/logic">ロジックの裏側を見る</Link>
+            </Button>
+          </div>
         </div>
       </section>
     </main>

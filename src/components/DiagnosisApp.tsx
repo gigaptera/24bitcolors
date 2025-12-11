@@ -126,7 +126,7 @@ export function DiagnosisApp() {
         }).catch((e) => console.error("Diagnosis save failed", e));
 
         // Navigate to Result Page immediately (no waiting)
-        router.push(`/result/${groupSlug}?hex=${safeHex}`);
+        router.push(`/result/${groupSlug}?hex=${safeHex}&from_diagnosis=true`);
         // --- Data Collection v2 End ---
       } else {
         // Update state only if not complete (prevents "21/20" flash)

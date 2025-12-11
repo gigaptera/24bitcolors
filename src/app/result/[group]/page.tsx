@@ -7,7 +7,7 @@ import { AmbientBackground } from "@/components/AmbientBackground";
 
 interface Props {
   params: Promise<{ group: string }>;
-  searchParams: Promise<{ hex?: string }>;
+  searchParams: Promise<{ hex?: string; from_diagnosis?: string }>;
 }
 
 export async function generateMetadata({
@@ -47,7 +47,7 @@ export async function generateMetadata({
 
 export default async function ResultPage({ params, searchParams }: Props) {
   const { group } = await params;
-  const { hex } = await searchParams;
+  const { hex, from_diagnosis } = await searchParams;
 
   let safeHex = "";
 
@@ -71,7 +71,7 @@ export default async function ResultPage({ params, searchParams }: Props) {
   const { groupName, groupSlug } = getNearestPoeticName(safeHex);
 
   return (
-    <div className="min-h-screen w-full bg-background flex flex-col items-center justify-center relative overflow-hidden pt-16 md:pt-0">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden pt-16 md:pt-0">
       {/* Background Ambience - theme-aware for text readability */}
       <AmbientBackground hex={safeHex} />
 
@@ -125,6 +125,7 @@ export default async function ResultPage({ params, searchParams }: Props) {
                 hex={safeHex}
                 resultColor={colorObj}
                 groupSlug={groupSlug}
+                fromDiagnosis={from_diagnosis === "true"}
               />
             );
           })()}

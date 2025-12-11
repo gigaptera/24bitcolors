@@ -64,7 +64,7 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#ffffff",
+          backgroundColor: "transparent",
         }}
       >
         {/* Golden Ratio Container (Invisible bounding box, implied by content) */}

@@ -73,21 +73,16 @@ export function LastDiagnosisLink() {
     <div className="flex items-center animate-in fade-in duration-500">
       <Link
         href={`/result/${groupSlug}?hex=${safeHex}`}
-        className="group flex items-center gap-2 pr-4 border-r border-border/40 mr-4"
+        className="group flex items-center gap-2"
         title="前回の診断結果へ"
       >
-        <div className="relative flex items-center justify-center">
-          {/* Minimal label that appears on hover */}
-          <span className="absolute right-full mr-2 whitespace-nowrap text-[10px] tracking-widest text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 font-serif uppercase">
-            Last Color
-          </span>
-
-          {/* Color Circle */}
-          <div
-            className="h-5 w-5 rounded-full shadow-sm ring-1 ring-black/5 transition-transform group-hover:scale-110"
-            style={{ backgroundColor: lastHex }}
-          />
-        </div>
+        <span className="hidden md:block text-[10px] tracking-widest text-muted-foreground font-serif uppercase">
+          LAST COLOR
+        </span>
+        <div
+          className="h-5 w-5 rounded-full shadow-sm ring-1 ring-black/5 transition-transform group-hover:scale-110"
+          style={{ backgroundColor: lastHex }}
+        />
       </Link>
     </div>
   );
