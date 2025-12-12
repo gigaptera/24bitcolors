@@ -41,8 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 # Review documents (local only)
-docs/review/
-docs/database/
-docs/planning/
-docs/history/
-docs/notebooklm/
+# docs/review/
+# docs/database/
+# docs/planning/
+# docs/notebooklm/

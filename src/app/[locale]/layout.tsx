@@ -116,9 +116,12 @@ export default async function LocaleLayout({ children, params }: Props) {
         {process.env.NEXT_PUBLIC_GA_ID && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         )}
-        {process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID && (
-          <GoogleAdsense pId={process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID} />
-        )}
+        <GoogleAdsense
+          pId={
+            process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID ||
+            "ca-pub-8772469250047655"
+          }
+        />
       </body>
     </html>
   );
