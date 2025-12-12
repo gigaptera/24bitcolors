@@ -133,10 +133,21 @@ export function selectOptimalColorPair(
 
       if (isDuplicate(c1, c2)) continue;
 
-      const distance = colorDistance(c1, c2);
+      let distance = colorDistance(c1, c2);
 
       // 類似の排除（ただし後半で候補がない場合は緩和するロジックも検討可だが、一旦厳格に）
       if (distance < MIN_DISTANCE) continue;
+
+      // 無彩色ペアの抑制ロジック (UX改善)
+      // 両方の彩度が低い場合、距離評価にペナルティを与えて選出されにくくする
+      // これにより、無彩色同士の質問が頻発するのを防ぐ
+      const ACHROMATIC_THRESHOLD = 0.04;
+      if (
+        c1.chroma < ACHROMATIC_THRESHOLD &&
+        c2.chroma < ACHROMATIC_THRESHOLD
+      ) {
+        distance *= 0.6; // 距離を60%として評価（優先度を下げる）
+      }
 
       if (distance > maxDistance) {
         maxDistance = distance;

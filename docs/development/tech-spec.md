@@ -71,7 +71,9 @@ H (Hue):       0 - 360°   色相
 
 1. **色変換**: culori ライブラリで正確な変換
 2. **円形距離計算**: 色相の円形性を考慮（0° と 350° は近い）
-3. **ペア選択**: 重み分布に基づく最適化
+3. **色変換**: culori ライブラリで正確な変換
+4. **円形距離計算**: 色相の円形性を考慮（0° と 350° は近い）
+5. **ペア選択**: 重み分布に基づく最適化
 
 ---
 
@@ -82,13 +84,13 @@ src/
 ├── app/
 │   ├── [locale]/             # i18n Routing Root
 │   │   ├── page.tsx          # ランディングページ
-│   │   ├── layout.tsx        # i18n Layout (Metadata, Fonts)
+│   │   ├── layout.tsx        # i18n Layout (Metadata, Fonts, Analytics)
 │   │   ├── about/            # About ページ
 │   │   ├── diagnosis/        # 診断ページ
 │   │   └── result/[group]/   # 結果ページ (Dynamic Route)
 │   ├── api/
 │   │   └── og/route.tsx      # OGP画像生成
-│   └── globals.css           # Global Styles
+│   └── globals.css           # Global Styles (Tailwind v4 alpha features)
 ├── i18n/
 │   ├── routing.ts            # i18n Routing Config
 │   └── request.ts            # Request Handler
@@ -96,10 +98,12 @@ src/
 │   ├── ja.json               # 日本語リソース
 │   └── en.json               # 英語リソース
 ├── components/
-│   ├── DiagnosisApp.tsx      # 診断メインコンポーネント
-│   ├── ResultInteraction.tsx # 結果ページインタラクション
+│   ├── DiagnosisApp.tsx      # 診断メインコンポーネント (Logic Separation)
+│   ├── StickyCTA.tsx         # モバイル用追従ボタン
+│   ├── Header.tsx            # レスポンシブヘッダー
+│   ├── MobileNav.tsx         # モバイルナビゲーション
 │   ├── GoogleAdsense.tsx     # AdSense Component (Lazy)
-│   └── ui/                   # shadcn/ui ベースコンポーネント
+│   └── ui/                   # shadcn/ui ベースコンポーネント (Museum Theme)
 └── lib/
     ├── oklch.ts              # OKLCH 色空間ユーティリティ
     └── colorNamesDictionary.ts # ポエティック色名辞書
@@ -107,4 +111,4 @@ src/
 
 ---
 
-**最終更新**: 2025 年 12 月 12 日 (v1.2.0 i18n 対応完了)
+**最終更新**: 2025 年 12 月 12 日 (v1.2.1)
