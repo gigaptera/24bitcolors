@@ -60,12 +60,11 @@ export function Header() {
 
         <Button
           variant="outline"
-          className="h-10 px-6 md:h-11 md:px-8 active:scale-95 transition-transform ml-2"
+          className="hidden md:inline-flex h-10 px-6 md:h-11 md:px-8 active:scale-95 transition-transform ml-2"
           asChild
         >
           <Link href="/diagnosis" className="flex items-center justify-center">
-            <span className="md:hidden text-xs">{t("startDiagnosis")}</span>
-            <span className="hidden md:inline">{t("startDiagnosis")}</span>
+            {t("startDiagnosis")}
           </Link>
         </Button>
       </div>
