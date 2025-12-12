@@ -18,7 +18,7 @@ interface HistoryEntry {
   pair: ColorPair;
 }
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
 import { getNearestPoeticName } from "@/lib/colorNaming";
 
 export function DiagnosisApp() {
