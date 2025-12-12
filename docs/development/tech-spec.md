@@ -2,15 +2,16 @@
 
 ## 🛠 技術スタック
 
-| カテゴリ         | 技術                    |
-| ---------------- | ----------------------- |
-| フレームワーク   | Next.js 15 (App Router) |
-| 言語             | TypeScript              |
-| スタイリング     | Tailwind CSS v4         |
-| 色空間ライブラリ | culori                  |
-| アイコン         | Phosphor Icons (light)  |
-| デプロイ         | Vercel                  |
-| バックエンド     | Supabase                |
+| カテゴリ         | 技術                                    |
+| ---------------- | --------------------------------------- |
+| フレームワーク   | Next.js 15 (App Router)                 |
+| 言語             | TypeScript                              |
+| スタイリング     | Tailwind CSS v3.4 (with v4 preparation) |
+| 色空間ライブラリ | culori                                  |
+| アイコン         | Phosphor Icons (light)                  |
+| i18n             | next-intl                               |
+| デプロイ         | Vercel                                  |
+| バックエンド     | Supabase                                |
 
 ---
 
@@ -79,22 +80,31 @@ H (Hue):       0 - 360°   色相
 ```
 src/
 ├── app/
-│   ├── page.tsx              # ランディングページ
-│   ├── about/page.tsx        # About ページ
-│   ├── diagnosis/page.tsx    # 診断ページ
-│   ├── result/[group]/       # 結果ページ (Dynamic Route)
-│   └── api/og/route.tsx      # OGP画像生成 (Edge Function)
+│   ├── [locale]/             # i18n Routing Root
+│   │   ├── page.tsx          # ランディングページ
+│   │   ├── layout.tsx        # i18n Layout (Metadata, Fonts)
+│   │   ├── about/            # About ページ
+│   │   ├── diagnosis/        # 診断ページ
+│   │   └── result/[group]/   # 結果ページ (Dynamic Route)
+│   ├── api/
+│   │   └── og/route.tsx      # OGP画像生成
+│   └── globals.css           # Global Styles
+├── i18n/
+│   ├── routing.ts            # i18n Routing Config
+│   └── request.ts            # Request Handler
+├── messages/
+│   ├── ja.json               # 日本語リソース
+│   └── en.json               # 英語リソース
 ├── components/
 │   ├── DiagnosisApp.tsx      # 診断メインコンポーネント
 │   ├── ResultInteraction.tsx # 結果ページインタラクション
-│   ├── ShareCard.tsx         # シェアカード生成
+│   ├── GoogleAdsense.tsx     # AdSense Component (Lazy)
 │   └── ui/                   # shadcn/ui ベースコンポーネント
 └── lib/
     ├── oklch.ts              # OKLCH 色空間ユーティリティ
-    ├── colorNaming.ts        # 色名変換ロジック
     └── colorNamesDictionary.ts # ポエティック色名辞書
 ```
 
 ---
 
-**最終更新**: 2025 年 12 月 10 日
+**最終更新**: 2025 年 12 月 12 日 (v1.2.0 i18n 対応完了)

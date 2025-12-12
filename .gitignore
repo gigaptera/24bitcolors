@@ -40,8 +40,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Review documents (local only)
-# docs/review/
-# docs/database/
-# docs/planning/
-# docs/notebooklm/
+docs/notebooklm/

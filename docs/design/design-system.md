@@ -125,6 +125,10 @@ Base Size: **16px (1rem)**
   - 浮遊感を演出する広範囲のドロップシャドウ。
   - **Light Mode**: `rgba(0, 0, 0, 0.2)` (Black Shadow)
   - **Dark Mode**: `rgba(255, 255, 255, 0.15)` (White Glow) - 黒背景でも視認性を確保するため、白い光彩を使用する。
+- **Glow Shadow** (`--shadow-glow`) _New_
+  - 全方向（上下左右）に広がるソフトな影。色選択ボタンの視認性向上に使用。
+  - **Light Mode**: `rgba(0, 0, 0, 0.1)` (Soft Dark)
+  - **Dark Mode**: `rgba(255, 255, 255, 0.2)` (Soft Light)
 - **Standard Card**: `shadow-md` は控えめに。Dark モードでは `border` (`zinc-800`) で境界を表現し、よりフラットな質感を保つ。
 
 ---
