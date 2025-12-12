@@ -36,11 +36,11 @@ export function StickyCTA() {
       <Button
         asChild
         size="lg"
-        className="shadow-xl shadow-primary/30 backdrop-blur-sm px-8"
+        className="shadow-2xl shadow-primary/40 backdrop-blur-md px-10 h-14 text-lg"
       >
         <Link
           href="/diagnosis"
-          className="flex items-center font-bold tracking-wider"
+          className="flex items-center font-serif tracking-widest"
         >
           {t("startDiagnosis")}
         </Link>
