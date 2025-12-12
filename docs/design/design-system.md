@@ -170,3 +170,19 @@ shadcn の標準スタイル（`default`）をそのまま使うのではなく�
 
 - **Default Variant**: 額縁スタイル（Black Border / White Border）を適用。
 - **Shadow**: `shadow-sm` の代わりに `floating-shadow` を使用。
+
+### Mobile Optimized Components
+
+- **Sticky CTA**:
+
+  - モバイルビューポート下部に固定される「診断開始」ボタン。
+  - スクロールを促すため、コンテンツと重なるが `z-index` で最前面に配置。
+  - 背景への干渉を避けるため、適切なシャドウと境界線を持つ。
+
+- **Mobile Navigation (Sheet)**:
+  - ハンバーガーメニューから展開されるドロワー。
+  - 画面の右側からスライドインし、主要なナビゲーションリンクを提供する。
+
+---
+
+**最終更新**: 2025 年 12 月 12 日 (v1.2.1 Refinements)

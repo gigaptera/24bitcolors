@@ -12,11 +12,18 @@
 | **Phase 1.5** | v1.1.0~ | **UX Optimization**: Dark Mode (Museum Theme), URL シェア, データ構造 v2 | ✅ 完了 |
 | **Phase 2**   | v2.0.0~ | **Activation & Retention**: 統計ダッシュボード、コレクション機能         | 🚧 次期 |
 | **Phase 3**   | v1.2.0  | **Global Expansion**: 多言語化対応 (i18n), 地域別メタデータ              | ✅ 完了 |
+| **Phase 3.5** | v1.2.1  | **Refinements**: Mobile UX (Sticky CTA), AdSense, SEO, UI Polish         | ✅ 完了 |
 | **Phase 4**   | v3.0.0~ | **Data Ecosystem**: API 公開、オープンデータ化                           | 予定    |
 | **Phase 5**   | v5.0.0~ | **AI Personalization**: 感性分析、レコメンド                             | 予定    |
 
-## 直近のタスク (v1.2.0 以降)
+## 直近のタスク (Next Steps)
 
-- [ ] 診断結果ページの「なぜ？」解説コンテンツ強化
-- [ ] 診断途中の State 永続化
-- [ ] PageSpeed Insights 結果の再確認
+- [ ] **診断結果ページの強化**
+  - "Why this color?" の解説コンテンツ
+  - 統計データの可視化（「上位 X%の人が選びました」）
+- [ ] **診断ステートの永続化**
+  - リロードしても進捗を維持する (`localStorage`)
+- [ ] **パフォーマンス最適化**
+  - Core Web Vitals の計測と改善
+
+**最終更新**: 2025 年 12 月 12 日
