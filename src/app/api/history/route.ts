@@ -5,14 +5,19 @@ export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   try {
-    const searchParams = request.nextUrl.searchParams;
-    const anonymousId = searchParams.get("id");
-    const limit = parseInt(searchParams.get("limit") || "50", 10);
+    const anonymousId = request.cookies.get("anonymous_id")?.value;
+    // Fallback to query param for backward compatibility or testing
+    // const anonymousId = request.cookies.get("anonymous_id")?.value || request.nextUrl.searchParams.get("id");
+
+    const limit = parseInt(
+      request.nextUrl.searchParams.get("limit") || "50",
+      10
+    );
 
     if (!anonymousId) {
       return NextResponse.json(
-        { error: "Anonymous ID is required" },
-        { status: 400 }
+        { error: "Anonymous ID is required (Cookie missing)" },
+        { status: 401 }
       );
     }
 

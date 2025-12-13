@@ -25,14 +25,20 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
+    // Cookie takes precedence
+    const cookieId = request.cookies.get("anonymous_id")?.value;
+    const anonymous_id = cookieId || body.anonymous_id;
+
     // Validate required fields
-    const requiredFields = [
-      "hex",
-      "hue",
-      "lightness",
-      "chroma",
-      "anonymous_id",
-    ];
+    const requiredFields = ["hex", "hue", "lightness", "chroma"];
+    // Check if anonymous_id exists either in cookie or body
+    if (!anonymous_id) {
+      return NextResponse.json(
+        { success: false, error: "Missing required field: anonymous_id" },
+        { status: 400 }
+      );
+    }
+
     for (const field of requiredFields) {
       if (body[field] === undefined) {
         return NextResponse.json(
@@ -76,7 +82,9 @@ export async function POST(request: NextRequest) {
       duration_seconds: body.duration_seconds || 0,
       algorithm_version: body.algorithm_version || "v1.0.0",
       locale: body.locale || "unknown",
-      anonymous_id: body.anonymous_id,
+      locale: body.locale || "unknown",
+      anonymous_id: anonymous_id,
+      user_agent: userAgent,
       user_agent: userAgent,
       country,
       region,

@@ -10,7 +10,25 @@ export default function middleware(request: NextRequest) {
   if (request.method === "OPTIONS") {
     return NextResponse.next();
   }
-  return handleI18nRouting(request);
+
+  const response = handleI18nRouting(request);
+
+  // Check for anonymous_id cookie
+  const anonymousId = request.cookies.get("anonymous_id")?.value;
+
+  if (!anonymousId) {
+    // Generate new ID if missing
+    const newId = crypto.randomUUID();
+    response.cookies.set("anonymous_id", newId, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 365, // 1 year
+    });
+  }
+
+  return response;
 }
 
 export const config = {

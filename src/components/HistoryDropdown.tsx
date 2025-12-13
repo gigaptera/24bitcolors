@@ -25,39 +25,35 @@ export function HistoryDropdown() {
   const t = useTranslations("Common");
   const [isOpen, setIsOpen] = useState(false);
   const [history, setHistory] = useState<HistoryItem[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [anonymousId, setAnonymousId] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const id = localStorage.getItem("anonymous_id");
-      if (id) setAnonymousId(id);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (isOpen && anonymousId) {
-      const fetchData = async () => {
-        setIsLoading(true);
-        try {
-          const res = await fetch(`/api/history?id=${anonymousId}&limit=5`); // Fetch a few more to see if "more" exists
-          const data = await res.json();
-          if (data.history) {
-            const enrichedHistory = data.history.map((item: HistoryItem) => ({
-              ...item,
-              poeticName: getNearestPoeticName(item.hex).fullTitle,
-            }));
-            setHistory(enrichedHistory);
-          }
-        } catch (err) {
-          console.error("Failed to fetch history", err);
-        } finally {
-          setIsLoading(false);
+    // Dropdown is client-side, so we fetch from API which uses the cookie
+    fetch(`/api/history?limit=3`, { cache: "no-store" })
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed");
+        return res.json();
+      })
+      .then((data) => {
+        if (data.history) {
+          const enriched = data.history.map(
+            (item: { id: string; hex: string; created_at: string }) => {
+              const info = getNearestPoeticName(item.hex);
+              return {
+                ...item,
+                poeticName: info.fullTitle,
+                groupSlug: info.groupSlug,
+              };
+            }
+          );
+          setHistory(enriched);
         }
-      };
-      fetchData();
-    }
-  }, [isOpen, anonymousId]);
+      })
+      .catch(() => {
+        // Silent error
+      })
+      .finally(() => setIsLoading(false));
+  }, []);
 
   // Only show top 3 in the menu
   const displayHistory = history.slice(0, 3);
