@@ -147,6 +147,12 @@ export function FeedbackClient() {
   if (submitted) {
     return (
       <div className="flex min-h-screen w-full flex-col items-center justify-center bg-background py-20 px-6 animate-in fade-in duration-700">
+        <div className="text-center space-y-6 max-w-lg">
+          <div className="flex justify-center mb-6">
+            <CheckCircle
+              weight="light"
+              className="mx-auto mb-4 h-12 w-12 text-primary"
+            />
           </div>
           <h1 className="font-serif text-3xl tracking-widest text-foreground">
             {t("successTitle")}
