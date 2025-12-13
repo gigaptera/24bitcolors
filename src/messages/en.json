@@ -16,6 +16,10 @@
     "viewAllHistory": "View Full History",
     "noHistory": "No History"
   },
+  "HistoryPage": {
+    "title": "Diagnosis History",
+    "description": "Your personal color journey. Discover the palette of your past choices."
+  },
   "Home": {
     "heroTitle": "24bitColors",
     "heroTagline": "Discover Your True Color",

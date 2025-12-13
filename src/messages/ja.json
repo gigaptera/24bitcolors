@@ -16,6 +16,10 @@
     "viewAllHistory": "履歴ページへ",
     "noHistory": "履歴なし"
   },
+  "HistoryPage": {
+    "title": "診断履歴",
+    "description": "あなたの色の旅路。過去に選ばれた色彩のパレットを確認できます。"
+  },
   "Home": {
     "heroTitle": "24bitColors",
     "heroTagline": "Discover Your True Color",
@@ -36,6 +40,10 @@
   },
   "About": {
     "title": "24bitColorsについて",
+    "description": "24bitColorsの哲学、コンセプト、科学的背景について。",
+    "jsonLdName": "24bitColorsについて",
+    "jsonLdDescription": "24bitColorsのプロジェクト概要とビジョン",
+    "organizationDescription": "色彩の統計分析と可視化を行うデザインプロジェクト",
     "lblPhilosophy": "PHILOSOPHY",
     "heroTitle1": "Universal Beauty &",
     "heroTitle2": "Intellectual Curiosity",

@@ -56,7 +56,7 @@ export function HistoryDropdown() {
   }, []);
 
   useEffect(() => {
-    fetchHistory();
+    void fetchHistory();
 
     const handleUpdate = () => {
       // Small delay to ensure DB write is committed
@@ -102,7 +102,7 @@ export function HistoryDropdown() {
                     {item.poeticName}
                   </span>
                   <div
-                    className="w-3 h-3 rounded-full border border-white/20 shadow-sm shrink-0"
+                    className="w-5 h-5 rounded-full border border-border/20 shadow-sm shrink-0"
                     style={{ backgroundColor: item.hex }}
                   />
                 </Link>
