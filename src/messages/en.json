@@ -18,7 +18,9 @@
   },
   "CollectionPage": {
     "title": "My Palette",
-    "description": "Your personal color journey. Discover the collection of your past choices."
+    "description": "Your color journey. View your personal collection of colors.",
+    "noHistory": "No collection yet",
+    "viewAllHistory": "View All Collections"
   },
   "Home": {
     "heroTitle": "24bitColors",

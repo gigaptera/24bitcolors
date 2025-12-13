@@ -18,7 +18,9 @@
   },
   "CollectionPage": {
     "title": "My Palette",
-    "description": "あなたの色の旅路。過去に選ばれた色彩のコレクションを確認できます。"
+    "description": "あなたの色の旅路。過去に選ばれた色彩のコレクションを確認できます。",
+    "noHistory": "コレクションなし",
+    "viewAllHistory": "コレクションを見る"
   },
   "Home": {
     "heroTitle": "24bitColors",
