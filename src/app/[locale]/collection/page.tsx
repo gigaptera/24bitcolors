@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { createClient } from "@supabase/supabase-js";
-import { Link, redirect } from "@/i18n/routing"; // Use i18n redirect
+import { Link } from "@/i18n/routing"; // Use i18n redirect
 import { getTranslations } from "next-intl/server";
 import { getNearestPoeticName } from "@/lib/colorNaming";
 import { Calendar, Hash } from "lucide-react";
@@ -52,7 +52,7 @@ export default async function HistoryPage({
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
   const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-  const { data: historyData, error } = await supabase
+  const { data: historyData } = await supabase
     .from("diagnoses")
     .select("id, hex, created_at")
     .eq("anonymous_id", anonymousId)
