@@ -16,7 +16,7 @@
     "viewAllHistory": "コレクションを見る",
     "noHistory": "コレクションなし"
   },
-  "MyPalettePage": {
+  "CollectionPage": {
     "title": "My Palette",
     "description": "あなたの色の旅路。過去に選ばれた色彩のコレクションを確認できます。"
   },

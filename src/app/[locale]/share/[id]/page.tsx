@@ -2,7 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
-import { Palette, Calendar, Hash } from "lucide-react";
+import { Calendar, Hash } from "lucide-react";
 import { getNearestPoeticName } from "@/lib/colorNaming";
 import { Metadata } from "next";
 import { Swatches } from "@phosphor-icons/react/dist/ssr";
