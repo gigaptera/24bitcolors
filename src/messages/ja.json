@@ -292,13 +292,12 @@
   },
   "Share": {
     "share": "シェア",
+    "shareTitle": "Paletteを共有",
+    "shareDesc": "現在のコレクションのスナップショットリンクを作成し、完全に共有します。",
     "copyLink": "リンクをコピー",
     "copied": "コピーしました",
-    "shareImage": "画像をシェア",
-    "saveImage": "画像を保存",
     "generating": "生成中...",
-    "shareTitle": "私の本当の色 | 24bitColors",
-    "shareText": "私の色は「{name}」({hex}) でした。"
+    "collection": "{count}色のコレクション"
   },
   "Harmonies": {
     "title": "COLOR SCHEMES",

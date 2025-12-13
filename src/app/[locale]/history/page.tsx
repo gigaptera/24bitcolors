@@ -4,6 +4,7 @@ import { Link, redirect } from "@/i18n/routing"; // Use i18n redirect
 import { getTranslations } from "next-intl/server";
 import { getNearestPoeticName } from "@/lib/colorNaming";
 import { Calendar, Hash } from "lucide-react";
+import { CollectionShareButton } from "@/components/CollectionShareButton";
 import { Button } from "@/components/ui/button"; // Keep Button for the "no history" case
 
 import { Metadata } from "next";
@@ -29,8 +30,6 @@ export default async function HistoryPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "MyPalettePage" });
-  const tCommon = await getTranslations({ locale, namespace: "Common" });
   const cookieStore = await cookies();
   const anonymousId = cookieStore.get("anonymous_id")?.value;
 
@@ -71,6 +70,11 @@ export default async function HistoryPage({
   return (
     <div className="min-h-screen pt-32 pb-20 px-space-4 max-w-5xl mx-auto">
       {/* Header Section Removed as per request */}
+
+      {/* Action Bar */}
+      <div className="flex justify-end mb-6 animate-in fade-in slide-in-from-bottom-2 duration-500">
+        <CollectionShareButton />
+      </div>
 
       {/* Grid Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
