@@ -294,7 +294,7 @@
   },
   "Share": {
     "share": "シェア",
-    "shareTitle": "Paletteを共有",
+    "shareTitle": "Shared Palette",
     "shareDesc": "現在のコレクションのスナップショットリンクを作成し、完全に共有します。",
     "copyLink": "リンクをコピー",
     "copied": "コピーしました",

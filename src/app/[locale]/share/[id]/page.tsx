@@ -104,13 +104,7 @@ export default async function SharePage({
           </div>
 
           <div className="hidden lg:block">
-            <Button
-              asChild
-              variant="outline"
-              className="rounded-none border-foreground/20 hover:bg-foreground hover:text-background transition-colors font-serif tracking-widest uppercase"
-            >
-              <Link href="/">Create Your Own</Link>
-            </Button>
+            {/* Action removed as per user request to focus on viewing */}
           </div>
         </aside>
 
@@ -140,13 +134,7 @@ export default async function SharePage({
           </div>
 
           <div className="block lg:hidden mt-20 text-center">
-            <Button
-              asChild
-              variant="outline"
-              className="w-full h-14 rounded-none border-foreground/20 hover:bg-foreground hover:text-background transition-colors font-serif tracking-widest uppercase"
-            >
-              <Link href="/">Create Your Own</Link>
-            </Button>
+            {/* Action removed as per user request to focus on viewing */}
           </div>
         </main>
       </div>
