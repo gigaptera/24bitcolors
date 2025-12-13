@@ -169,7 +169,15 @@ shadcn の標準スタイル（`default`）をそのまま使うのではなく�
 #### Cards
 
 - **Default Variant**: 額縁スタイル（Black Border / White Border）を適用。
+- **Default Variant**: 額縁スタイル（Black Border / White Border）を適用。
 - **Shadow**: `shadow-sm` の代わりに `floating-shadow` を使用。
+
+#### Modals (Dialogs) _New_
+
+- **Shape**: Always `rounded-none` (Sharp).
+- **Alignment**: **Left-aligned** text and actions. Avoid centering unless for specific alert types.
+- **Padding**: Spacious padding (`p-8` to `p-12`) to frame the content like an artwork.
+- **Typography**: Headings in **Serif** (Georgia), Body in **Serif** or **Sans** depending on content type.
 
 ### Mobile Optimized Components
 
@@ -185,4 +193,74 @@ shadcn の標準スタイル（`default`）をそのまま使うのではなく�
 
 ---
 
-**最終更新**: 2025 年 12 月 12 日 (v1.2.1 Refinements)
+## 7. Page Templates
+
+サイト内のページを一貫性のある 3 つのタイプに分類し、それぞれのレイアウトとタイポグラフィのルールを定義します。
+
+### A. Immersive Article (Narrative)
+
+_Target: About, Philosophy, Logic, Concept pages_
+
+**Concept**: "The Coffee Table Book" - 美的体験と没入感を重視し、ゆっくりと読ませるデザイン。
+
+- **Layout**:
+  - **Hero**: 中央揃え、XLarge Serif Heading (68px+)、Monospace Tagline、区切り線。
+  - **Body**: シングルカラム、中央寄せ (`max-w-3xl`)、余白 (`space-8` / 144px) を多用した垂直リズム。
+  - **Decorations**: 背景のぼかし効果、セクション番号 (01, 02...)、装飾的な区切り線。
+- **Typography**:
+  - **Headings**: Serif (Georgia).
+  - **Body**: **Serif** (Georgia). 長文の可読性と雰囲気を重視。
+  - **Labels**: Monospace (tracking-widest, uppercase).
+
+### B. Standard Document (Legal/Technical)
+
+_Target: Privacy Policy, Terms of Service, Technical Docs_
+
+**Concept**: "The Museum Archives" - 信頼性、明確さ、構造化を重視。
+
+- **Layout**:
+  - **Container**: `max-w-3xl`、左揃えまたは両端揃え。
+  - **Structure**: 明確な階層構造 (H1 > H2 > P)。装飾は最小限に抑える。
+- **Typography**:
+  - **Headings**: Serif (Georgia).
+  - **Body**: **Serif** (Georgia). 書き言葉としての格調高さを維持するため、Sans ではなく Serif を採用。
+  - **Leading**: `leading-relaxed` または `leading-loose`。
+
+### C. Functional App (UI)
+
+_Target: Diagnosis, Results, My Palette, Share_
+
+**Concept**: "The Interactive Exhibit" - 機能性、操作性、レスポンシブな動作。
+
+- **Layout**:
+  - **Container**: Fluid (`w-full`) または Grid System。情報は効率的に配置。
+  - **Header**: 機能的な配置（左タイトル、右アクション）。
+- **Typography**:
+  - **Headings**: Serif (Georgia). ブランドの統一感を出すため見出しは Serif。
+  - **Body/UI**: **Sans** (System/Inter). 視認性と操作性を優先し、UI 要素や短いテキストは Sans を使用。
+
+---
+
+## 8. Standardization Rules
+
+| Feature          | Immersive / Document                  | Functional App                             |
+| :--------------- | :------------------------------------ | :----------------------------------------- |
+| **Main Font**    | **Serif** (Georgia)                   | **Sans** (System/Inter)                    |
+| **Heading Font** | **Serif**                             | **Serif**                                  |
+| **Spacing**      | Fibonacci (34, 55, 89, 144px) - Loose | Grid / Fibonacci (8, 13, 21, 34px) - Tight |
+| **Alignment**    | Center (Immersive) / Left (Doc)       | Functional / Grid                          |
+| **Colors**       | Muted, High Contrast Text             | Functional colors, Interactive states      |
+
+---
+
+## 9. Content Guidelines
+
+### Writing Style (Tone & Voice)
+
+- **Curator's Voice**: 知識豊富で落ち着いているが、決して尊大ではない。
+- **Clarity**: 専門用語は避け、直感的な言葉を選ぶ。ただし、色彩学的な正確さは妥協しない。
+- **Politeness**: ユーザーを尊重する丁寧な「です・ます」調。ただし、システムメッセージやラベルは簡潔に体言止めを使用可。
+
+---
+
+**最終更新**: 2025 年 12 月 13 日 (v1.3 Page Templates Added)

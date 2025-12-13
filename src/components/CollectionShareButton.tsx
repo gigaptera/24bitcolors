@@ -58,11 +58,11 @@ export function CollectionShareButton() {
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-lg p-12 gap-8 rounded-none border-neutral-100 dark:border-neutral-800 shadow-2xl">
-        <DialogHeader className="space-y-4">
-          <DialogTitle className="font-serif tracking-wide text-3xl text-center">
+        <DialogHeader className="space-y-4 text-left">
+          <DialogTitle className="font-serif tracking-wide text-3xl">
             {t("shareTitle")}
           </DialogTitle>
-          <DialogDescription className="text-center font-serif leading-relaxed text-muted-foreground text-base">
+          <DialogDescription className="font-serif leading-relaxed text-muted-foreground text-base">
             {t("shareDesc")}
           </DialogDescription>
         </DialogHeader>
@@ -76,7 +76,7 @@ export function CollectionShareButton() {
               id="link"
               defaultValue={shareUrl}
               readOnly
-              className="font-mono text-sm h-14 px-6 rounded-none border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 focus-visible:ring-0 focus-visible:border-neutral-400 transition-colors text-center"
+              className="font-mono text-sm h-14 px-6 rounded-none border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 focus-visible:ring-0 focus-visible:border-neutral-400 transition-colors"
               placeholder={isLoading ? t("generating") : ""}
             />
           </div>
