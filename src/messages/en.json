@@ -294,13 +294,15 @@
   },
   "Share": {
     "share": "SHARE",
+    "shareTitle": "Share Palette",
+    "shareDesc": "Create a snapshot link of your current collection and share it perfectly.",
     "copyLink": "COPY LINK",
-    "shareImage": "Share Image",
-    "saveImage": "Save Image",
+    "copied": "COPIED",
     "generating": "Generating...",
-    "shareTitle": "My True Color | 24bitColors",
-    "shareText": "My color is '{name}' ({hex}).",
-    "copied": "COPIED"
+    "collection": "{count} Color Collection",
+    "saveToMyPalette": "Save to My Palette",
+    "saved": "Saved!",
+    "failed": "Failed to save"
   },
   "Harmonies": {
     "title": "COLOR SCHEMES",
