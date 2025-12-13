@@ -27,6 +27,7 @@ export function Breadcrumbs() {
     "privacy",
     "terms",
     "result",
+    "history",
   ];
 
   const breadcrumbItems = segments.map((segment, index) => {

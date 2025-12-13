@@ -3,9 +3,23 @@ import { createClient } from "@supabase/supabase-js";
 import { Link, redirect } from "@/i18n/routing"; // Use i18n redirect
 import { getTranslations } from "next-intl/server";
 import { getNearestPoeticName } from "@/lib/colorNaming";
-import { ArrowLeft, Calendar, Hash } from "lucide-react";
-import { Palette } from "@phosphor-icons/react/dist/ssr";
-import { Button } from "@/components/ui/button";
+import { Calendar, Hash } from "lucide-react";
+import { Button } from "@/components/ui/button"; // Keep Button for the "no history" case
+
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "MyPalettePage" });
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
 
 export const dynamic = "force-dynamic";
 
@@ -20,72 +34,43 @@ export default async function HistoryPage({
   const cookieStore = await cookies();
   const anonymousId = cookieStore.get("anonymous_id")?.value;
 
+  if (!anonymousId) {
+    // If no anonymous_id, no history to show.
+    return (
+      <div className="min-h-screen pt-32 pb-20 px-space-4 max-w-5xl mx-auto flex flex-col items-center justify-center">
+        <h1 className="text-xl md:text-2xl font-serif text-muted-foreground mb-4">
+          {t("noHistory")}
+        </h1>
+        <Button asChild variant="outline">
+          <Link href="/diagnosis">{t("viewAllHistory")}</Link>
+        </Button>
+      </div>
+    );
+  }
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+  const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+  const { data: historyData, error } = await supabase
+    .from("diagnoses")
+    .select("id, hex, created_at")
+    .eq("anonymous_id", anonymousId)
+    .order("created_at", { ascending: false });
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let history: any[] = [];
-
-  if (anonymousId) {
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-    const supabaseServiceKey =
-      process.env.SUPABASE_SERVICE_ROLE_KEY ||
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-      "";
-
-    if (supabaseUrl && supabaseServiceKey) {
-      const supabase = createClient(supabaseUrl, supabaseServiceKey);
-      const { data, error: dbError } = await supabase
-        .from("diagnoses")
-        .select("id, hex, created_at")
-        .eq("anonymous_id", anonymousId)
-        .order("created_at", { ascending: false })
-        .limit(100);
-
-      if (!dbError && data) {
-        history = data.map((item) => {
-          const info = getNearestPoeticName(item.hex);
-          return {
-            ...item,
-            poeticName: info.fullTitle,
-            groupSlug: info.groupSlug,
-          };
-        });
-      } else {
-        console.error("History fetch error:", dbError);
-      }
-    }
-  }
-
-  // Redirect if no history found
-  if (history.length === 0) {
-    redirect({ href: "/diagnosis", locale });
-  }
+  const history = (historyData || []).map((item: any) => {
+    const info = getNearestPoeticName(item.hex);
+    return {
+      ...item,
+      poeticName: info.fullTitle,
+      groupSlug: info.groupSlug,
+    };
+  });
 
   return (
     <div className="min-h-screen pt-32 pb-20 px-space-4 max-w-5xl mx-auto">
-      {/* Header Section */}
-      <div className="flex flex-col items-start mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
-        <div className="flex items-center gap-4 mb-6">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="rounded-full hover:bg-background/80 -ml-3"
-            asChild
-          >
-            <Link href="/">
-              <ArrowLeft className="h-5 w-5" />
-            </Link>
-          </Button>
-          <div className="flex items-center gap-2 text-sm font-serif tracking-widest text-muted-foreground uppercase opacity-60">
-            <Palette className="h-4 w-4" />
-            <span>{tCommon("history")}</span>
-          </div>
-        </div>
-        <h1 className="text-4xl md:text-5xl font-serif text-foreground tracking-wide">
-          {t("title")}
-        </h1>
-        <p className="text-muted-foreground mt-4 font-serif tracking-wide text-sm opacity-80 max-w-lg leading-relaxed">
-          {t("description")}
-        </p>
-      </div>
+      {/* Header Section Removed as per request */}
 
       {/* Grid Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">

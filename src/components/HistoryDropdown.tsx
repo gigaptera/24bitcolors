@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { getNearestPoeticName } from "@/lib/colorNaming";
-import { ClockCounterClockwise } from "@phosphor-icons/react";
+import { Swatches } from "@phosphor-icons/react";
 
 interface HistoryItem {
   id: string;
@@ -76,10 +76,7 @@ export function HistoryDropdown() {
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen} modal={false}>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" aria-label={t("history")}>
-          <ClockCounterClockwise
-            weight="light"
-            className="h-5 w-5 text-muted-foreground"
-          />
+          <Swatches weight="light" className="h-5 w-5 text-muted-foreground" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
