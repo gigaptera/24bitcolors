@@ -94,13 +94,6 @@ export default async function SharePage({
 
         <div className="flex flex-col items-center md:items-end gap-4 w-full md:w-auto">
           <ImportCollectionButton shareId={id} />
-          <Button
-            asChild
-            variant="ghost"
-            className="rounded-none font-serif text-muted-foreground hover:text-foreground"
-          >
-            <Link href="/diagnosis">{tCommon("startDiagnosis")}</Link>
-          </Button>
         </div>
       </div>
 
