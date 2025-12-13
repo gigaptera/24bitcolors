@@ -1,7 +1,6 @@
 import { cookies } from "next/headers";
 import { createClient } from "@supabase/supabase-js";
-import { Link } from "@/i18n/routing";
-import { redirect } from "next/navigation"; // Use standard redirect for simple paths
+import { Link, redirect } from "@/i18n/routing"; // Use i18n redirect
 import { getTranslations } from "next-intl/server";
 import { getNearestPoeticName } from "@/lib/colorNaming";
 import { ArrowLeft, Calendar, Hash } from "lucide-react";

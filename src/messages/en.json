@@ -40,6 +40,10 @@
   },
   "About": {
     "title": "About 24bitColors",
+    "description": "About 24bitColors - The philosophy, concept, and science behind the digital color museum.",
+    "jsonLdName": "About 24bitColors",
+    "jsonLdDescription": "Learn about the philosophy and science behind 24bitColors, a digital color museum and personality test.",
+    "organizationDescription": "A digital color museum exploring the intersection of art, science, and human perception.",
     "lblPhilosophy": "PHILOSOPHY",
     "heroTitle1": "Universal Beauty &",
     "heroTitle2": "Intellectual Curiosity",

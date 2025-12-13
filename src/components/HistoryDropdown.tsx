@@ -56,7 +56,7 @@ export function HistoryDropdown() {
   }, []);
 
   useEffect(() => {
-    void fetchHistory();
+    fetchHistory();
 
     const handleUpdate = () => {
       // Small delay to ensure DB write is committed

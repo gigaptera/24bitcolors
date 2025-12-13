@@ -40,10 +40,10 @@
   },
   "About": {
     "title": "24bitColorsについて",
-    "description": "24bitColorsの哲学、コンセプト、科学的背景について。",
+    "description": "24bitColorsについて - デジタルカラーミュージアムの哲学、コンセプト、そして科学的背景。",
     "jsonLdName": "24bitColorsについて",
-    "jsonLdDescription": "24bitColorsのプロジェクト概要とビジョン",
-    "organizationDescription": "色彩の統計分析と可視化を行うデザインプロジェクト",
+    "jsonLdDescription": "デジタルカラーミュージアム「24bitColors」の哲学、コンセプト、科学的背景について。",
+    "organizationDescription": "アート、サイエンス、そして人間の知覚の交差点を探求するデジタルカラーミュージアム。",
     "lblPhilosophy": "PHILOSOPHY",
     "heroTitle1": "Universal Beauty &",
     "heroTitle2": "Intellectual Curiosity",
