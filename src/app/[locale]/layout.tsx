@@ -14,6 +14,7 @@ import "@/app/globals.css";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { GoogleAdsense } from "@/components/GoogleAdsense";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { SmoothScroll } from "@/components/SmoothScroll";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const notoSansJP = Noto_Sans_JP({
@@ -100,10 +101,12 @@ export default async function LocaleLayout({ children, params }: Props) {
       >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>
-            <Header />
-            <Breadcrumbs />
-            <div className="flex-1 flex flex-col w-full">{children}</div>
-            <Footer />
+            <SmoothScroll>
+              <Header />
+              <Breadcrumbs />
+              <div className="flex-1 flex flex-col w-full">{children}</div>
+              <Footer />
+            </SmoothScroll>
           </ThemeProvider>
         </NextIntlClientProvider>
 

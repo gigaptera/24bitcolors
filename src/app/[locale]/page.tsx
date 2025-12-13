@@ -8,124 +8,122 @@ export default function Home() {
   const t = useTranslations("Home");
 
   return (
-    <main className="flex w-full flex-col bg-background text-foreground selection:bg-foreground selection:text-background">
-      <HomeScrollManager />
+    <main className="relative flex w-full flex-col bg-background text-foreground overflow-x-hidden selection:bg-foreground selection:text-background">
       {/* 
-        HERO SECTION 
-        - Snap Start
-        - Full Height
+        HERO SECTION: Global Museum Style
+        - Asymmetrical Layout (Mobile: Stacked, Desktop: Grid)
+        - Huge Typography
       */}
-      <section className="relative flex h-[100vh] w-full snap-start flex-col items-center justify-center overflow-hidden p-6">
-        {/* Background Effect: Color Prism / Aurora */}
-        <div className="aurora-gradient absolute inset-0 -z-10 animate-pulse-slow opacity-30 dark:opacity-20" />
+      <section className="relative min-h-[100dvh] w-full px-6 pt-32 pb-20 md:px-12 md:py-0 grid grid-cols-1 md:grid-cols-12 gap-y-12 md:gap-x-12 items-center">
+        {/* Background Atmosphere */}
+        <div className="aurora-gradient absolute inset-0 -z-10 opacity-30 dark:opacity-20 pointer-events-none" />
 
-        {/* Floating Abstract Shapes */}
-        <div className="animate-float absolute -left-20 top-20 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl filter dark:bg-blue-400/5" />
-        <div className="animate-float absolute -right-20 bottom-20 h-80 w-80 rounded-full bg-rose-500/10 blur-3xl filter transition-transform delay-1000 dark:bg-rose-400/5" />
-
-        {/* Main Content Container */}
-        <div className="z-10 flex max-w-3xl flex-col items-center text-center">
-          {/* Main Title - Optimize for Brand but Keep SEO in mind via context */}
-          <h1 className="mb-8 animate-fade-in text-6xl font-medium tracking-tight md:text-8xl font-serif">
-            {t("heroTitle")}
+        {/* LEFT: Massive Heading (The Exhibit) */}
+        <div className="md:col-span-7 flex flex-col justify-center items-start z-10">
+          <h1
+            className="font-serif text-[15vw] md:text-[9vw] leading-[0.9] tracking-tighter text-foreground mix-blend-difference animate-fade-in opacity-0"
+            style={{ animationDelay: "0.2s" }}
+          >
+            FIND
+            <br />
+            YOUR
+            <br />
+            COLOR
           </h1>
+        </div>
 
-          {/* Tagline */}
-          <p className="mb-12 animate-fade-in text-sm font-light uppercase tracking-[0.25em] text-muted-foreground delay-100 md:text-base font-sans">
-            {t("heroTagline")}
-          </p>
-
-          {/* Description - SEO Optimized */}
-          <div className="mb-12 max-w-md animate-fade-in text-sm leading-relaxed text-muted-foreground delay-200 md:text-base font-serif">
-            <h2 className="sr-only">{t("srOnlyTitle")}</h2>
-            <p className="whitespace-pre-line">{t("heroDescription")}</p>
-          </div>
-
-          {/* CTA Button */}
-          <div className="flex flex-col items-center gap-4 animate-fade-in delay-300">
-            <Button
-              asChild
-              size="lg"
-              className="px-10 py-7 text-lg shadow-lg transition-all hover:scale-105 hover:shadow-xl dark:shadow-none dark:hover:shadow-[var(--shadow-glow)]"
-            >
-              <Link href="/diagnosis">{t("ctaSearchYourColor")}</Link>
-            </Button>
-            <p className="text-xs text-muted-foreground tracking-wider opacity-80">
-              {t("freeNoRegistration")}
+        {/* RIGHT: Context & Action (Gallery Label) */}
+        <div className="md:col-span-5 flex flex-col justify-end items-start h-full md:pb-24 z-10">
+          {/* Label Group */}
+          <div
+            className="space-y-8 animate-fade-in opacity-0"
+            style={{ animationDelay: "0.8s" }}
+          >
+            {/* Tagline */}
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+              {t("heroTagline")}
             </p>
+
+            {/* Description (Japanese) */}
+            <div className="font-serif text-sm md:text-base leading-loose text-muted-foreground/80 max-w-sm whitespace-pre-line">
+              <p>{t("heroDescription")}</p>
+            </div>
+
+            {/* CTA */}
+            <div className="pt-4">
+              <Button
+                asChild
+                size="lg"
+                className="rounded-none px-12 py-8 text-lg bg-foreground text-background hover:bg-foreground/90 hover:scale-[1.02] transition-all duration-500 shadow-xl dark:shadow-[var(--shadow-floating)]"
+              >
+                <Link href="/diagnosis">{t("ctaSearchYourColor")}</Link>
+              </Button>
+            </div>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-12 animate-bounce opacity-80">
-          <p className="text-[10px] tracking-[0.3em] font-medium">
-            {t("scroll")}
+        {/* Scroll Indicator (Absolute Bottom Center) */}
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce opacity-50 hidden md:block">
+          <p className="text-[10px] uppercase tracking-[0.3em] font-mono">
+            Scroll
           </p>
         </div>
       </section>
 
       {/* 
-        CONCEPT SECTION 
-        - Snap Start
-        - Full Height
+        CONCEPT SECTION: The Philosophy
+        - Clean centered text with "Ma" (Negative space)
       */}
-      <section className="flex h-[100vh] w-full snap-start flex-col items-center justify-center bg-foreground/5 p-6 text-center">
-        <div className="max-w-xl space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
-          <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+      {/* 
+        CONCEPT SECTION: The Philosophy
+        - Clean centered text with "Ma" (Negative space)
+        - Height adjusted for natural flow (Fibonacci Spacing)
+      */}
+      <section className="w-full py-40 md:py-64 px-6 flex flex-col items-center justify-center text-center">
+        <div className="max-w-2xl space-y-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 view-timeline-name:--reveal">
+          <p className="text-[10px] font-mono uppercase tracking-[0.4em] text-muted-foreground/60">
             {t("conceptLabel")}
           </p>
-          <h2 className="text-3xl font-normal md:text-5xl font-serif">
+          <h2 className="text-3xl md:text-5xl font-serif text-foreground leading-tight">
             {t("conceptTitle")}
           </h2>
-          <p className="leading-loose text-muted-foreground font-serif text-sm md:text-base whitespace-pre-line">
+          <p className="text-base md:text-lg leading-loose text-muted-foreground font-serif whitespace-pre-line">
             {t("conceptBody")}
           </p>
 
-          <div className="pt-8 flex flex-col items-center gap-6">
-            <Button
-              variant="outline"
-              asChild
-              className="group text-xs tracking-[0.2em] px-8 h-12"
-            >
-              <Link href="/about" className="flex items-center gap-2">
-                <span>{t("readOurStory")}</span>
-                <span className="block h-px w-8 bg-foreground transition-all group-hover:w-16" />
-              </Link>
-            </Button>
-          </div>
+          <Button
+            variant="outline"
+            asChild
+            className="rounded-none border-foreground text-foreground hover:bg-foreground hover:text-background px-8 py-6 text-xs tracking-widest uppercase transition-all duration-300"
+          >
+            <Link href="/about">{t("readOurStory")}</Link>
+          </Button>
         </div>
       </section>
 
       {/* 
-        LOGIC SECTION 
-        - Snap Start
-        - Full Height
+        LOGIC SECTION
+        - Height adjusted for natural flow
       */}
-      <section
-        id="about"
-        className="flex h-[100vh] w-full snap-start flex-col items-center justify-center p-6 text-center"
-      >
-        <div className="max-w-xl">
-          <p className="mb-6 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+      <section className="w-full py-40 md:py-64 px-6 flex flex-col items-center justify-center bg-foreground/5">
+        <div className="max-w-2xl text-center space-y-12">
+          <p className="text-[10px] font-mono uppercase tracking-[0.4em] text-muted-foreground/60">
             {t("logicLabel")}
           </p>
-          <h2 className="mb-8 text-3xl font-normal md:text-4xl font-serif">
+          <h2 className="text-3xl md:text-4xl font-serif text-foreground">
             {t("logicTitle")}
           </h2>
-          <p className="mb-10 leading-loose text-muted-foreground whitespace-pre-line">
+          <p className="text-sm md:text-base leading-loose text-muted-foreground whitespace-pre-line">
             {t("logicBody")}
           </p>
 
-          <div className="flex flex-col items-center gap-4">
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="px-8 font-serif tracking-widest shadow-sm transition-all hover:bg-foreground hover:text-background"
-            >
-              <Link href="/diagnosis/logic">{t("ctaSeeLogicBehind")}</Link>
-            </Button>
-          </div>
+          <Button
+            asChild
+            variant="outline"
+            className="rounded-none border-foreground/20 hover:bg-foreground hover:text-background px-8 py-6 tracking-widest text-xs uppercase transition-all duration-300"
+          >
+            <Link href="/diagnosis/logic">{t("ctaSeeLogicBehind")}</Link>
+          </Button>
         </div>
       </section>
 

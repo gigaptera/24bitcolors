@@ -50,6 +50,10 @@ export async function generateMetadata({
   };
 }
 
+import { AmbientBackground } from "@/components/AmbientBackground";
+
+// ... (imports remain same, need to be careful with replace)
+
 export default async function ColorDetailPage({ params }: PageProps) {
   const { hex, locale } = await params;
 
@@ -68,96 +72,65 @@ export default async function ColorDetailPage({ params }: PageProps) {
   const tints = getTints(`#${hex}`, 5);
 
   return (
-    <div className="flex min-h-[calc(100vh-80px)] w-full flex-col items-center bg-background pt-20 pb-12 md:py-20 animate-in fade-in duration-1000">
-      {/* Shared Container for Vertical Flow */}
-      <div className="w-full max-w-3xl px-6 flex flex-col items-center">
-        {/* 1. HERO: The "Color Monolith" (Exhibition Poster) */}
-        <div className="relative mb-16 md:mb-32 w-full perspective-1000">
-          {/* The Frame - Full Width of Container */}
-          <div className="relative mx-auto bg-white p-[15px] shadow-[var(--shadow-museum)] duration-700 ease-out hover:scale-[1.01] hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.4)] dark:bg-[#111] dark:hover:shadow-[0_40px_80px_-15px_rgba(255,255,255,0.1)]">
-            {/* The Matting (Passe-Partout) */}
-            <div className="flex aspect-[5/6] md:aspect-[4/3] w-full flex-col bg-white p-6 dark:bg-[#1a1a1a] sm:p-[60px]">
-              {/* The Artwork (Color) - Clean, no overlay */}
-              <CopyableHex
-                hex={colorInfo.hex}
-                className="group/art relative flex-1 w-full overflow-hidden shadow-inner cursor-pointer"
-                style={{ backgroundColor: colorInfo.hex }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 transition-opacity duration-500 group-hover/art:opacity-100" />
-              </CopyableHex>
+    <div className="flex min-h-[calc(100vh-80px)] w-full flex-col items-center bg-background pt-20 pb-20 md:py-32 animate-in fade-in duration-1000 relative">
+      <AmbientBackground hex={`#${hex}`} />
 
-              {/* Hex Code - Left aligned */}
-              <div className="mt-4 md:mt-6 text-left">
-                <span className="font-mono text-2xl md:text-3xl tracking-wider text-foreground">
-                  {colorInfo.hex}
-                </span>
+      {/* Shared Container for Vertical Flow */}
+      <div className="w-full max-w-4xl px-6 flex flex-col items-center z-10">
+        {/* 1. HERO: The "Color Monolith" (Exhibition Poster) */}
+        <div className="relative mb-24 md:mb-40 w-full perspective-1000">
+          {/* The Frame - Full Width of Container */}
+          <div className="relative mx-auto bg-card shadow-[var(--shadow-museum)] transition-all duration-700 hover:shadow-[var(--shadow-floating)] hover:-translate-y-1">
+            {/* The Matting (Passe-Partout) */}
+            <div className="flex flex-col bg-card p-6 md:p-12 lg:p-16">
+              {/* The Artwork (Color) */}
+              <div className="aspect-[4/5] md:aspect-[3/2] w-full relative">
+                <CopyableHex
+                  hex={colorInfo.hex}
+                  className="w-full h-full shadow-inner cursor-pointer"
+                  style={{ backgroundColor: colorInfo.hex }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 transition-opacity duration-500 hover:opacity-100" />
+                </CopyableHex>
               </div>
 
-              {/* The Caption (Bottom of Mat - integrated for simpler look in wider view) */}
-              <div className="flex flex-col items-center space-y-4">
-                {/* Exhibition Notes (Tech Data) */}
-                <div className="w-full grid grid-cols-2 lg:grid-cols-[1fr_auto_1fr] lg:gap-4 gap-y-6 pt-4 md:pt-8 font-mono tracking-wider text-black/70 dark:text-white/70">
-                  {/* RGB (Row 1 Left) */}
-                  <div className="flex justify-center lg:justify-between px-2 lg:px-0">
-                    <div className="flex gap-4 sm:gap-6 lg:gap-5 w-full justify-center lg:justify-around text-center">
-                      <div className="flex flex-col items-center min-w-[1.5rem]">
-                        <span className="mb-3 text-[10px] opacity-40">R</span>
-                        <span className="text-xs">{colorInfo.rgb.r}</span>
-                      </div>
-                      <div className="flex flex-col items-center min-w-[1.5rem]">
-                        <span className="mb-3 text-[10px] opacity-40">G</span>
-                        <span className="text-xs">{colorInfo.rgb.g}</span>
-                      </div>
-                      <div className="flex flex-col items-center min-w-[1.5rem]">
-                        <span className="mb-3 text-[10px] opacity-40">B</span>
-                        <span className="text-xs">{colorInfo.rgb.b}</span>
-                      </div>
+              {/* Caption Area */}
+              <div className="mt-8 md:mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                {/* Left: Identity */}
+                <div>
+                  <h1 className="font-mono text-3xl md:text-4xl tracking-widest text-foreground uppercase">
+                    {colorInfo.hex}
+                  </h1>
+                  <p className="mt-2 text-xs font-serif tracking-widest text-muted-foreground">
+                    EXHIBIT NO. {hex.toUpperCase()}
+                  </p>
+                </div>
+
+                {/* Right: Technical Specs (Minimalist) */}
+                <div className="grid grid-cols-3 gap-6 font-mono text-[10px] md:text-xs text-muted-foreground tracking-widest">
+                  <div className="space-y-2">
+                    <span className="opacity-40 block mb-1">RGB</span>
+                    <div className="flex flex-col">
+                      <span>{colorInfo.rgb.r}</span>
+                      <span>{colorInfo.rgb.g}</span>
+                      <span>{colorInfo.rgb.b}</span>
                     </div>
                   </div>
-
-                  {/* OKLCH (Row 1 Right on Mobile) */}
-                  <div className="flex justify-center lg:justify-between px-2 lg:px-0">
-                    <div className="flex gap-4 sm:gap-6 lg:gap-5 w-full justify-center lg:justify-around text-center">
-                      <div className="flex flex-col items-center min-w-[1.5rem]">
-                        <span className="mb-3 text-[10px] opacity-40">L</span>
-                        <span className="text-xs">
-                          {Math.round(colorInfo.oklch.l * 100)}%
-                        </span>
-                      </div>
-                      <div className="flex flex-col items-center min-w-[1.5rem]">
-                        <span className="mb-3 text-[10px] opacity-40">C</span>
-                        <span className="text-xs">
-                          {colorInfo.oklch.c.toFixed(2)}
-                        </span>
-                      </div>
-                      <div className="flex flex-col items-center min-w-[1.5rem]">
-                        <span className="mb-3 text-[10px] opacity-40">H</span>
-                        <span className="text-xs">
-                          {Math.round(colorInfo.oklch.h)}°
-                        </span>
-                      </div>
+                  <div className="space-y-2">
+                    <span className="opacity-40 block mb-1">CMYK</span>
+                    <div className="flex flex-col">
+                      <span>{colorInfo.cmyk.c}</span>
+                      <span>{colorInfo.cmyk.m}</span>
+                      <span>{colorInfo.cmyk.y}</span>
+                      <span>{colorInfo.cmyk.k}</span>
                     </div>
                   </div>
-
-                  {/* CMYK (Row 2 Spans Full) */}
-                  <div className="col-span-2 lg:col-span-1 flex justify-center lg:border-l lg:border-r border-black/5 dark:border-white/5 px-4 lg:px-6">
-                    <div className="flex gap-4 sm:gap-6 lg:gap-5 w-full justify-center lg:justify-around text-center">
-                      <div className="flex flex-col items-center min-w-[1.5rem]">
-                        <span className="mb-3 text-[10px] opacity-40">C</span>
-                        <span className="text-xs">{colorInfo.cmyk.c}</span>
-                      </div>
-                      <div className="flex flex-col items-center min-w-[1.5rem]">
-                        <span className="mb-3 text-[10px] opacity-40">M</span>
-                        <span className="text-xs">{colorInfo.cmyk.m}</span>
-                      </div>
-                      <div className="flex flex-col items-center min-w-[1.5rem]">
-                        <span className="mb-3 text-[10px] opacity-40">Y</span>
-                        <span className="text-xs">{colorInfo.cmyk.y}</span>
-                      </div>
-                      <div className="flex flex-col items-center min-w-[1.5rem]">
-                        <span className="mb-3 text-[10px] opacity-40">K</span>
-                        <span className="text-xs">{colorInfo.cmyk.k}</span>
-                      </div>
+                  <div className="space-y-2">
+                    <span className="opacity-40 block mb-1">OKLCH</span>
+                    <div className="flex flex-col">
+                      <span>{Math.round(colorInfo.oklch.l * 100)}%</span>
+                      <span>{colorInfo.oklch.c.toFixed(2)}</span>
+                      <span>{Math.round(colorInfo.oklch.h)}°</span>
                     </div>
                   </div>
                 </div>
@@ -166,7 +139,7 @@ export default async function ColorDetailPage({ params }: PageProps) {
           </div>
 
           {/* Share Actions (Below the Frame) */}
-          <div className="mt-12 flex justify-center">
+          <div className="mt-16 flex justify-center">
             <HexShareSection hex={hex} />
           </div>
         </div>

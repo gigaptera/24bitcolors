@@ -86,7 +86,7 @@ export default async function ResultPage({ params, searchParams }: Props) {
         {/* Color Card */}
         <div className="relative group">
           <div
-            className="w-64 h-64 md:w-80 md:h-80 rounded-full shadow-2xl border-4 border-background transition-transform duration-700 hover:scale-105 dark:shadow-[var(--shadow-glow)]"
+            className="w-64 h-64 md:w-80 md:h-80 rounded-full shadow-2xl border-4 border-background transition-transform duration-700 hover:scale-105 floating-shadow"
             style={{ backgroundColor: safeHex }}
           />
           <div className="absolute inset-0 rounded-full ring-1 ring-white/10" />

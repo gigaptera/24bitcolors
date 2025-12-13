@@ -1,266 +1,263 @@
-# 24bitColors Design System
+# 24bitColors デザインシステム
 
-**Version 1.0** | **Theme:** Museum 🏛️
+**Version 1.3** | **テーマ:** Museum (美術館) 🏛️
 
-## 1. Design Philosophy
+---
 
-"Universal Beauty & Intellectual Curiosity"
+## 1. デザイン哲学 (Design Philosophy)
+
+**"Universal Beauty & Intellectual Curiosity" (普遍的な美と知的好奇心)**
+
 24bitColors は、色彩を探求する美術館のような空間です。静謐でエレガントな「Museum」をテーマとし、コンテンツ（色）が主役となるよう、UI は徹底的にミニマルかつ機能的でなければなりません。また、全てのユーザーに美しい体験を提供するため、最新のアクセシビリティ基準（APCA/WCAG）に準拠します。
 
 ### UX 設計原則
 
-| 原則                     | 説明                                                     |
-| :----------------------- | :------------------------------------------------------- |
-| **気軽さ最優先**         | 30 秒で完了、即座に結果が見える                          |
-| **中立性の確保**         | 色の配置はランダム、順序によるバイアスなし               |
-| **エンターテイメント性** | 「なんでこんなに当たるの？」という驚き、シェア欲求を刺激 |
-| **モバイルファースト**   | シンプルで直感的な操作                                   |
+| 原則                     | 説明                                                                         |
+| :----------------------- | :--------------------------------------------------------------------------- |
+| **気軽さ最優先**         | 30 秒で完了し、即座に結果が見える体験を提供します。                          |
+| **中立性の確保**         | 色の配置はランダムにし、順序によるバイアスを排除します。                     |
+| **エンターテイメント性** | 「なぜこんなに当たるのか？」という驚きと、シェアしたくなる欲求を刺激します。 |
+| **モバイルファースト**   | スマートフォンでの片手操作を前提とした、シンプルで直感的な UI を設計します。 |
 
 ---
 
-## 2. Color System
+## 2. カラーシステム (Color System)
 
-### Accessibility Standards
+### アクセシビリティ基準
 
 - **WCAG 2.1**: AA (4.5:1) 必須、AAA (7:1) 推奨
 - **APCA (SAPC)**: Lc 60 (本文), Lc 45 (大きな見出し), Lc 75 (推奨本文)
   - 本システムでは、本文テキストにおいて **Lc 63+** (WCAG 4.5:1 相当以上) を安全圏として採用します。
 
-### Primitive Palette (Museum Custom)
+### プリミティブパレット (Museum Custom)
 
 Tailwind のプリセットに依存せず、"Night Museum"の世界観に最適化された独自の無彩色パレットです。
 
-| Token           | Hex       | Usage                                    |
-| :-------------- | :-------- | :--------------------------------------- |
-| **Neutral-0**   | `#FFFFFF` | Absolute White (Icons, Highlights)       |
-| **Neutral-50**  | `#F9F9F9` | **Light: Page Background** (Clean, Airy) |
-| **Neutral-100** | `#E5E5E5` | Light: Borders                           |
-| **Neutral-200** | `#C7C7C7` | Light: Disabled / Placeholder            |
-| **Neutral-500** | `#808080` | Muted Text (Lc 60+ safety line)          |
-| **Neutral-800** | `#1A1A1A` | **Light: Primary Text** (Soft Black)     |
-| **Neutral-900** | `#080808` | **Dark: Page Background** (Deep Ink)     |
-| **Neutral-950** | `#000000` | Absolute Black                           |
+| トークン        | Hex       | 用途                                   |
+| :-------------- | :-------- | :------------------------------------- |
+| **Neutral-0**   | `#FFFFFF` | 完全な白（アイコン、ハイライト）       |
+| **Neutral-50**  | `#F9F9F9` | **Light: ページ背景** (清潔感、開放感) |
+| **Neutral-100** | `#E5E5E5` | Light: ボーダー                        |
+| **Neutral-200** | `#C7C7C7` | Light: 無効状態 / プレースホルダー     |
+| **Neutral-500** | `#808080` | 控えめなテキスト (Lc 60+ 安全ライン)   |
+| **Neutral-800** | `#1A1A1A` | **Light: 主要テキスト** (柔らかい黒)   |
+| **Neutral-900** | `#080808` | **Dark: ページ背景** (深いインク色)    |
+| **Neutral-950** | `#000000` | 完全な黒                               |
 
-### Semantic Tokens
+### セマンティックトークン
 
 コンテキストに基づいた意味的な変数名（CSS Variables）を使用します。
 
-| Variable             | Light (`#F9F9F9`)     | Dark (`#080808`)      | Role                     |
-| :------------------- | :-------------------- | :-------------------- | :----------------------- |
-| `--background`       | Neutral-50 (#F9F9F9)  | Neutral-900 (#080808) | ページの背景。           |
-| `--foreground`       | Neutral-800 (#1A1A1A) | Neutral-100 (#E5E5E5) | 主要テキスト。           |
-| `--muted-foreground` | Neutral-500 (#808080) | Neutral-500 (#808080) | 補足情報。               |
-| `--card`             | `#FFFFFF`             | `#121212`             | コンテンツカードの背景。 |
-| `--border`           | Neutral-100 (#E5E5E5) | `#2A2A2A`             | 区切り線。               |
-| `--accent`           | Neutral-950 (#000000) | Neutral-0 (#FFFFFF)   | ロゴ、アイコン。         |
+| 変数名               | Light (`#F9F9F9`)     | Dark (`#080808`)      | 役割                         |
+| :------------------- | :-------------------- | :-------------------- | :--------------------------- |
+| `--background`       | Neutral-50 (#F9F9F9)  | Neutral-900 (#080808) | ページの背景色               |
+| `--foreground`       | Neutral-800 (#1A1A1A) | Neutral-100 (#E5E5E5) | 主要テキスト色               |
+| `--muted-foreground` | Neutral-500 (#808080) | Neutral-500 (#808080) | 補足情報のテキスト色         |
+| `--card`             | `#FFFFFF`             | `#121212`             | カードコンポーネントの背景   |
+| `--border`           | Neutral-100 (#E5E5E5) | `#2A2A2A`             | 区切り線                     |
+| `--accent`           | Neutral-950 (#000000) | Neutral-0 (#FFFFFF)   | ロゴ、アイコンのアクセント色 |
 
 ---
 
-## 3. Typography
+## 3. タイポグラフィ (Typography)
 
-### Font Stack
+### フォントスタック
 
-"Tradition meets Modernity"
+**"Tradition meets Modernity" (伝統と現代性の融合)**
 見出しには格調高いセリフ体を、UI には可読性の高いシステムフォントを使用します。
 
-- **Serif (Headings / Brand)**: `Georgia`, `"Times New Roman"`, `Times`, `serif`
-- **Sans (UI / Body)**: System UI (`-apple-system`, `BlinkMacSystemFont`), `Inter`, `sans-serif`
-- **Mono (Data / Codes)**: `SFMono-Regular`, `Consolas`, `Liberation Mono`, `Menlo`, `monospace`
+- **Serif (見出し / ブランド)**: `Georgia`, `"Times New Roman"`, `Times`, `serif`
+- **Sans (UI / 本文)**: System UI (`-apple-system`, `BlinkMacSystemFont`), `Inter`, `sans-serif`
+- **Mono (データ / コード)**: `SFMono-Regular`, `Consolas`, `Liberation Mono`, `Menlo`, `monospace`
 
-## 3. Typography (Golden Ratio Scale)
+### 黄金比スケール (Golden Ratio Scale)
 
-### Concept: Modular Scale 1.618 (φ)
-
+**コンセプト: Modular Scale 1.618 (φ)**
 自然界で最も美しいとされる「黄金比」をフォントサイズに適用し、リズミカルで有機的な階層構造を作ります。
-Base Size: **16px (1rem)**
+ベースサイズ: **16px (1rem)**
 
-| Token       | Calculation       | Size (approx) | Usage                           |
-| :---------- | :---------------- | :------------ | :------------------------------ |
-| **Micro**   | $16 \div 1.618$   | **10px**      | Disclaimer, Copyright           |
-| **Base**    | $16$              | **16px**      | Body Text, UI Elements          |
-| **Medium**  | $16 \times 1.618$ | **26px**      | Subheadings (H3), Large Buttons |
-| **Large**   | $26 \times 1.618$ | **42px**      | Section Headings (H2)           |
-| **XLarge**  | $42 \times 1.618$ | **68px**      | Page Title (H1)                 |
-| **Display** | $68 \times 1.618$ | **110px**     | Hero Numbers / Art Text         |
-
----
-
-## 4. Spacing (Fibonacci Sequence)
-
-### Concept: Fibonacci & Golden Ratio
-
-余白も黄金比に近い「フィボナッチ数列」を採用することで、心地よい「間」を生み出します。
-
-| Token     | Size      | Role                     |
-| :-------- | :-------- | :----------------------- |
-| `space-1` | **5px**   | 微調整                   |
-| `space-2` | **8px**   | アイコンとテキスト       |
-| `space-3` | **13px**  | 密接な関係               |
-| `space-4` | **21px**  | コンポーネント内余白     |
-| `space-5` | **34px**  | セクション内区切り       |
-| `space-6` | **55px**  | 大きな区切り             |
-| `space-7` | **89px**  | セクション間（広大）     |
-| `space-8` | **144px** | ヒーローエリア前後の余白 |
+| トークン    | 計算式            | サイズ (約) | 用途                           |
+| :---------- | :---------------- | :---------- | :----------------------------- |
+| **Micro**   | $16 \div 1.618$   | **10px**    | 免責事項、コピーライト         |
+| **Base**    | $16$              | **16px**    | 本文、標準的な UI 要素         |
+| **Medium**  | $16 \times 1.618$ | **26px**    | 小見出し (H3)、大きなボタン    |
+| **Large**   | $26 \times 1.618$ | **42px**    | セクション見出し (H2)          |
+| **XLarge**  | $42 \times 1.618$ | **68px**    | ページタイトル (H1)            |
+| **Display** | $68 \times 1.618$ | **110px**   | ヒーローエリアの数字、装飾文字 |
 
 ---
 
-### Interactive Targets
+## 4. 余白と配置 (Spacing & Layout)
 
-- **Minimum Size**: 44x44px (W3C 推奨)
-  - ボタンやリンクは、タップ領域として最低 44px 四方を確保する。
-  - _ThemeToggle の実装もタッチ領域は h-10(40px)以上を維持すること。_
+### フィボナッチ数列 (Fibonacci Sequence)
+
+**コンセプト: Fibonacci & Golden Ratio**
+余白にも黄金比に近い「フィボナッチ数列」を採用することで、心地よい「間」を生み出します。
+
+| トークン  | サイズ    | 役割                               |
+| :-------- | :-------- | :--------------------------------- |
+| `space-1` | **5px**   | 微調整レベルの余白                 |
+| `space-2` | **8px**   | アイコンとテキストの間隔           |
+| `space-3` | **13px**  | 密接に関連する要素間               |
+| `space-4` | **21px**  | コンポーネント内部の余白 (Padding) |
+| `space-5` | **34px**  | セクション内の区切り               |
+| `space-6` | **55px**  | 大きな区切り                       |
+| `space-7` | **89px**  | セクション間の余白 (広め)          |
+| `space-8` | **144px** | ヒーローエリア前後の広大な余白     |
+
+### タッチターゲット
+
+- **最小サイズ**: 44x44px (W3C 推奨)
+  - ボタンやリンクは、タップ領域として最低でも 44px 四方を確保してください。
+  - _ThemeToggle などの小さなアイコンも、クリック可能領域は `h-10`(40px) 以上を維持すること。_
 
 ---
 
-## 5. UI Components
+## 5. UI コンポーネント (UI Components)
 
-### Buttons (Museum Style)
+### ボタン (Museum Style)
 
-- **Shape**: 角丸なし（Sharp）または完全な丸（Pill、コンパクトなアクション用）。
-- **Interaction**: ホバー時に不透明度変化 (`opacity-80`) や、反転 (`bg-black` -> `bg-white`) ではなく、背景色の微細な変化 (`zinc-800`) を基本とする。
+- **形状**: 角丸なし (**Sharp**)、または完全な丸 (**Pill** - コンパクトなアクション用)。
+- **インタラクション**: ホバー時は固定色への変更ではなく、色の混合（Mix）や透過レイヤーの重ね合わせによって微細な変化を与え、元の色との調和を保ちつつ上質感を演出します。
 
-### Cards & Shadows
+### カードとシャドウ (Cards & Shadows)
 
 - **Floating Shadow** (`--shadow-floating`): `0 30px 60px -10px`
   - 浮遊感を演出する広範囲のドロップシャドウ。
-  - **Light Mode**: `rgba(0, 0, 0, 0.2)` (Black Shadow)
-  - **Dark Mode**: `rgba(255, 255, 255, 0.15)` (White Glow) - 黒背景でも視認性を確保するため、白い光彩を使用する。
-- **Glow Shadow** (`--shadow-glow`) _New_
+  - **Light Mode**: `rgba(0, 0, 0, 0.2)` (黒い影)
+  - **Dark Mode**: `rgba(255, 255, 255, 0.15)` (白い光彩) - 黒背景でも視認性を確保するため、白い光を使用します。
+- **Glow Shadow** (`--shadow-glow`):
   - 全方向（上下左右）に広がるソフトな影。色選択ボタンの視認性向上に使用。
-  - **Light Mode**: `rgba(0, 0, 0, 0.1)` (Soft Dark)
-  - **Dark Mode**: `rgba(255, 255, 255, 0.2)` (Soft Light)
-- **Standard Card**: `shadow-md` は控えめに。Dark モードでは `border` (`zinc-800`) で境界を表現し、よりフラットな質感を保つ。
+- **Standard Card**: `shadow-md` は控えめに使用します。Dark モードでは `border` (`zinc-800`) で境界を表現し、よりフラットな質感を保ちます。
+
+### モーダル (Modals / Dialogs)
+
+- **形状**: 常に角丸なし (**Sharp**) (`rounded-none`)。
+- **配置**: テキストとアクションは**左揃え**を基本とします。特別な警告などを除き、中央揃えは避けてください。
+- **余白**: ゆったりとしたパディング (`p-8` 〜 `p-12`) を取り、作品を展示する額縁のような余白を確保します。
+- **タイポグラフィ**: 見出しは **Serif** (Georgia)、本文はコンテンツに応じて Serif または Sans を使用します。
 
 ---
 
-## 6. UI Component Architecture (shadcn/ui "Museum Theme")
+## 6. 実装アーキテクチャ (shadcn/ui "Museum Theme")
 
 開発効率とデザインの一貫性を両立するため、ヘッドレス UI ライブラリ（Radix UI）をベースにした **shadcn/ui** を採用しますが、そのスタイルは**「Museum Theme」で完全に上書き**します。
 
-### Strategy: "Museum Overwrite"
+### 戦略: "Museum Overwrite"
 
-shadcn の標準スタイル（`default`）をそのまま使うのではなく、本デザインシステムの定義（セリフ体、角丸なし、特殊なシャドウ）をデフォルトとして適用します。
-これにより、開発者は `class` 指定を意識することなく、コンポーネントを配置するだけで美術館の世界観を再現できます。
+shadcn の標準スタイル（`default`）をそのまま使うのではなく、本デザインシステムの定義（セリフ体、角丸なし、特殊なシャドウ）をデフォルトとして適用します。開発者は `class` 指定を意識することなく、コンポーネントを配置するだけで美術館の世界観を再現できます。
 
-### Technologies
+### コンポーネントルール
 
-- **Core**: Radix UI (Accessibility & Logic)
-- **Styling**: Tailwind CSS v4 (Alpha)
-- **Utils**: `cva` (Class Variance Authority), `clsx`, `tailwind-merge`
-
-### Component Rules
-
-> [!NOTE] > **On-Demand Strategy**:
-> `Button` や `Card` 以外のコンポーネント（Dialog, Input, Select 等）が必要になった際は、shadcn のコードをコピーし、必ず **Museum Theme に適合するようにスタイルを書き換えてから** `src/components/ui/` に追加すること。
-> デザインシステムに適合しない生の shadcn コンポーネントをそのまま使用しない。
+> [!NOTE] > **オンデマンド戦略**:
+> `Button` や `Card` 以外のコンポーネント（Dialog, Input, Select 等）が必要になった際は、shadcn のコードをコピーし、必ず **Museum Theme に適合するようにスタイルを書き換えてから** `src/components/ui/` に追加してください。生の shadcn コンポーネントをそのまま使用することは禁止です。
 
 #### Buttons
 
-- **Shape**: Always `rounded-none` (Sharp) to match the framed aesthetic.
-- **Font**: Always `serif` (Georgia).
+- **Shape**: `rounded-none` (Sharp)
+- **Font**: `serif` (Georgia)
 - **Variants**:
-  - `default`: **Primary Action**. Solid Black (Light) / White (Dark). `.btn-museum` equivalent.
-  - `secondary`: **Alternative Action**. Solid White (Light) / dark Gray (Dark) with delicate border.
-  - `destructive`: **Danger**. Deep Red text, borders, or background depending on importance.
-  - `outline`: **Bordered**. Transparent background with `foreground` border. `.btn-museum-outline` equivalent.
-  - `ghost`: **Subtle**. Hover effect only. Used for icon buttons or less prominent actions.
-  - `link`: **Hyperlink**. Underline on hover, `serif`.
+  - `default`: **Primary Action**. [Light] 黒 / [Dark] 白。
+  - `secondary`: **Alternative Action**. [Light] 白 / [Dark] ダークグレー。繊細なボーダー付き。
+  - `destructive`: **Danger**. 重要度に応じた赤字のテキストまたは背景。
+  - `outline`: **Bordered**. 透明背景に枠線。
+  - `ghost`: **Subtle**. ホバー効果のみ。
+  - `link`: **Hyperlink**. ホバー時に下線。
 
 #### Cards
 
-- **Default Variant**: 額縁スタイル（Black Border / White Border）を適用。
-- **Default Variant**: 額縁スタイル（Black Border / White Border）を適用。
+- **Default**: 額縁スタイル（黒/白のボーダー）。
 - **Shadow**: `shadow-sm` の代わりに `floating-shadow` を使用。
 
-#### Modals (Dialogs) _New_
+### フォーム (Museum Forms)
 
-- **Shape**: Always `rounded-none` (Sharp).
-- **Alignment**: **Left-aligned** text and actions. Avoid centering unless for specific alert types.
-- **Padding**: Spacious padding (`p-8` to `p-12`) to frame the content like an artwork.
-- **Typography**: Headings in **Serif** (Georgia), Body in **Serif** or **Sans** depending on content type.
+- **Input Style**: デフォルトの四角い枠線を廃止し、**下線のみ** (Underline Only) のスタイルを採用します。
+  - 背景色なし、ボーダーは底面の 1px のみ。
+  - フォーカス時にラインが太くなる、または色が変化するミニマルな挙動。
+- **Labels**: 入力欄の上部に配置し、余白を十分に取ります。
 
-### Mobile Optimized Components
+### フッター (Gallery Label Footer)
 
-- **Sticky CTA**:
-
-  - モバイルビューポート下部に固定される「診断開始」ボタン。
-  - スクロールを促すため、コンテンツと重なるが `z-index` で最前面に配置。
-  - 背景への干渉を避けるため、適切なシャドウと境界線を持つ。
-
-- **Mobile Navigation (Sheet)**:
-  - ハンバーガーメニューから展開されるドロワー。
-  - 画面の右側からスライドインし、主要なナビゲーションリンクを提供する。
+- **Style**: 極めてミニマルなテキストのみの構成。
+- **Layout**: 大きな背景色枠や複雑なリンク集を排除し、作品のキャプションのように著作権表記と最低限のリンクのみを配置します。
 
 ---
 
-## 7. Page Templates
+## 7. ページテンプレート (Page Templates)
 
 サイト内のページを一貫性のある 3 つのタイプに分類し、それぞれのレイアウトとタイポグラフィのルールを定義します。
 
-### A. Immersive Article (Narrative)
+### A. 没入型記事 (Immersive Article)
 
-_Target: About, Philosophy, Logic, Concept pages_
+_対象: About, Philosophy, Logic, Concept ページ_
 
-**Concept**: "The Coffee Table Book" - 美的体験と没入感を重視し、ゆっくりと読ませるデザイン。
+**コンセプト**: "The Global Museum" - スムーススクロールと非対称レイアウトによる、高級感ある展示体験。
 
-- **Layout**:
-  - **Hero**: 中央揃え、XLarge Serif Heading (68px+)、Monospace Tagline、区切り線。
-  - **Body**: シングルカラム、中央寄せ (`max-w-3xl`)、余白 (`space-8` / 144px) を多用した垂直リズム。
-  - **Decorations**: 背景のぼかし効果、セクション番号 (01, 02...)、装飾的な区切り線。
-- **Typography**:
-  - **Headings**: Serif (Georgia).
-  - **Body**: **Serif** (Georgia). 長文の可読性と雰囲気を重視。
-  - **Labels**: Monospace (tracking-widest, uppercase).
+- **レイアウト**:
+  - **アシンメトリー (Asymmetry)**: コンテンツを常に中央に置くのではなく、左右にずらして配置し、動的な「間」を作ります。
+  - **ヒーローエリア**: 英語の巨大なディスプレイ書体（左）と、日本語の本文ブロック（右下）を対角線上に配置。
+  - **本文**: シングルカラムですが、完全な中央揃えではなく、視線誘導を意識した配置を行います。
+- **モーション**:
+  - **Smooth Scroll (Lenis)**: ページ全体に慣性スクロールを適用し、物理的な「重み」と高級感を与えます。
+  - **Slow Reveal**: テキストはスクロールに合わせてゆっくりと浮き上がる（またはブラーが晴れる）演出を施します。
+- **モバイル対応 (Mobile Strategy)**:
+  - **Single Column**: アシンメトリーなレイアウトは、モバイルでは「垂直一列（シングルカラム）」にスタッキングします。
+  - **Padding**: 左右の余白は確保しつつ、テキストサイズ比（Modular Scale）を調整して可読性を維持します。
+  - **Motion**: SP でも基本動作は維持しますが、パフォーマンスを考慮し一部エフェクトを簡略化する場合があります。
+- **タイポグラフィ**:
+  - **見出し**: Serif (Georgia).
+  - **本文**: **Serif** (Georgia).
+  - **ラベル**: Monospace (トラッキング広め、大文字).
 
-### B. Standard Document (Legal/Technical)
+### B. 公式文書 (Standard Document)
 
-_Target: Privacy Policy, Terms of Service, Technical Docs_
+_対象: プライバシーポリシー, 利用規約, 技術ドキュメント_
 
-**Concept**: "The Museum Archives" - 信頼性、明確さ、構造化を重視。
+**コンセプト**: "The Museum Archives" - 信頼性、明確さ、構造化を重視。
 
-- **Layout**:
-  - **Container**: `max-w-3xl`、左揃えまたは両端揃え。
-  - **Structure**: 明確な階層構造 (H1 > H2 > P)。装飾は最小限に抑える。
-- **Typography**:
-  - **Headings**: Serif (Georgia).
-  - **Body**: **Serif** (Georgia). 書き言葉としての格調高さを維持するため、Sans ではなく Serif を採用。
-  - **Leading**: `leading-relaxed` または `leading-loose`。
+- **レイアウト**:
+  - **コンテナ**: `max-w-3xl`、左揃えまたは両端揃え。
+  - **構造**: 明確な階層構造 (H1 > H2 > P)。装飾は最小限に抑える。
+- **タイポグラフィ**:
+  - **見出し**: Serif (Georgia).
+  - **本文**: **Serif** (Georgia). 書き言葉としての格調高さを維持するため、Sans ではなく Serif を採用。
+  - **行間**: `leading-relaxed` または `leading-loose`。
 
-### C. Functional App (UI)
+### C. 機能アプリケーション (Functional App)
 
-_Target: Diagnosis, Results, My Palette, Share_
+_対象: 診断画面, 結果画面, パレット, シェア画面_
 
-**Concept**: "The Interactive Exhibit" - 機能性、操作性、レスポンシブな動作。
+**コンセプト**: "The Interactive Exhibit" - 機能性、操作性、レスポンシブな動作。
 
-- **Layout**:
-  - **Container**: Fluid (`w-full`) または Grid System。情報は効率的に配置。
-  - **Header**: 機能的な配置（左タイトル、右アクション）。
-- **Typography**:
-  - **Headings**: Serif (Georgia). ブランドの統一感を出すため見出しは Serif。
-  - **Body/UI**: **Sans** (System/Inter). 視認性と操作性を優先し、UI 要素や短いテキストは Sans を使用。
-
----
-
-## 8. Standardization Rules
-
-| Feature          | Immersive / Document                  | Functional App                             |
-| :--------------- | :------------------------------------ | :----------------------------------------- |
-| **Main Font**    | **Serif** (Georgia)                   | **Sans** (System/Inter)                    |
-| **Heading Font** | **Serif**                             | **Serif**                                  |
-| **Spacing**      | Fibonacci (34, 55, 89, 144px) - Loose | Grid / Fibonacci (8, 13, 21, 34px) - Tight |
-| **Alignment**    | Center (Immersive) / Left (Doc)       | Functional / Grid                          |
-| **Colors**       | Muted, High Contrast Text             | Functional colors, Interactive states      |
+- **レイアウト**:
+  - **コンテナ**: Fluid (`w-full`) または Grid System。情報は効率的に配置。
+  - **ヘッダー**: 機能的な配置（左にタイトル、右にアクション）。
+- **タイポグラフィ**:
+  - **見出し**: Serif (Georgia). ブランドの統一感を出すため見出しは Serif。
+  - **UI/本文**: **Sans** (System/Inter). 視認性と操作性を優先し、UI 要素や短いテキストは Sans を使用。
 
 ---
 
-## 9. Content Guidelines
+## 8. 標準化ルール (Standardization Rules)
 
-### Writing Style (Tone & Voice)
-
-- **Curator's Voice**: 知識豊富で落ち着いているが、決して尊大ではない。
-- **Clarity**: 専門用語は避け、直感的な言葉を選ぶ。ただし、色彩学的な正確さは妥協しない。
-- **Politeness**: ユーザーを尊重する丁寧な「です・ます」調。ただし、システムメッセージやラベルは簡潔に体言止めを使用可。
+| 機能                 | 没入型記事 / 公式文書                      | 機能アプリケーション                       |
+| :------------------- | :----------------------------------------- | :----------------------------------------- |
+| **主フォント**       | **Serif** (Georgia)                        | **Sans** (System/Inter)                    |
+| **見出しフォント**   | **Serif**                                  | **Serif**                                  |
+| **余白 (Spacing)**   | フィボナッチ (34, 55, 89, 144px) - 広め    | Grid / フィボナッチ (8, 13, 21, 34px) - 密 |
+| **配置 (Alignment)** | 中央 (記事) / 左 (文書)                    | 左揃え / グリッド                          |
+| **色使い**           | 落ち着いた色調、ハイコントラストなテキスト | 機能色、インタラクティブな状態変化         |
 
 ---
 
-**最終更新**: 2025 年 12 月 13 日 (v1.3 Page Templates Added)
+## 9. コンテンツガイドライン (Content Guidelines)
+
+### 文体とトーン (Tone & Voice)
+
+- **学芸員の声 (Curator's Voice)**: 知識豊富で落ち着いているが、決して尊大ではないトーン。
+- **明快さ (Clarity)**: 難解な専門用語は避け、直感的な言葉を選びます。ただし、色彩学的な正確さは妥協しません。
+- **丁寧さ (Politeness)**: ユーザーを尊重する丁寧な「です・ます」調を基本とします。ただし、ボタンのラベルやシステムメッセージは、簡潔さを優先して体言止めを使用します。
+
+---
+
+**最終更新**: 2025 年 12 月 13 日 (v1.3 Complete Localization & Refinement)

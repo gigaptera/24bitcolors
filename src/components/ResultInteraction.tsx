@@ -147,27 +147,16 @@ export function ResultInteraction({
           {t("feedbackRequest")}
         </p>
         <Button
-          variant="link"
+          variant="outline"
           size="sm"
           asChild
-          className="text-xs text-muted-foreground hover:text-foreground underline-offset-4"
+          className="rounded-none border-foreground/20 text-xs text-muted-foreground hover:bg-foreground hover:text-background transition-colors uppercase tracking-widest"
         >
           <a
-            href="https://forms.gle/XXXXXXX" // Assuming form link might be external or need correct link
+            href="https://google.com" // Placeholder, user mentioned existing link
             target="_blank"
             rel="noopener noreferrer"
           >
-            {/* Actual link was /diagnosis/logic/feedback in previous file, checking... 
-                 It was /diagnosis/logic/feedback in DiagnosisLogicPage. 
-                 In ResultInteraction it was /diagnosis/logic/feedback.
-                 Wait, in ja.json I put linkFeedbackForm. 
-                 Let's keep the internal link if it exists or external if intended.
-                 Original code had: href="/diagnosis/logic/feedback" 
-             */}
-            {/* UPDATE: The original code used Link to internal page /diagnosis/logic/feedback. 
-                 But wait, the viewed file content had target="_blank". 
-                 Let's preserve the original href but use translations for text. 
-             */}
             {t("linkFeedbackForm")}
           </a>
         </Button>

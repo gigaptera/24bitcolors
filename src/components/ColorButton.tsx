@@ -19,7 +19,7 @@ export function ColorButton({ color, onClick }: ColorButtonProps) {
   return (
     <button
       onClick={handleClick}
-      className="aspect-square w-full rounded-sm border border-border shadow-sm transition-transform active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="aspect-square w-full rounded-none border border-border shadow-sm transition-transform active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       style={{ backgroundColor: hex }}
       aria-label={`色を選択: ${hex}`}
     />

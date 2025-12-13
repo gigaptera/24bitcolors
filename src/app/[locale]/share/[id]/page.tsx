@@ -77,7 +77,7 @@ export default async function SharePage({
   }
 
   return (
-    <div className="min-h-screen pt-32 pb-20 px-space-4 max-w-5xl mx-auto">
+    <div className="min-h-screen pt-40 pb-32 px-space-4 max-w-5xl mx-auto">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
         <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-6 max-w-2xl">

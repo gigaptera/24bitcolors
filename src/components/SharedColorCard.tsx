@@ -58,7 +58,7 @@ export function SharedColorCard({
         "#",
         ""
       )}`}
-      className="group relative flex flex-col items-center p-8 bg-card/50 backdrop-blur-sm border border-border/40 rounded-none overflow-hidden hover:border-border/80 hover:bg-card/80 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 dark:hover:shadow-[var(--shadow-floating)] hover:-translate-y-1 block"
+      className="group relative flex flex-col items-center p-8 bg-card/50 backdrop-blur-sm border border-border/40 rounded-none overflow-hidden hover:border-foreground/20 hover:bg-card/80 transition-all duration-500 hover:shadow-[var(--shadow-museum)] hover:-translate-y-1 block"
       style={{
         animationDelay: `${index * 50}ms`,
       }}

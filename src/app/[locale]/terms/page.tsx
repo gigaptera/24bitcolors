@@ -1,11 +1,13 @@
 import { getTranslations } from "next-intl/server";
 import { useTranslations } from "next-intl";
 
+import type { Metadata } from "next";
+
 type Props = {
   params: Promise<{ locale: string }>;
 };
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Terms" });
 
@@ -19,26 +21,26 @@ export default function TermsPage() {
   const t = useTranslations("Terms");
 
   return (
-    <div className="container mx-auto max-w-3xl px-space-5 py-space-6 font-serif">
-      <h1 className="mb-space-5 text-[length:var(--text-large)] font-medium tracking-wide text-foreground">
+    <div className="container mx-auto max-w-3xl px-space-5 py-24 md:py-32 font-serif text-foreground">
+      <h1 className="mb-16 text-3xl md:text-5xl font-light tracking-wide text-center">
         {t("title")}
       </h1>
-      <div className="space-y-space-4 text-[length:var(--text-base)] leading-8 text-foreground">
+      <div className="space-y-16 text-base md:text-lg leading-loose text-muted-foreground font-serif">
         <p>{t("intro")}</p>
 
         <section>
-          <h2 className="mb-space-3 text-[length:var(--text-medium)] font-medium text-foreground">
+          <h2 className="mb-6 text-xl md:text-2xl font-normal text-foreground tracking-wide">
             {t("article1Title")}
           </h2>
           <p>{t("article1Body")}</p>
         </section>
 
         <section>
-          <h2 className="mb-space-3 text-[length:var(--text-medium)] font-medium text-foreground">
+          <h2 className="mb-6 text-xl md:text-2xl font-normal text-foreground tracking-wide">
             {t("article2Title")}
           </h2>
           <p>{t("article2Body")}</p>
-          <ul className="list-disc pl-5 mt-2 space-y-1">
+          <ul className="list-disc pl-5 mt-4 space-y-2 marker:text-foreground/50">
             <li>{t("article2List1")}</li>
             <li>{t("article2List2")}</li>
             <li>{t("article2List3")}</li>
@@ -47,21 +49,21 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="mb-space-3 text-[length:var(--text-medium)] font-medium text-foreground">
+          <h2 className="mb-6 text-xl md:text-2xl font-normal text-foreground tracking-wide">
             {t("article3Title")}
           </h2>
           <p>{t("article3Body1")}</p>
-          <p className="mt-2">{t("article3Body2")}</p>
+          <p className="mt-4">{t("article3Body2")}</p>
         </section>
 
         <section>
-          <h2 className="mb-space-3 text-[length:var(--text-medium)] font-medium text-foreground">
+          <h2 className="mb-6 text-xl md:text-2xl font-normal text-foreground tracking-wide">
             {t("article4Title")}
           </h2>
           <p>{t("article4Body")}</p>
         </section>
 
-        <div className="mt-space-6 text-right text-[length:var(--text-micro)] text-muted-foreground">
+        <div className="pt-12 text-right text-xs md:text-sm tracking-widest uppercase opacity-60">
           {t("date")}
         </div>
       </div>
