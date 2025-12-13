@@ -2,7 +2,6 @@ import { createClient } from "@supabase/supabase-js";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
-import { ImportCollectionButton } from "@/components/ImportCollectionButton";
 import { getNearestPoeticName } from "@/lib/colorNaming";
 import { SharedColorCard } from "@/components/SharedColorCard";
 import { Metadata } from "next";
@@ -93,7 +92,7 @@ export default async function SharePage({
         </div>
 
         <div className="flex flex-col items-center md:items-end gap-4 w-full md:w-auto">
-          <ImportCollectionButton shareId={id} />
+          {/* Actions removed as per user request (single bookmark focused) */}
         </div>
       </div>
 
