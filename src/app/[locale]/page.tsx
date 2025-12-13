@@ -1,6 +1,5 @@
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
-import { HomeScrollManager } from "@/components/HomeScrollManager";
 import { StickyCTA } from "@/components/StickyCTA";
 import { useTranslations } from "next-intl";
 
