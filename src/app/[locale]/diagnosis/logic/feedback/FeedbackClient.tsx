@@ -56,7 +56,7 @@ function DiagnosisResultSection({ result }: { result: StoredResult | null }) {
     <Card className="rounded-none">
       <CardContent className="p-6 flex flex-col md:flex-row items-center gap-6">
         <div
-          className="w-24 h-24 rounded-full shadow-lg border-4 border-background shrink-0"
+          className="w-64 h-64 md:w-80 md:h-80 rounded-full shadow-2xl border-4 border-background transition-transform duration-700 hover:scale-105 dark:shadow-[0_0_30px_rgba(255,255,255,0.1)]"
           style={{ backgroundColor: result.hex }}
         />
         <div className="text-center md:text-left space-y-2">
@@ -147,12 +147,6 @@ export function FeedbackClient() {
   if (submitted) {
     return (
       <div className="flex min-h-screen w-full flex-col items-center justify-center bg-background py-20 px-6 animate-in fade-in duration-700">
-        <div className="text-center space-y-6 max-w-lg">
-          <div className="flex justify-center mb-6">
-            <CheckCircle
-              weight="light"
-              className="mx-auto mb-4 h-12 w-12 text-primary"
-            />
           </div>
           <h1 className="font-serif text-3xl tracking-widest text-foreground">
             {t("successTitle")}

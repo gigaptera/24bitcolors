@@ -57,7 +57,7 @@ export function HarmonyDetailModal({
       />
 
       {/* Modal Content */}
-      <div className="relative z-10 w-full max-w-lg overflow-hidden rounded-xl border border-border bg-card shadow-2xl animate-in zoom-in-95 duration-300 p-6 md:p-10">
+      <div className="relative z-10 w-full max-w-lg overflow-hidden rounded-xl border border-border bg-card shadow-2xl animate-in zoom-in-95 duration-300 p-6 md:p-10 dark:shadow-[0_0_40px_rgba(255,255,255,0.1)]">
         {/* Close Button */}
         <button
           onClick={onClose}

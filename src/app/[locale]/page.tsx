@@ -46,7 +46,7 @@ export default function Home() {
             <Button
               asChild
               size="lg"
-              className="px-10 py-7 text-lg shadow-lg transition-all hover:scale-105 hover:shadow-xl"
+              className="px-10 py-7 text-lg shadow-lg transition-all hover:scale-105 hover:shadow-xl dark:shadow-none dark:hover:shadow-[0_0_30px_rgba(255,255,255,0.15)]"
             >
               <Link href="/diagnosis">{t("ctaSearchYourColor")}</Link>
             </Button>
