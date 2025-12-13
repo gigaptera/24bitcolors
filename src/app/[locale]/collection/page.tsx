@@ -30,6 +30,7 @@ export default async function HistoryPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "CollectionPage" });
   const cookieStore = await cookies();
   const anonymousId = cookieStore.get("anonymous_id")?.value;
 
