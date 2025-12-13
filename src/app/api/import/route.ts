@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 
 export async function POST(req: Request) {
   try {
-    const { shareId } = await req.json();
+    const { shareId, hex } = await req.json();
     const cookieStore = await cookies();
     const anonymousId = cookieStore.get("anonymous_id")?.value;
 
@@ -50,7 +50,19 @@ export async function POST(req: Request) {
 
     // 2. Prepare data for insertion
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const snapshotItems = shareData.snapshot_data as any[];
+    let snapshotItems = shareData.snapshot_data as any[];
+
+    // If hex is provided, filter for that specific color
+    if (hex) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      snapshotItems = snapshotItems.filter((item: any) => item.hex === hex);
+      if (snapshotItems.length === 0) {
+        return NextResponse.json(
+          { error: "Color not found in collection" },
+          { status: 404 }
+        );
+      }
+    }
 
     // Map snapshot items to diagnoses table structure
     // We treat these as new "diagnoses" but with source metadata

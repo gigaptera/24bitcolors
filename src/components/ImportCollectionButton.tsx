@@ -42,7 +42,7 @@ export function ImportCollectionButton({ shareId }: { shareId: string }) {
     return (
       <Button
         variant="outline"
-        className="mt-4 rounded-full px-6 gap-2 text-green-600 border-green-200 bg-green-50"
+        className="mt-4 rounded-none font-serif tracking-widest px-8 py-6 text-base gap-3 text-green-600 border-green-200 bg-green-50 min-w-[240px]"
         disabled
       >
         <Check className="w-4 h-4" />
@@ -54,12 +54,12 @@ export function ImportCollectionButton({ shareId }: { shareId: string }) {
   return (
     <Button
       variant="secondary"
-      className="mt-4 rounded-full px-6 gap-2"
+      className="mt-4 rounded-none font-serif tracking-widest px-8 py-6 text-base gap-3 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors duration-500 min-w-[240px]"
       onClick={handleImport}
       disabled={isLoading}
     >
       <Download className="w-4 h-4" />
-      {isLoading ? "Saving..." : t("saveToMyPalette")}
+      {isLoading ? t("generating") : t("saveToMyPalette")}
     </Button>
   );
 }

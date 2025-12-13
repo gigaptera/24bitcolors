@@ -3,10 +3,8 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import { ImportCollectionButton } from "@/components/ImportCollectionButton";
-import { Calendar, Hash } from "lucide-react";
-import { getNearestPoeticName } from "@/lib/colorNaming";
+import { SharedColorCard } from "@/components/SharedColorCard";
 import { Metadata } from "next";
-import { Swatches } from "@phosphor-icons/react/dist/ssr";
 
 type HistoryItem = {
   id: string;
@@ -81,53 +79,39 @@ export default async function SharePage({
   return (
     <div className="min-h-screen pt-32 pb-20 px-space-4 max-w-5xl mx-auto">
       {/* Header */}
-      <div className="flex flex-col items-center mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
-        <div className="inline-flex items-center justify-center p-3 rounded-full bg-secondary/50 mb-6">
-          <Swatches className="w-6 h-6 text-foreground/80" />
+      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-6 max-w-2xl">
+          <div className="space-y-4">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-foreground tracking-tight">
+              {t("shareTitle")}
+            </h1>
+            <p className="text-lg text-muted-foreground font-serif leading-relaxed max-w-lg">
+              {t("collection", { count: history.length })}
+            </p>
+          </div>
         </div>
-        <h1 className="text-3xl md:text-4xl font-serif text-foreground tracking-wide text-center mb-4">
-          {t("collection", { count: history.length })}
-        </h1>
 
-        <Button asChild className="mt-4 rounded-full px-8">
-          <Link href="/diagnosis">{tCommon("startDiagnosis")}</Link>
-        </Button>
-
-        <ImportCollectionButton shareId={id} />
+        <div className="flex flex-col items-center md:items-end gap-4 w-full md:w-auto">
+          <ImportCollectionButton shareId={id} />
+          <Button
+            asChild
+            variant="ghost"
+            className="rounded-none font-serif text-muted-foreground hover:text-foreground"
+          >
+            <Link href="/diagnosis">{tCommon("startDiagnosis")}</Link>
+          </Button>
+        </div>
       </div>
 
       {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         {history.map((item, index) => (
-          <Link
+          <SharedColorCard
             key={item.id}
-            href={`/result/${item.groupSlug}?hex=${item.hex.replace("#", "")}`}
-            className="group relative flex flex-col items-center p-8 bg-card/50 backdrop-blur-sm border border-border/40 rounded-none overflow-hidden hover:border-border/80 hover:bg-card/80 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 dark:hover:shadow-[var(--shadow-floating)] hover:-translate-y-1"
-            style={{
-              animationDelay: `${index * 50}ms`,
-            }}
-          >
-            <div
-              className="w-32 h-32 rounded-full shadow-2xl mb-6 border border-white/10 group-hover:scale-105 transition-transform duration-500"
-              style={{ backgroundColor: item.hex }}
-            />
-            <div className="text-center space-y-2 w-full">
-              <h3 className="text-xl font-serif tracking-wide text-foreground group-hover:text-primary transition-colors">
-                {item.poeticName}
-              </h3>
-              <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground font-mono opacity-70">
-                <span className="flex items-center gap-1">
-                  <Hash className="w-3 h-3" />
-                  {item.hex.replace("#", "")}
-                </span>
-                <span className="w-1 h-1 rounded-full bg-border" />
-                <span className="flex items-center gap-1">
-                  <Calendar className="w-3 h-3" />
-                  {new Date(item.created_at).toLocaleDateString()}
-                </span>
-              </div>
-            </div>
-          </Link>
+            item={item}
+            shareId={id}
+            index={index}
+          />
         ))}
       </div>
     </div>
