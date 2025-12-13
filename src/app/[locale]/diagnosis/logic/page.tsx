@@ -45,7 +45,7 @@ export default function DiagnosisLogicPage() {
             <h2 className="font-serif text-2xl tracking-wide text-center mb-6">
               {t("titleTransparency")}
             </h2>
-            <p className="text-muted-foreground leading-loose text-justify font-light">
+            <p className="text-muted-foreground leading-loose text-left font-light">
               {t("bodyTransparency")}
             </p>
           </div>
@@ -60,7 +60,7 @@ export default function DiagnosisLogicPage() {
             <h2 className="font-serif text-2xl tracking-wide text-center mb-6">
               {t("titleColorSpace")}
             </h2>
-            <p className="text-muted-foreground leading-loose text-justify font-light">
+            <p className="text-muted-foreground leading-loose text-left font-light">
               {t("bodyColorSpace")}
             </p>
             <div className="pt-6">
@@ -84,7 +84,7 @@ export default function DiagnosisLogicPage() {
             <h2 className="font-serif text-2xl tracking-wide text-center mb-6">
               {t("titleAdaptive")}
             </h2>
-            <p className="text-muted-foreground leading-loose text-justify font-light">
+            <p className="text-muted-foreground leading-loose text-left font-light">
               {t("bodyAdaptive")}
             </p>
             <div className="pt-6">
@@ -111,7 +111,7 @@ export default function DiagnosisLogicPage() {
             <h2 className="font-serif text-2xl tracking-wide text-center mb-6">
               {t("titleEvolution")}
             </h2>
-            <p className="text-muted-foreground leading-loose text-justify font-light">
+            <p className="text-muted-foreground leading-loose text-left font-light">
               {t("bodyEvolution")}
             </p>
             <div className="pt-6">
