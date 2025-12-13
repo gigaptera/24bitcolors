@@ -93,6 +93,7 @@ export function DiagnosisApp() {
         localStorage.setItem("lastDiagnosisId", diagnosisId);
 
         // Fire-and-forget API call with client-provided ID
+        // Fire-and-forget API call with client-provided ID
         fetch("/api/diagnosis", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -108,7 +109,16 @@ export function DiagnosisApp() {
             locale: navigator.language,
           }),
           keepalive: true, // Survives page navigation
-        }).catch((e) => console.error("Diagnosis save failed", e));
+        })
+          .then(async (res) => {
+            if (!res.ok) {
+              const errorText = await res.text();
+              console.error("Diagnosis save failed:", res.status, errorText);
+            } else {
+              console.log("Diagnosis saved successfully");
+            }
+          })
+          .catch((e) => console.error("Diagnosis save network error", e));
 
         // Navigate to Result Page immediately (no waiting)
         router.push(`/result/${groupSlug}?hex=${safeHex}&from_diagnosis=true`);

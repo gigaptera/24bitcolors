@@ -27,6 +27,11 @@ export async function POST(request: NextRequest) {
 
     // Cookie takes precedence
     const cookieId = request.cookies.get("anonymous_id")?.value;
+    console.log(
+      "[API] Diagnosis POST. Cookie:",
+      cookieId ? "Found" : "Missing"
+    );
+
     const anonymous_id = cookieId || body.anonymous_id;
 
     // Validate required fields
