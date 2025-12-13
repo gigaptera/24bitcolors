@@ -80,18 +80,18 @@ export default async function SharePage({
     <div className="min-h-screen pt-40 pb-32 px-space-4 max-w-5xl mx-auto">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
-        <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-6 max-w-2xl">
+        <div className="flex flex-col items-start text-left space-y-6 max-w-2xl">
           <div className="space-y-4">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-foreground tracking-tight">
               {t("shareTitle")}
             </h1>
-            <p className="text-lg text-muted-foreground font-serif leading-relaxed max-w-lg">
+            <p className="text-lg text-muted-foreground font-serif leading-relaxed max-w-lg text-left">
               {t("collection", { count: history.length })}
             </p>
           </div>
         </div>
 
-        <div className="flex flex-col items-center md:items-end gap-4 w-full md:w-auto">
+        <div className="flex flex-col items-end gap-4 w-full md:w-auto">
           {/* Actions removed as per user request (single bookmark focused) */}
         </div>
       </div>

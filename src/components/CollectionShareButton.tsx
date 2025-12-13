@@ -76,7 +76,7 @@ export function CollectionShareButton() {
               id="link"
               defaultValue={shareUrl}
               readOnly
-              className="font-mono text-sm h-14 px-6 rounded-none border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 focus-visible:ring-0 focus-visible:border-neutral-400 transition-colors"
+              className="font-mono text-sm h-14 px-0 rounded-none border-0 border-b border-neutral-300 dark:border-neutral-700 bg-transparent focus-visible:ring-0 focus-visible:border-neutral-900 dark:focus-visible:border-neutral-100 transition-colors"
               placeholder={isLoading ? t("generating") : ""}
             />
           </div>

@@ -73,12 +73,12 @@ export default function CollectionPage() {
     <div className="min-h-screen pt-32 pb-20 px-space-4 max-w-5xl mx-auto">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
-        <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-6 max-w-3xl">
+        <div className="flex flex-col items-start text-left space-y-6 max-w-3xl">
           <div className="space-y-4">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-foreground tracking-tight">
               {t("title")}
             </h1>
-            <p className="text-muted-foreground font-serif leading-relaxed text-balance max-w-xl">
+            <p className="text-muted-foreground font-serif leading-relaxed text-balance max-w-xl text-left">
               {t("description")}
             </p>
           </div>
