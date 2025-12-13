@@ -1,41 +1,70 @@
-import { cookies } from "next/headers";
-import { createClient } from "@supabase/supabase-js";
-import { Link } from "@/i18n/routing"; // Use i18n redirect
-import { getTranslations } from "next-intl/server";
+"use client";
+
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import { getNearestPoeticName } from "@/lib/colorNaming";
 import { Calendar, Hash } from "lucide-react";
 import { CollectionShareButton } from "@/components/CollectionShareButton";
-import { Button } from "@/components/ui/button"; // Keep Button for the "no history" case
+import { Button } from "@/components/ui/button";
+import { Swatches } from "@phosphor-icons/react";
+import { useEffect, useState } from "react";
 
-import { Metadata } from "next";
+type HistoryItem = {
+  id: string;
+  hex: string;
+  created_at: string;
+  poeticName?: string;
+  groupSlug?: string;
+};
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "CollectionPage" });
-  return {
-    title: t("title"),
-    description: t("description"),
-  };
-}
+export default function CollectionPage() {
+  const t = useTranslations("CollectionPage");
+  const [history, setHistory] = useState<HistoryItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-export const dynamic = "force-dynamic";
+  useEffect(() => {
+    const fetchHistory = async () => {
+      try {
+        const res = await fetch("/api/collection");
+        if (!res.ok) throw new Error("Failed to fetch history");
 
-export default async function HistoryPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "CollectionPage" });
-  const cookieStore = await cookies();
-  const anonymousId = cookieStore.get("anonymous_id")?.value;
+        const data = await res.json();
+        const rawHistory = data.history || [];
 
-  if (!anonymousId) {
-    // If no anonymous_id, no history to show.
+        // Enrich with poetic names on client side
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const enriched = rawHistory.map((item: any) => {
+          const info = getNearestPoeticName(item.hex);
+          return {
+            ...item,
+            poeticName: info.fullTitle,
+            groupSlug: info.groupSlug,
+          };
+        });
+
+        setHistory(enriched);
+      } catch (error) {
+        console.error("Failed to load collection:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchHistory();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen pt-32 pb-20 px-space-4 max-w-5xl mx-auto flex flex-col items-center justify-center">
+        <div className="animate-pulse flex flex-col items-center gap-4">
+          <div className="h-4 w-32 bg-secondary/50 rounded"></div>
+          <div className="h-8 w-48 bg-secondary/50 rounded"></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (history.length === 0) {
     return (
       <div className="min-h-screen pt-32 pb-20 px-space-4 max-w-5xl mx-auto flex flex-col items-center justify-center">
         <h1 className="text-xl md:text-2xl font-serif text-muted-foreground mb-4">
@@ -48,49 +77,23 @@ export default async function HistoryPage({
     );
   }
 
-  let historyData = null;
-
-  try {
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-    if (supabaseUrl && supabaseAnonKey) {
-      const supabase = createClient(supabaseUrl, supabaseAnonKey);
-      const { data, error } = await supabase
-        .from("diagnoses")
-        .select("id, hex, created_at")
-        .eq("anonymous_id", anonymousId)
-        .order("created_at", { ascending: false });
-
-      if (!error) {
-        historyData = data;
-      } else {
-        console.error("Supabase fetch error:", error);
-      }
-    } else {
-      console.error("Supabase environment variables missing");
-    }
-  } catch (err) {
-    console.error("Unexpected error in CollectionPage:", err);
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const history = (historyData || []).map((item: any) => {
-    const info = getNearestPoeticName(item.hex);
-    return {
-      ...item,
-      poeticName: info.fullTitle,
-      groupSlug: info.groupSlug,
-    };
-  });
-
   return (
     <div className="min-h-screen pt-32 pb-20 px-space-4 max-w-5xl mx-auto">
-      {/* Header Section Removed as per request */}
+      {/* Header */}
+      <div className="flex flex-col items-center mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="inline-flex items-center justify-center p-3 rounded-full bg-secondary/50 mb-6">
+          <Swatches className="w-6 h-6 text-foreground/80" />
+        </div>
+        <h1 className="text-3xl md:text-4xl font-serif text-foreground tracking-wide text-center mb-4">
+          {t("title")}
+        </h1>
+        <p className="text-muted-foreground text-center max-w-md mx-auto mb-8 font-serif leading-relaxed">
+          {t("description")}
+        </p>
 
-      {/* Action Bar */}
-      <div className="flex justify-end mb-6 animate-in fade-in slide-in-from-bottom-2 duration-500">
-        <CollectionShareButton />
+        <div className="flex gap-4">
+          <CollectionShareButton />
+        </div>
       </div>
 
       {/* Grid Section */}
