@@ -18,7 +18,6 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
   }, [pathname, searchParams]);
 
   return (
-    // @ts-expect-error React 19 type conflict with react-lenis
     <ReactLenis
       ref={lenisRef}
       root
