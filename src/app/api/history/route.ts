@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@supabase/supabase-js";
 
 export const dynamic = "force-dynamic";
 
@@ -16,17 +16,25 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    if (!supabase) {
-      console.error("Supabase client is not configured");
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+    const supabaseServiceKey =
+      process.env.SUPABASE_SERVICE_ROLE_KEY ||
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+      "";
+
+    if (!supabaseUrl || !supabaseServiceKey) {
+      console.error("Supabase credentials missing");
       return NextResponse.json(
         { error: "Service unavailable" },
         { status: 503 }
       );
     }
 
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
     const { data, error } = await supabase
       .from("diagnoses")
-      .select("id, hex, created_at") // 必要なカラムのみ取得
+      .select("id, hex, created_at")
       .eq("anonymous_id", anonymousId)
       .order("created_at", { ascending: false })
       .limit(limit);
