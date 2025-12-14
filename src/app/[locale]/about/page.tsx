@@ -38,7 +38,7 @@ export default function AboutPage() {
     url: "https://24bitcolors.com/about",
     mainEntity: {
       "@type": "Organization",
-      name: "24bitColors",
+      name: t("jsonLdName"),
       url: "https://24bitcolors.com",
       logo: "https://24bitcolors.com/icon.png",
       description: t("organizationDescription"),

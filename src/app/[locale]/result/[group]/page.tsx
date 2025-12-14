@@ -47,7 +47,7 @@ export async function generateMetadata({
   // Fallback if no valid color found
   return {
     title: `${readableGroup} | 24bitColors`,
-    description: `${readableGroup}の色域に関する診断結果ページ。`, // Fallback
+    description: t("descBelongTo", { groupName: readableGroup }),
   };
 }
 
