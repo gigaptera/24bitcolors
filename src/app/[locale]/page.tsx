@@ -19,10 +19,7 @@ export default function Home() {
 
         {/* LEFT: Massive Heading (The Exhibit) */}
         <div className="md:col-span-7 flex flex-col justify-center items-start z-10">
-          <h1
-            className="font-serif text-[15vw] md:text-[9vw] leading-[0.9] tracking-tighter text-foreground mix-blend-difference animate-fade-in opacity-0"
-            style={{ animationDelay: "0.2s" }}
-          >
+          <h1 className="font-serif text-[15vw] md:text-[9vw] leading-[0.9] tracking-tighter text-foreground mix-blend-difference">
             FIND
             <br />
             YOUR
