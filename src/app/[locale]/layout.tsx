@@ -97,27 +97,10 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   // Providing all messages to the client
   // side is the easiest way to get started
-  const allMessages = await getMessages();
 
-  // Pick only essential namespaces to reduce HTML size (LCP optimization)
-  // Diagnosis and Logic texts are huge and only needed in specific routes
-  const essentialKeys = [
-    "Common",
-    "Metadata",
-    "Home",
-    "About",
-    "Contact",
-    "Privacy",
-    "Terms",
-    "Collection",
-    "History",
-    "Result", // Needed for shared components
-  ];
-
-  // Simple pick implementation
-  const messages = Object.fromEntries(
-    Object.entries(allMessages).filter(([key]) => essentialKeys.includes(key))
-  );
+  // Providing all messages to the client
+  // side is the easiest way to get started
+  const messages = await getMessages();
 
   return (
     <html lang={locale}>
