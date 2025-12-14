@@ -14,7 +14,6 @@ import "@/app/globals.css";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { GoogleAdsense } from "@/components/GoogleAdsense";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { SmoothScroll } from "@/components/SmoothScroll";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -127,12 +126,10 @@ export default async function LocaleLayout({ children, params }: Props) {
       >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>
-            <SmoothScroll>
-              <Header />
-              <Breadcrumbs />
-              <div className="flex-1 flex flex-col w-full">{children}</div>
-              <Footer />
-            </SmoothScroll>
+            <Header />
+            <Breadcrumbs />
+            <div className="flex-1 flex flex-col w-full">{children}</div>
+            <Footer />
           </ThemeProvider>
         </NextIntlClientProvider>
 
