@@ -19,6 +19,7 @@
   "CollectionPage": {
     "title": "My Palette",
     "description": "Your color journey. View your personal collection of colors.",
+    "ogpSubtitle": "Your Personal Palette",
     "noHistory": "No collection yet",
     "viewAllHistory": "View All Collections"
   },
@@ -68,16 +69,19 @@
     "visionBody1": "The purpose of this project goes beyond just a diagnostic tool.\nWe aim to accumulate data on \"colors\" chosen by people around the world\nand build a database of human color preferences.",
     "visionBody2": "What do people find beautiful across borders and language barriers?\nThrough the common language of \"color\",\nwe visualize the diversity and universality of human sensibilities.\nThat is the future we envision.",
     "ctaStart": "Start Diagnosis",
-    "ctaBack": "Back to Top"
+    "ctaBack": "Back to Top",
+    "ogpSubtitle": "Find Your True Color"
   },
   "Contact": {
     "title": "Contact",
     "intro": "If you have any questions, requests, or bug reports about 24bitColors, please feel free to contact us via the email address below.",
+    "ogpSubtitle": "Contact Us",
     "emailLabel": "Email",
     "note": "* Depending on the content of your inquiry, it may take some time to reply or we may not be able to reply."
   },
   "Privacy": {
     "title": "Privacy Policy",
+    "ogpSubtitle": "Important Documents",
     "section1Title": "Purpose of Use of Personal Information",
     "section1Body": "On this site, you may be asked to enter personal information such as your name and email address when making inquiries or commenting on articles. The acquired personal information will be used to contact you by email etc. for answers to inquiries or necessary information, and will not be used for any other purpose.",
     "section2Title": "About Advertising",
@@ -91,6 +95,7 @@
   },
   "Terms": {
     "title": "Terms of Service",
+    "ogpSubtitle": "Terms of Service",
     "intro": "These Terms of Service (hereinafter referred to as \"Terms\") set forth the terms and conditions for using the services (hereinafter referred to as the \"Service\") provided on this website by 24bitColors (hereinafter referred to as the \"Site\"). Registered users (hereinafter referred to as \"Users\") shall use the Service in accordance with these Terms.",
     "article1Title": "Article 1 (Applicability)",
     "article1Body": "These Terms shall apply to all relationships related to the use of the Service between the User and the Site.",
@@ -127,10 +132,12 @@
     "titleEvolution": "Evolving with Feedback",
     "bodyEvolution": "This algorithm is not the final form. We adjust logic daily in response to feedback from users such as \"I want to choose more achromatic colors\" or \"Questions are too similar\". Your diagnosis results and impressions directly lead to accuracy improvement for someone else. Our exploration of color continues to evolve with you.",
     "linkFeedback": "Send Detailed Feedback",
-    "backData": "← BACK TO DIAGNOSIS"
+    "backData": "← BACK TO DIAGNOSIS",
+    "ogpSubtitle": "The Logic"
   },
   "Diagnosis": {
     "title": "Free Color Diagnosis Test",
+    "ogpSubtitle": "Free Color Personality Test",
     "description": "Choose the color that feels intuitively comfortable to identify your color sense. Takes less than 3 minutes. Find your favorite color from 16.77 million colors with a free diagnosis requiring no registration.",
     "back": "← Back",
     "questionLabel": "Which color do you prefer?"
@@ -190,6 +197,7 @@
     "description": "Why OKLCH instead of HSL or RGB? Scientific basis for 'correct color diagnosis' brought by the latest color space faithful to human perception.",
     "back": "← BACK TO OVERVIEW",
     "heading": "THE SCIENCE OF <br /> OKLCH & OKLAB",
+    "ogpSubtitle": "Color Science",
     "introLarge": "Putting the human 'eye' directly into a formula.",
     "introSmall": "At the heart of 24bitColors are the latest color spaces born in 2020: 'OKLCH' and 'OKLAB'.\nThis is not just a new color picker. It is a revolutionary event where computers can finally feel color in the same way as humans.",
     "sec1Label": "01. PERCEPTION GAP",
@@ -220,6 +228,7 @@
     "description": "Unique dialogue engine using Bayesian inference and information theory. The full picture of the statistical process to identify your preference from 16.77 million colors.",
     "back": "← BACK TO OVERVIEW",
     "heading": "ADAPTIVE <br /> ALGORITHM",
+    "ogpSubtitle": "The Logic",
     "introLarge": "Catching your 'subconscious' with mathematics.",
     "introSmall": "This diagnosis is not just a personality test or fortune telling.\nIt is an interactive search engine that applies probability statistics and information theory to keep calculating the shortest route to the 'ideal color' in your brain.",
     "sec1Label": "01. THE MAP & SENSORS",
@@ -252,6 +261,7 @@
     "description": "We accept detailed feedback to improve diagnosis accuracy. Your data will evolve the next generation algorithm.",
     "heading": "FEEDBACK",
     "subHeading": "Help us evolve",
+    "ogpSubtitle": "Evolution",
     "intro": "Was the diagnosis accurate? Is the algorithm biased? Please verify the result details and send us your data.",
     "resultNotFoundTitle": "No Diagnosis History",
     "resultNotFoundDesc": "Please perform a color diagnosis first to send feedback.",

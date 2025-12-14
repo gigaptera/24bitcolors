@@ -17,6 +17,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${t("title")} | 24bitColors`,
     description: t("description"),
+    openGraph: {
+      title: `${t("title")} | 24bitColors`,
+      description: t("description"),
+      images: [
+        `/api/og?type=page&title=${encodeURIComponent(
+          t("title")
+        )}&subtitle=${encodeURIComponent(t("ogpSubtitle"))}`,
+      ],
+    },
   };
 }
 

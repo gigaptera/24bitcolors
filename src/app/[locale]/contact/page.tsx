@@ -12,8 +12,17 @@ export async function generateMetadata({ params }: Props) {
   return {
     title: t("title"),
     description: t("intro"), // Using intro as description for now or create specific key
+    openGraph: {
+      title: t("title"),
+      description: t("intro"),
+      images: [
+        `/api/og?type=page&title=${encodeURIComponent(
+          t("title")
+        )}&subtitle=${encodeURIComponent(t("ogpSubtitle"))}`,
+      ],
+    },
     robots: {
-      index: false,
+      index: false, // Contact page generally no index, but OGP is still good for sharing if needed
     },
   };
 }

@@ -14,8 +14,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "About" });
 
   return {
-    title: t("title"),
-    description: t("description"),
+    openGraph: {
+      title: t("title"),
+      description: t("description"),
+      images: [
+        `/api/og?type=page&title=${encodeURIComponent(
+          t("title")
+        )}&subtitle=${encodeURIComponent(t("ogpSubtitle"))}`,
+      ],
+    },
     alternates: {
       canonical: "/about",
     },
