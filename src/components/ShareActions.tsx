@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 
 import {
   XLogo,
-  PinterestLogo,
   InstagramLogo,
+  DownloadSimple,
   Link as LinkIcon,
   Check,
   ShareNetwork,
@@ -45,13 +45,7 @@ export function ShareActions({ url, text, onShareImage }: ShareActionsProps) {
   };
 
   /* Removed handleFacebookShare as button is removed */
-
-  const handlePinterestShare = () => {
-    const shareUrl = `http://pinterest.com/pin/create/button/?url=${encodeURIComponent(
-      url
-    )}&description=${encodeURIComponent(text)}`;
-    openWindow(shareUrl);
-  };
+  /* Removed handlePinterestShare as button is removed */
 
   // Web Share API Support
   const [isWebShareSupported, setIsWebShareSupported] = useState(false);
@@ -112,22 +106,22 @@ export function ShareActions({ url, text, onShareImage }: ShareActionsProps) {
         <XLogo weight="light" className={iconClass} />
       </button>
 
-      {/* Pinterest */}
-      <button
-        onClick={handlePinterestShare}
-        className={btnClass}
-        aria-label="Share on Pinterest"
-      >
-        <PinterestLogo weight="light" className={iconClass} />
-      </button>
-
       {/* Instagram (Triggers Save Image) */}
       <button
         onClick={onShareImage}
         className={btnClass}
-        aria-label="Share on as Image"
+        aria-label="Share on Instagram"
       >
         <InstagramLogo weight="light" className={iconClass} />
+      </button>
+
+      {/* Save Image */}
+      <button
+        onClick={onShareImage}
+        className={btnClass}
+        aria-label="Save Image"
+      >
+        <DownloadSimple weight="light" className={iconClass} />
       </button>
 
       {/* Copy Link */}
