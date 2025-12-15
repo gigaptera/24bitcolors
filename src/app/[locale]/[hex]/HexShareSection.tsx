@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ShareActions } from "@/components/ShareActions";
 import { ShareCard } from "@/components/ShareCard";
-// Helper to convert hex to Oklch for ShareCard
 import { converter, parse } from "culori";
 import { OklchColor } from "@/lib/oklch";
 
@@ -14,6 +14,7 @@ interface HexShareSectionProps {
 }
 
 export function HexShareSection({ hex }: HexShareSectionProps) {
+  const t = useTranslations("Share");
   const [showShareCard, setShowShareCard] = useState(false);
 
   // Ensure hex has # prefix
@@ -35,7 +36,8 @@ export function HexShareSection({ hex }: HexShareSectionProps) {
     <>
       <ShareActions
         url={`https://24bitcolors.com/${hex.replace("#", "")}`}
-        onShare={() => setShowShareCard(true)}
+        text={t("shareTextGeneric", { hex: safeHex })}
+        onShareImage={() => setShowShareCard(true)}
       />
 
       {showShareCard && (
