@@ -5,9 +5,9 @@ import { useState, useEffect } from "react";
 import {
   XLogo,
   PinterestLogo,
+  InstagramLogo,
   Link as LinkIcon,
   Check,
-  DownloadSimple,
   ShareNetwork,
 } from "@phosphor-icons/react";
 // import { useTranslations } from "next-intl"; // Not used currently
@@ -121,13 +121,13 @@ export function ShareActions({ url, text, onShareImage }: ShareActionsProps) {
         <PinterestLogo weight="light" className={iconClass} />
       </button>
 
-      {/* Save Image */}
+      {/* Instagram (Triggers Save Image) */}
       <button
         onClick={onShareImage}
         className={btnClass}
-        aria-label="Save Image"
+        aria-label="Share on as Image"
       >
-        <DownloadSimple weight="light" className={iconClass} />
+        <InstagramLogo weight="light" className={iconClass} />
       </button>
 
       {/* Copy Link */}
