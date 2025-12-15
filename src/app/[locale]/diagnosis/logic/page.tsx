@@ -15,10 +15,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "DiagnosisLogic" });
 
   return {
-    title: `${t("title")} | 24bitColors`,
+    title: t("title"),
     description: t("description"),
     openGraph: {
-      title: `${t("title")} | 24bitColors`,
+      title: t("title"),
       description: t("description"),
       images: [
         `/api/og?type=page&title=${encodeURIComponent(
