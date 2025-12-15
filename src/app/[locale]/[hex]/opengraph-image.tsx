@@ -41,95 +41,51 @@ export default async function Image({ params }: { params: { hex: string } }) {
           width: "100%",
           display: "flex",
           flexDirection: "column",
-          backgroundColor: "#ffffff",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "#fcfcfc", // Slightly off-white for paper feel
         }}
       >
-        {/* Color Area - Top 80% */}
+        {/* The Exhibit: Color Circle */}
         <div
           style={{
-            flex: 4, // 80%
+            display: "flex", // Needed for children
+            width: 480,
+            height: 480,
+            borderRadius: "50%",
             backgroundColor: hexCode,
+            boxShadow: "0 40px 80px -20px rgba(0,0,0,0.3)", // Deep shadow
+            marginBottom: 60,
+          }}
+        />
+
+        {/* Typography: Hex Code */}
+        <div
+          style={{
+            fontSize: 72,
+            fontFamily: '"Courier New", Courier, monospace', // Monospace for precision
+            color: "#1a1a1a",
+            letterSpacing: "0.15em",
+            marginBottom: 20,
             display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            position: "relative",
           }}
         >
-          {/* Subtle overlay/gradient effect cannot be easily done with CSS gradients in OG sometimes, 
-              but distinct flat color is better for sharing usually. 
-              Let's add a "Pigment No." text if it's readable? 
-              Actually, keep it clean. Just pure color.
-           */}
+          {hexCode.split("").join(" ")}
         </div>
 
-        {/* Info Area - Bottom 20% */}
+        {/* Typography: Brand */}
         <div
           style={{
-            flex: 1, // 20%
+            fontSize: 24,
+            fontFamily: 'Georgia, "Times New Roman", serif', // Serif for elegance
+            color: "#808080",
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
             display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: "0 60px",
-            backgroundColor: "#ffffff",
-            borderTop: "1px solid #e5e5e5",
+            marginTop: 40,
           }}
         >
-          {/* Left: Hex Code */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <span
-              style={{
-                fontSize: 64,
-                fontFamily: "serif", // Next.og supports standard fonts, custom fonts need loading.
-                // Sans-serif is safer default, but let's try serif for the aesthetic.
-                fontWeight: "bold",
-                color: "#000000",
-                lineHeight: 1,
-              }}
-            >
-              {hexCode}
-            </span>
-            <span
-              style={{
-                fontSize: 24,
-                fontFamily: "sans-serif",
-                color: "#666666",
-                marginTop: 10,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-              }}
-            >
-              PIGMENT NO.
-            </span>
-          </div>
-
-          {/* Right: Brand */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "#000",
-              color: "#fff",
-              padding: "10px 20px",
-              borderRadius: "50px", // Pill shape
-            }}
-          >
-            <span
-              style={{
-                fontSize: 24,
-                fontWeight: "bold",
-                fontFamily: "sans-serif",
-              }}
-            >
-              24bitColors
-            </span>
-          </div>
+          24bitColors
         </div>
       </div>
     ),

@@ -35,86 +35,73 @@ export default async function Image() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#fafafa",
-          fontFamily: "serif",
+          backgroundColor: "#fcfcfc", // Slightly off-white
           position: "relative",
         }}
       >
-        {/* Main Content - All elements aligned to 508px width */}
+        {/* Title */}
+        <div
+          style={{
+            fontSize: 100,
+            fontWeight: 400,
+            color: "#1a1a1a",
+            letterSpacing: "0.05em",
+            marginBottom: 60,
+            fontFamily: "Georgia, 'Times New Roman', Times, serif",
+          }}
+        >
+          24bitColors
+        </div>
+
+        {/* The Exhibit: A Grid of Colors */}
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            width: 508,
+            gap: 24,
+            padding: 40,
+            backgroundColor: "#fff",
+            boxShadow: "0 20px 60px -10px rgba(0,0,0,0.15)", // Card shadow
+            borderRadius: 4,
           }}
         >
-          {/* Logo / Title - Sized to fit 508px */}
-          <div
-            style={{
-              fontSize: 90,
-              fontWeight: 400,
-              color: "#1a1a1a",
-              letterSpacing: "0.02em",
-              marginBottom: 21,
-              fontFamily: "Georgia, 'Times New Roman', Times, serif",
-              width: "100%",
-            }}
-          >
-            24bitColors
-          </div>
+          {colorGroups.map((group, groupIndex) => (
+            <div
+              key={groupIndex}
+              style={{
+                display: "flex",
+                flexDirection: "column", // Vertical stacks looks like palettes
+                width: 60,
+                gap: 8,
+              }}
+            >
+              {group.map((color, colorIndex) => (
+                <div
+                  key={colorIndex}
+                  style={{
+                    width: 60,
+                    height: 60,
+                    backgroundColor: color,
+                    borderRadius: "50%", // Circles instead of squares
+                  }}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
 
-          {/* Tagline - Sized to fit 508px */}
-          <div
-            style={{
-              fontSize: 24,
-              color: "#808080",
-              letterSpacing: "0.32em",
-              fontWeight: 400,
-              textTransform: "uppercase",
-              fontFamily:
-                "-apple-system, BlinkMacSystemFont, Inter, sans-serif",
-              marginBottom: 34,
-              width: "100%",
-            }}
-          >
-            Find Your True Color
-          </div>
-
-          {/* 24-Hue Color Grid (6 groups of 2x2) */}
-          <div
-            style={{
-              display: "flex",
-              gap: 20,
-            }}
-          >
-            {colorGroups.map((group, groupIndex) => (
-              <div
-                key={groupIndex}
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  width: 68,
-                  height: 68,
-                  gap: 4,
-                  backgroundColor: "#fafafa",
-                  padding: 2,
-                }}
-              >
-                {group.map((color, colorIndex) => (
-                  <div
-                    key={colorIndex}
-                    style={{
-                      width: 30,
-                      height: 30,
-                      backgroundColor: color,
-                      borderRadius: 2,
-                    }}
-                  />
-                ))}
-              </div>
-            ))}
-          </div>
+        {/* Footer Tagline */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: 60,
+            fontSize: 24,
+            fontFamily: '"Courier New", Courier, monospace',
+            color: "#808080",
+            letterSpacing: "0.3em",
+            textTransform: "uppercase",
+          }}
+        >
+          Digital Color Museum
         </div>
       </div>
     ),
