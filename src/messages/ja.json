@@ -144,7 +144,7 @@
     "descBelongTo": "あなたは「{groupName}」という\n色の星雲に属しています。",
     "feedbackQuestion": "この診断結果はいかがでしたか？",
     "msgSubmitted": "✓ フィードバックを送信しました",
-    "btnSubmit": "評価してシェアへ進む",
+    "btnSubmit": "フィードバックを送信",
     "btnDetail": "詳細を見る",
     "feedbackRequest": "アルゴリズム精度向上のために\n詳細なフィードバックも歓迎します",
     "linkFeedbackForm": "詳細フィードバックフォームへ →",

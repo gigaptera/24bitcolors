@@ -60,11 +60,11 @@ export function ShareActions({ url, text, onShareImage }: ShareActionsProps) {
 
   // Button base class
   const btnClass =
-    "group flex h-12 w-12 items-center justify-center border border-foreground/20 bg-background text-foreground transition-all duration-300 hover:bg-foreground hover:text-background hover:border-foreground active:scale-95";
-  const iconClass = "h-5 w-5 transition-transform group-hover:scale-110";
+    "group flex h-10 w-10 items-center justify-center rounded-sm bg-foreground/5 text-foreground transition-all duration-300 hover:bg-foreground hover:text-background active:scale-95";
+  const iconClass = "h-4 w-4 transition-transform group-hover:scale-110";
 
   return (
-    <div className="flex w-full items-center justify-center gap-3 py-6 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
+    <div className="flex w-full items-center justify-center gap-2 py-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
       {/* X (Twitter) */}
       <button
         onClick={handleXShare}
