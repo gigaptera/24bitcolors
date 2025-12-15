@@ -69,8 +69,8 @@ export function ShareActions({ url, text, onShareImage }: ShareActionsProps) {
     const checkSupport = () => {
       if (
         typeof navigator !== "undefined" &&
-        navigator.share &&
-        navigator.canShare
+        "share" in navigator &&
+        "canShare" in navigator
       ) {
         setIsWebShareSupported(true);
       }
