@@ -129,21 +129,19 @@ export function ResultInteraction({
               <p className="font-serif text-sm">{t("msgSubmitted")}</p>
             </div>
           )}
-
-          {/* Additional Actions after submission */}
-          <div className="flex flex-col gap-0 w-full">
-            <Button
-              variant="outline"
-              className="btn-museum h-12 w-full text-xs tracking-[0.2em] uppercase border-foreground/20 hover:bg-foreground hover:text-background transition-colors"
-              asChild
-            >
-              <Link href={`/${safeHex.replace("#", "")}`}>
-                {t("btnDetail")}
-              </Link>
-            </Button>
-          </div>
         </div>
       )}
+
+      {/* Detail Button - ALWAYS VISIBLE */}
+      <div className="mb-12 w-full">
+        <Button
+          variant="outline"
+          className="btn-museum h-12 w-full text-xs tracking-[0.2em] uppercase border-foreground/20 hover:bg-foreground hover:text-background transition-colors"
+          asChild
+        >
+          <Link href={`/${safeHex.replace("#", "")}`}>{t("btnDetail")}</Link>
+        </Button>
+      </div>
 
       {/* Share Card Modal */}
       {showShareCard && resultColor && (
