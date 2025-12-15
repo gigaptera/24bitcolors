@@ -4,9 +4,7 @@ import { useState, useEffect } from "react";
 
 import {
   XLogo,
-  FacebookLogo,
   PinterestLogo,
-  InstagramLogo,
   Link as LinkIcon,
   Check,
   DownloadSimple,
@@ -119,15 +117,6 @@ export function ShareActions({ url, text, onShareImage }: ShareActionsProps) {
         <XLogo weight="light" className={iconClass} />
       </button>
 
-      {/* Facebook */}
-      <button
-        onClick={handleFacebookShare}
-        className={btnClass}
-        aria-label="Share on Facebook"
-      >
-        <FacebookLogo weight="light" className={iconClass} />
-      </button>
-
       {/* Pinterest */}
       <button
         onClick={handlePinterestShare}
@@ -135,15 +124,6 @@ export function ShareActions({ url, text, onShareImage }: ShareActionsProps) {
         aria-label="Share on Pinterest"
       >
         <PinterestLogo weight="light" className={iconClass} />
-      </button>
-
-      {/* Instagram (Triggers Save Image) */}
-      <button
-        onClick={onShareImage}
-        className={btnClass}
-        aria-label="Share on Instagram"
-      >
-        <InstagramLogo weight="light" className={iconClass} />
       </button>
 
       {/* Save Image */}
