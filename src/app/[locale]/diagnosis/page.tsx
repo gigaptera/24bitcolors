@@ -15,7 +15,6 @@ export async function generateMetadata({ params }: Props) {
     openGraph: {
       title: `${t("title")} | 24bitColors`,
       description: t("description"),
-      description: t("description"),
     },
   };
 }
