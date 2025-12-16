@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { PartytownSetup } from "@/components/PartytownSetup";
+import { GoogleAnalyticsPartytown } from "@/components/GoogleAnalyticsPartytown";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { NextIntlClientProvider } from "next-intl";
@@ -98,6 +99,9 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale}>
+      <head>
+        <PartytownSetup />
+      </head>
       <body
         className={`${inter.variable} ${notoSansJP.variable} font-sans antialiased min-h-screen flex flex-col`}
       >
@@ -117,7 +121,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         />
         <SpeedInsights />
         {process.env.NEXT_PUBLIC_GA_ID && (
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+          <GoogleAnalyticsPartytown gaId={process.env.NEXT_PUBLIC_GA_ID} />
         )}
         <GoogleAdsense
           pId={
