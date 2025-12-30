@@ -16,8 +16,9 @@ export async function generateColorInsight(
 ): Promise<ColorInsight | null> {
   const apiKey = process.env.GEMINI_API_KEY || "";
   if (!apiKey) {
-    console.warn("GEMINI_API_KEY is not set");
-    return null;
+    console.error("GEMINI_API_KEY is not set in environment variables");
+    // Throw error so API route can catch it and return 500 with message
+    throw new Error("GEMINI_API_KEY is not configured on server");
   }
 
   try {
@@ -60,10 +61,11 @@ export async function generateColorInsight(
       return JSON.parse(text) as ColorInsight;
     } catch (parseError) {
       console.error("Failed to parse Gemini JSON response:", text);
-      return null;
+      throw new Error("Failed to parse AI response as JSON");
     }
   } catch (error) {
     console.error("Gemini API Error details:", error);
-    return null;
+    // Re-throw to be caught by API route
+    throw error;
   }
 }
