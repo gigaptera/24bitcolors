@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { ColorInsight } from "@/lib/gemini";
+import type { ColorInsight } from "@/lib/gemini";
 import { Sparkles, Brain, Globe, BookOpen } from "lucide-react";
 
 interface ColorInsightSectionProps {
