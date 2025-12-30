@@ -178,7 +178,7 @@ export function ResultInteraction({
         </div>
       )}
 
-      <div className="mb-8 w-full flex flex-col items-center gap-4">
+      <div className="mb-8 w-full flex flex-col gap-4">
         {/* Compare Button - ONLY if diagnosis exists and not comparing self */}
         {diagnosisId &&
           myHex &&
@@ -188,7 +188,7 @@ export function ResultInteraction({
             hex.replace("#", "").toUpperCase() && (
             <Button
               variant="default"
-              className="w-64 h-12 text-xs tracking-[0.2em] uppercase bg-foreground text-background hover:bg-foreground/90 transition-all font-serif"
+              className="w-full h-12 text-xs tracking-[0.2em] uppercase bg-foreground text-background hover:bg-foreground/90 transition-all font-serif"
               asChild
             >
               <Link href={`/compare?target=${hex.replace("#", "")}`}>
@@ -199,7 +199,7 @@ export function ResultInteraction({
 
         <Button
           variant="outline"
-          className="h-12 w-64 text-xs tracking-[0.2em] uppercase border-foreground/20 hover:bg-foreground hover:text-background transition-colors"
+          className="h-12 w-full text-xs tracking-[0.2em] uppercase border-foreground/20 hover:bg-foreground hover:text-background transition-colors"
           asChild
         >
           <Link href={`/${safeHex.replace("#", "")}`}>{t("btnDetail")}</Link>
