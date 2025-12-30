@@ -120,73 +120,73 @@ export default function ComparePage() {
   });
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden pt-16 md:pt-0">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden pt-24 md:pt-0">
       <AmbientBackground hex={myHex} />
 
-      <main className="z-10 w-full max-w-4xl px-6 py-12 flex flex-col items-center text-center space-y-16">
+      <main className="z-10 w-full max-w-5xl px-8 py-16 flex flex-col items-center text-center space-y-24">
         {/* Header Section */}
-        <div className="space-y-6 animate-in fade-in slide-in-from-top-4 duration-1000">
-          <p className="text-xs font-mono tracking-[0.4em] uppercase text-muted-foreground/60">
+        <div className="space-y-8 animate-in fade-in slide-in-from-top-4 duration-1000">
+          <p className="text-xs font-mono tracking-[0.5em] uppercase text-muted-foreground/60">
             Color Resonance
           </p>
-          <h1 className="text-6xl md:text-8xl font-serif tracking-wide font-light">
+          <h1 className="text-7xl md:text-9xl font-serif tracking-wide font-light">
             {resonance?.score ?? 0}%
           </h1>
         </div>
 
         {/* Color Comparison Visualization */}
-        <div className="relative w-full max-w-3xl flex items-center justify-center min-h-[400px] md:min-h-[300px] animate-in fade-in zoom-in duration-1000 delay-200">
+        <div className="relative w-full max-w-4xl flex items-center justify-center min-h-[300px] md:min-h-[250px] animate-in fade-in zoom-in duration-1000 delay-200">
           {/* My Color (Left) */}
-          <div className="relative group flex flex-col items-center gap-6 transition-transform hover:scale-105 duration-700">
+          <div className="relative group flex flex-col items-center gap-8 transition-transform hover:scale-105 duration-700">
             <div className="relative">
               <div
-                className="w-40 h-40 md:w-56 md:h-56 rounded-full shadow-2xl border-4 border-background/50 transition-all duration-700"
+                className="w-32 h-32 md:w-40 md:h-40 rounded-full shadow-2xl border-4 border-background/50 transition-all duration-700"
                 style={{ backgroundColor: myHex }}
               />
               <div className="absolute inset-0 rounded-full ring-1 ring-white/10" />
             </div>
-            <p className="font-serif text-base md:text-lg tracking-wide text-foreground">
+            <p className="font-serif text-sm md:text-base tracking-wide text-foreground/80">
               {myName}
             </p>
           </div>
 
           {/* Connection Line */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="w-full max-w-md h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent" />
-          </div>
-
-          {/* Harmony Badge */}
-          <div className="absolute z-30 bg-background/90 backdrop-blur-md px-8 py-3 rounded-full border border-white/20 shadow-2xl animate-in zoom-in duration-700 delay-500">
-            <span className="font-mono text-sm md:text-base tracking-[0.3em] uppercase font-light">
-              {harmonyTitle}
-            </span>
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-20">
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-foreground/20 to-transparent" />
           </div>
 
           {/* Target Color (Right) */}
-          <div className="relative group flex flex-col items-center gap-6 transition-transform hover:scale-105 duration-700">
+          <div className="relative group flex flex-col items-center gap-8 transition-transform hover:scale-105 duration-700">
             <div className="relative">
               <div
-                className="w-40 h-40 md:w-56 md:h-56 rounded-full shadow-2xl border-4 border-background/50 transition-all duration-700"
+                className="w-32 h-32 md:w-40 md:h-40 rounded-full shadow-2xl border-4 border-background/50 transition-all duration-700"
                 style={{ backgroundColor: targetHex }}
               />
               <div className="absolute inset-0 rounded-full ring-1 ring-white/10" />
             </div>
-            <p className="font-serif text-base md:text-lg tracking-wide text-foreground">
+            <p className="font-serif text-sm md:text-base tracking-wide text-foreground/80">
               {targetName}
             </p>
           </div>
         </div>
 
+        {/* Harmony Type */}
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
+          <p className="font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground/60">
+            {harmonyTitle}
+          </p>
+        </div>
+
         {/* Description */}
-        <div className="max-w-xl space-y-6 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-700">
-          <div className="w-16 h-px bg-gradient-to-r from-transparent via-foreground/20 to-transparent mx-auto" />
-          <p className="text-lg font-serif italic text-muted-foreground leading-relaxed tracking-wide">
+        <div className="max-w-2xl space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-700">
+          <div className="w-20 h-px bg-gradient-to-r from-transparent via-foreground/20 to-transparent mx-auto" />
+          <p className="text-base md:text-lg font-serif italic text-muted-foreground/90 leading-relaxed tracking-wide px-4">
             {harmonyDesc}
           </p>
         </div>
 
         {/* Action Button */}
-        <div className="w-full max-w-xs pt-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-1000">
+        <div className="w-full max-w-xs pt-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-1000">
           <Button
             asChild
             variant="outline"
