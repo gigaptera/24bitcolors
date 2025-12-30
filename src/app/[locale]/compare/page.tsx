@@ -120,55 +120,78 @@ export default function ComparePage() {
   });
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center relative overflow-hidden text-foreground">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden pt-16 md:pt-0">
       <AmbientBackground hex={myHex} />
 
-      <main className="z-10 w-full max-w-4xl px-4 py-12 md:py-24 flex flex-col items-center">
-        <div className="mb-12 text-center animate-in fade-in slide-in-from-top-4 duration-1000">
-          <p className="text-xs font-mono tracking-[0.4em] opacity-60 uppercase mb-2">
+      <main className="z-10 w-full max-w-4xl px-6 py-12 flex flex-col items-center text-center space-y-16">
+        {/* Header Section */}
+        <div className="space-y-6 animate-in fade-in slide-in-from-top-4 duration-1000">
+          <p className="text-xs font-mono tracking-[0.4em] uppercase text-muted-foreground/60">
             Color Resonance
           </p>
-          <h1 className="text-5xl md:text-7xl font-serif font-thin">
+          <h1 className="text-6xl md:text-8xl font-serif tracking-wide font-light">
             {resonance?.score ?? 0}%
           </h1>
         </div>
 
-        <div className="relative w-full max-w-2xl aspect-square md:aspect-[2/1] flex items-center justify-center mb-12">
-          <div className="relative z-10 flex flex-col items-center gap-4 transition-transform hover:scale-105 duration-500">
-            <div
-              className="w-32 h-32 md:w-48 md:h-48 rounded-full shadow-2xl border-4 border-background/50"
-              style={{ backgroundColor: myHex }}
-            />
-            <p className="font-serif text-sm tracking-widest">{myName}</p>
+        {/* Color Comparison Visualization */}
+        <div className="relative w-full max-w-3xl flex items-center justify-center min-h-[400px] md:min-h-[300px] animate-in fade-in zoom-in duration-1000 delay-200">
+          {/* My Color (Left) */}
+          <div className="relative group flex flex-col items-center gap-6 transition-transform hover:scale-105 duration-700">
+            <div className="relative">
+              <div
+                className="w-40 h-40 md:w-56 md:h-56 rounded-full shadow-2xl border-4 border-background/50 transition-all duration-700"
+                style={{ backgroundColor: myHex }}
+              />
+              <div className="absolute inset-0 rounded-full ring-1 ring-white/10" />
+            </div>
+            <p className="font-serif text-base md:text-lg tracking-wide text-foreground">
+              {myName}
+            </p>
           </div>
 
-          <div className="absolute inset-0 flex items-center justify-center z-0">
-            <div className="w-full h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+          {/* Connection Line */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="w-full max-w-md h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent" />
           </div>
 
-          <div className="absolute z-20 bg-background/80 backdrop-blur-md px-6 py-2 rounded-full border border-white/20 shadow-lg animate-in zoom-in duration-500 delay-300">
-            <span className="font-mono text-xs md:text-sm tracking-widest uppercase">
+          {/* Harmony Badge */}
+          <div className="absolute z-30 bg-background/90 backdrop-blur-md px-8 py-3 rounded-full border border-white/20 shadow-2xl animate-in zoom-in duration-700 delay-500">
+            <span className="font-mono text-sm md:text-base tracking-[0.3em] uppercase font-light">
               {harmonyTitle}
             </span>
           </div>
 
-          <div className="relative z-10 flex flex-col items-center gap-4 transition-transform hover:scale-105 duration-500">
-            <div
-              className="w-32 h-32 md:w-48 md:h-48 rounded-full shadow-2xl border-4 border-background/50"
-              style={{ backgroundColor: targetHex }}
-            />
-            <p className="font-serif text-sm tracking-widest">{targetName}</p>
+          {/* Target Color (Right) */}
+          <div className="relative group flex flex-col items-center gap-6 transition-transform hover:scale-105 duration-700">
+            <div className="relative">
+              <div
+                className="w-40 h-40 md:w-56 md:h-56 rounded-full shadow-2xl border-4 border-background/50 transition-all duration-700"
+                style={{ backgroundColor: targetHex }}
+              />
+              <div className="absolute inset-0 rounded-full ring-1 ring-white/10" />
+            </div>
+            <p className="font-serif text-base md:text-lg tracking-wide text-foreground">
+              {targetName}
+            </p>
           </div>
         </div>
 
-        <div className="max-w-lg text-center mb-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
-          <p className="text-lg font-serif italic text-muted-foreground leading-relaxed">
+        {/* Description */}
+        <div className="max-w-xl space-y-6 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-700">
+          <div className="w-16 h-px bg-gradient-to-r from-transparent via-foreground/20 to-transparent mx-auto" />
+          <p className="text-lg font-serif italic text-muted-foreground leading-relaxed tracking-wide">
             {harmonyDesc}
           </p>
         </div>
 
-        <div className="flex flex-col gap-4 w-full max-w-xs">
-          <Button asChild variant="outline" className="w-full">
+        {/* Action Button */}
+        <div className="w-full max-w-xs pt-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-1000">
+          <Button
+            asChild
+            variant="outline"
+            className="w-full h-12 text-xs tracking-[0.2em] uppercase border-foreground/20 hover:bg-foreground hover:text-background transition-colors"
+          >
             <Link href={`/${myHex.replace("#", "")}`}>Back to My Color</Link>
           </Button>
         </div>
