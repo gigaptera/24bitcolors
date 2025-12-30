@@ -134,7 +134,7 @@ export default async function ResultPage({ params, searchParams }: Props) {
       />
 
       {/* Share Section and Buttons - Moved here */}
-      <div className="w-full max-w-md pt-16 pb-12 flex flex-col items-center space-y-6 z-10">
+      <div className="w-full max-w-md px-6 pt-16 pb-12 flex flex-col items-center space-y-6 z-10">
         {(() => {
           // Re-calculate OKLCH for the interaction component
           const c = toOklch(safeHex);
