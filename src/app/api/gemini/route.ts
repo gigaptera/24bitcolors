@@ -32,13 +32,12 @@ export async function GET(request: NextRequest) {
     }
 
     return NextResponse.json(insight);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("API Route Error:", error);
 
     // Return the specific error message to help debugging
-    return NextResponse.json(
-      { error: error.message || "Internal Server Error" },
-      { status: 500 }
-    );
+    const errorMessage =
+      error instanceof Error ? error.message : "Internal Server Error";
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

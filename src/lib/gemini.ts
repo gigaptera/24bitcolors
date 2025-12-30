@@ -59,7 +59,7 @@ export async function generateColorInsight(
 
     try {
       return JSON.parse(text) as ColorInsight;
-    } catch (parseError) {
+    } catch {
       console.error("Failed to parse Gemini JSON response:", text);
       throw new Error("Failed to parse AI response as JSON");
     }
