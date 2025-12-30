@@ -178,7 +178,7 @@ export function ResultInteraction({
         </div>
       )}
 
-      <div className="mb-8 w-full flex flex-col gap-4">
+      <div className="mb-8 w-full flex flex-col items-center gap-4">
         {/* Compare Button - ONLY if diagnosis exists and not comparing self */}
         {diagnosisId &&
           myHex &&
