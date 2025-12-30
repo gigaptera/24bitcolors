@@ -81,7 +81,7 @@ export function ColorInsightFetcher({
 
     if (isQuotaError) {
       return (
-        <div className="w-full max-w-5xl px-6 py-12 flex justify-center opacity-70">
+        <div className="w-full max-w-5xl px-6 py-12 flex justify-center opacity-70 relative z-10">
           <div className="bg-red-500/5 text-red-600/60 dark:text-red-400/60 px-6 py-4 rounded-sm text-[10px] font-mono tracking-widest text-center max-w-md border border-red-500/10 uppercase">
             Capacity Limit Reached.
             <br />
@@ -98,7 +98,7 @@ export function ColorInsightFetcher({
   // Initial Loading State (No data yet)
   if (loading && !hasData) {
     return (
-      <div className="w-full max-w-5xl px-6 py-24 flex justify-center opacity-50">
+      <div className="w-full max-w-5xl px-6 py-24 flex justify-center opacity-50 relative z-10">
         <div className="animate-pulse flex flex-col items-center gap-4">
           <div className="h-0.5 w-12 bg-foreground/20"></div>
           <span className="text-[10px] font-mono tracking-widest uppercase text-muted-foreground">
@@ -112,7 +112,7 @@ export function ColorInsightFetcher({
   if (!hasData) return null;
 
   return (
-    <div className="w-full max-w-5xl px-6 relative">
+    <div className="w-full max-w-5xl px-6 relative z-10">
       {/* If validating/re-fetching but we have stale data, optionally show a small indicator or nothing */}
       {/* {loading && <div className="absolute inset-0 bg-background/50 z-10" />} */}
       <ColorInsightSection insight={insight!} colorName={colorName} />
