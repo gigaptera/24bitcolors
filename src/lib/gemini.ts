@@ -1,10 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import type { ColorInsight } from "@/types";
 
-export interface ColorInsight {
-  psychology: string;
-  culture: string;
-  story: string;
-}
+export { type ColorInsight };
 
 /**
  * Generate deep insights for a color using Gemini API

@@ -160,15 +160,7 @@ export default async function ResultPage({ params, searchParams }: Props) {
       </div>
 
       {/* Ad Placement: After content, before very bottom */}
-      {/* Temporarily disabled pending AdSense approval
-      <div className="w-full max-w-5xl px-6 pb-24 flex justify-center animate-in fade-in duration-1000 delay-1000 z-10">
-        {/* <AdUnit
-          className="max-w-[728px] min-h-[90px]"
-          format="auto"
-          slotId="YOUR_ADSENSE_UNIT_ID"
-        /> */}
-      </div>
-      */}
+      {/* AdUnit temporarily disabled pending Google AdSense approval */}
     </div>
   );
 }
