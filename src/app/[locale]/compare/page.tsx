@@ -135,51 +135,57 @@ export default function ComparePage() {
         </div>
 
         {/* Color Comparison Visualization */}
-        <div className="relative w-full max-w-5xl flex items-center justify-between min-h-[300px] md:min-h-[250px] px-12 md:px-24 animate-in fade-in zoom-in duration-1000 delay-200">
-          {/* My Color (Left) */}
-          <div className="relative group flex flex-col items-center gap-8 transition-transform hover:scale-105 duration-700">
-            <div className="relative">
-              <div
-                className="w-32 h-32 md:w-40 md:h-40 rounded-full shadow-2xl border-4 border-background/50 transition-all duration-700"
-                style={{ backgroundColor: myHex }}
-              />
-              <div className="absolute inset-0 rounded-full ring-1 ring-white/10" />
+        <div className="w-full max-w-6xl space-y-12 animate-in fade-in zoom-in duration-1000 delay-200">
+          {/* Color Pair */}
+          <div className="flex items-center justify-between px-8 md:px-16">
+            {/* My Color (Left) - Circle then Info */}
+            <div className="flex items-center gap-6 md:gap-8 transition-transform hover:scale-105 duration-700">
+              <div className="relative group">
+                <div
+                  className="w-28 h-28 md:w-36 md:h-36 rounded-full shadow-2xl border-4 border-background/50 transition-all duration-700"
+                  style={{ backgroundColor: myHex }}
+                />
+                <div className="absolute inset-0 rounded-full ring-1 ring-white/10" />
+              </div>
+              <div className="flex flex-col items-start gap-1">
+                <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-muted-foreground/50">
+                  MY COLOR
+                </p>
+                <p className="font-serif text-lg md:text-xl tracking-wide text-foreground">
+                  {myName}
+                </p>
+                <p className="font-mono text-xs text-muted-foreground/60">
+                  {myHex.toUpperCase()}
+                </p>
+              </div>
             </div>
-            <div className="flex flex-col items-center gap-2">
-              <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-muted-foreground/50">
-                MY COLOR
-              </p>
-              <p className="font-serif text-sm md:text-base tracking-wide text-foreground/80">
-                {myName}
-              </p>
+
+            {/* Target Color (Right) - Info then Circle */}
+            <div className="flex items-center gap-6 md:gap-8 transition-transform hover:scale-105 duration-700">
+              <div className="flex flex-col items-end gap-1">
+                <p className="font-serif text-lg md:text-xl tracking-wide text-foreground">
+                  {targetName}
+                </p>
+                <p className="font-mono text-xs text-muted-foreground/60">
+                  {targetHex.toUpperCase()}
+                </p>
+              </div>
+              <div className="relative group">
+                <div
+                  className="w-28 h-28 md:w-36 md:h-36 rounded-full shadow-2xl border-4 border-background/50 transition-all duration-700"
+                  style={{ backgroundColor: targetHex }}
+                />
+                <div className="absolute inset-0 rounded-full ring-1 ring-white/10" />
+              </div>
             </div>
           </div>
 
-          {/* Target Color (Right) */}
-          <div className="relative group flex flex-col items-center gap-8 transition-transform hover:scale-105 duration-700">
-            <div className="relative">
-              <div
-                className="w-32 h-32 md:w-40 md:h-40 rounded-full shadow-2xl border-4 border-background/50 transition-all duration-700"
-                style={{ backgroundColor: targetHex }}
-              />
-              <div className="absolute inset-0 rounded-full ring-1 ring-white/10" />
-            </div>
-            <div className="flex flex-col items-center gap-2">
-              <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-transparent select-none">
-                SPACER
-              </p>
-              <p className="font-serif text-sm md:text-base tracking-wide text-foreground/80">
-                {targetName}
-              </p>
-            </div>
+          {/* Harmony Type - Centered between colors */}
+          <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
+            <p className="font-mono text-sm tracking-[0.3em] uppercase text-foreground/70">
+              {harmonyTitle}
+            </p>
           </div>
-        </div>
-
-        {/* Harmony Type */}
-        <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
-          <p className="font-mono text-sm tracking-[0.3em] uppercase text-foreground/70">
-            {harmonyTitle}
-          </p>
         </div>
 
         {/* Description */}
