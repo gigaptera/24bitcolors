@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { saveFeedback } from "@/lib/feedback";
 import { ShareCard } from "@/components/ShareCard";
 import { ShareActions } from "@/components/ShareActions";
@@ -32,23 +32,29 @@ export function ResultInteraction({
   const [justSubmitted, setJustSubmitted] = useState(false);
   const [showShareCard, setShowShareCard] = useState(false);
   const [reasonTags, setReasonTags] = useState<string[]>([]);
-  const [diagnosisId, setDiagnosisId] = useState<string | null>(null);
-  const diagnosisIdRef = useRef<string | undefined>(undefined);
+  // Helper for localStorage subscription
+  const subscribe = (callback: () => void) => {
+    window.addEventListener("storage", callback);
+    return () => window.removeEventListener("storage", callback);
+  };
 
-  // Load diagnosis ID
-  useEffect(() => {
-    const id = localStorage.getItem("lastDiagnosisId");
-    if (id) {
-      diagnosisIdRef.current = id;
-      setDiagnosisId(id);
-    }
-  }, []);
+  const diagnosisId = useSyncExternalStore(
+    subscribe,
+    () => localStorage.getItem("lastDiagnosisId"),
+    () => null
+  );
+
+  const myHex = useSyncExternalStore(
+    subscribe,
+    () => localStorage.getItem("lastDiagnosisHex"),
+    () => null
+  );
 
   const handleRatingSubmit = async () => {
     if (rating === null) return;
 
     await saveFeedback({
-      diagnosis_id: diagnosisIdRef.current,
+      diagnosis_id: diagnosisId ?? undefined,
       hex: hex,
       hue: resultColor?.hue ?? 0,
       lightness: resultColor?.lightness ?? 0,
@@ -174,13 +180,11 @@ export function ResultInteraction({
       <div className="mb-8 w-full flex flex-col gap-4">
         {/* Compare Button - ONLY if diagnosis exists and not comparing self */}
         {diagnosisId &&
-          localStorage.getItem("lastDiagnosisHex") &&
+          myHex &&
           // Ideally we check if hex === myHex to hide "Compare with me" if it's me
           // But simple check: safeHex (current page) vs lastDiagnosisHex
-          localStorage
-            .getItem("lastDiagnosisHex")
-            ?.replace("#", "")
-            .toUpperCase() !== hex.replace("#", "").toUpperCase() && (
+          myHex.replace("#", "").toUpperCase() !==
+            hex.replace("#", "").toUpperCase() && (
             <Button
               variant="default"
               className="w-full h-12 text-xs tracking-[0.2em] uppercase bg-foreground text-background hover:bg-foreground/90 transition-all font-serif"

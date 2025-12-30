@@ -40,10 +40,7 @@ export function calculateResonance(
   // 1. Calculate basic metrics
   const hueDiff = Math.abs((cA.hue || 0) - (cB.hue || 0));
   const hueDist = Math.min(hueDiff, 360 - hueDiff); // Shortest arc on color wheel
-  const dist = colorDistance(
-    { hue: cA.hue || 0, lightness: cA.l || 0, chroma: cA.c || 0, weight: 1 },
-    { hue: cB.hue || 0, lightness: cB.l || 0, chroma: cB.c || 0, weight: 1 }
-  );
+  const dist = colorDistance(cA, cB);
 
   // 2. Determine Harmony Type & Score Base
   let type: HarmonyType = "neutral";

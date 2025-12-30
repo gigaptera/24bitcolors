@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useSyncExternalStore } from "react";
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import { calculateResonance } from "@/lib/color-resonance";
@@ -13,10 +13,13 @@ export default function ComparePage() {
   const searchParams = useSearchParams();
   const t = useTranslations("Compare");
 
-  const [myHex, setMyHex] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  // Helper for localStorage subscription
+  const subscribe = (callback: () => void) => {
+    window.addEventListener("storage", callback);
+    return () => window.removeEventListener("storage", callback);
+  };
 
-  // 1. Get Target from URL (Derived directly)
+  // 1. Get Target from URL
   const targetParam = searchParams.get("target");
   const targetHex = useMemo(() => {
     return targetParam
@@ -26,31 +29,26 @@ export default function ComparePage() {
       : null;
   }, [targetParam]);
 
-  // 2. Get My Color from LocalStorage (Effect for client-side storage)
-  useEffect(() => {
+  // 2. Get My Color from LocalStorage using useSyncExternalStore
+  const getMyHex = () => {
+    if (typeof window === "undefined") return null;
     const storedJson = localStorage.getItem("lastDiagnosisResult");
     const storedHex = localStorage.getItem("lastDiagnosisHex");
 
-    let foundHex: string | null = null;
     if (storedJson) {
       try {
         const parsed = JSON.parse(storedJson);
-        if (parsed.hex) foundHex = parsed.hex;
+        if (parsed.hex) return parsed.hex;
       } catch (e) {
         console.error("Failed to parse lastDiagnosisResult", e);
       }
     }
-    if (!foundHex && storedHex) {
-      foundHex = storedHex;
-    }
+    return storedHex || null;
+  };
 
-    if (foundHex) {
-      setMyHex(foundHex);
-    }
-    setLoading(false);
-  }, []);
+  const myHex = useSyncExternalStore(subscribe, getMyHex, () => null);
 
-  // 3. Calculate Resonance (Derived)
+  // 3. Calculate Resonance (Derived) - MUST be called before any return
   const resonance = useMemo(() => {
     if (myHex && targetHex) {
       return calculateResonance(myHex, targetHex);
@@ -58,7 +56,15 @@ export default function ComparePage() {
     return null;
   }, [myHex, targetHex]);
 
-  if (loading) {
+  // Loading state handling (Mounted check)
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    // delay slightly to avoid synchronous setState warning and ensure hydration match
+    const timer = setTimeout(() => setIsMounted(true), 0);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!isMounted) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-black text-white" />
     );
