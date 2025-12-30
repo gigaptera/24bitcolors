@@ -31,12 +31,17 @@ export function ResultInteraction({
   const [submitted, setSubmitted] = useState(!fromDiagnosis);
   const [justSubmitted, setJustSubmitted] = useState(false);
   const [showShareCard, setShowShareCard] = useState(false);
+  const [reasonTags, setReasonTags] = useState<string[]>([]);
+  const [diagnosisId, setDiagnosisId] = useState<string | null>(null);
   const diagnosisIdRef = useRef<string | undefined>(undefined);
 
   // Load diagnosis ID
   useEffect(() => {
     const id = localStorage.getItem("lastDiagnosisId");
-    if (id) diagnosisIdRef.current = id;
+    if (id) {
+      diagnosisIdRef.current = id;
+      setDiagnosisId(id);
+    }
   }, []);
 
   const handleRatingSubmit = async () => {
@@ -49,6 +54,7 @@ export function ResultInteraction({
       lightness: resultColor?.lightness ?? 0,
       chroma: resultColor?.chroma ?? 0,
       rating,
+      reason_tags: reasonTags,
     });
 
     setSubmitted(true);
@@ -114,6 +120,39 @@ export function ResultInteraction({
               {ratingLabels[rating - 1].label}
             </div>
           )}
+
+          {/* Reason Tags for Low Rating */}
+          {rating && rating <= 3 && (
+            <div className="mb-6 animate-in fade-in slide-in-from-top-2">
+              <p className="mb-3 text-xs text-center text-muted-foreground">
+                {t("feedbackRequest")}
+              </p>
+              <div className="flex flex-wrap justify-center gap-2">
+                {["mismatch", "question", "ui", "performance", "other"].map(
+                  (tagKey) => (
+                    <button
+                      key={tagKey}
+                      onClick={() => {
+                        setReasonTags((prev) =>
+                          prev.includes(tagKey)
+                            ? prev.filter((t) => t !== tagKey)
+                            : [...prev, tagKey]
+                        );
+                      }}
+                      className={`px-3 py-1.5 text-xs border transition-colors rounded-full ${
+                        reasonTags.includes(tagKey)
+                          ? "bg-foreground text-background border-foreground"
+                          : "bg-transparent text-muted-foreground border-border hover:border-foreground/50"
+                      }`}
+                    >
+                      {t(`reasonTags.${tagKey}`)}
+                    </button>
+                  )
+                )}
+              </div>
+            </div>
+          )}
+
           <Button
             onClick={handleRatingSubmit}
             disabled={rating === null}
@@ -132,8 +171,27 @@ export function ResultInteraction({
         </div>
       )}
 
-      {/* Detail Button - ALWAYS VISIBLE */}
-      <div className="mb-12 w-full">
+      <div className="mb-8 w-full flex flex-col gap-4">
+        {/* Compare Button - ONLY if diagnosis exists and not comparing self */}
+        {diagnosisId &&
+          localStorage.getItem("lastDiagnosisHex") &&
+          // Ideally we check if hex === myHex to hide "Compare with me" if it's me
+          // But simple check: safeHex (current page) vs lastDiagnosisHex
+          localStorage
+            .getItem("lastDiagnosisHex")
+            ?.replace("#", "")
+            .toUpperCase() !== hex.replace("#", "").toUpperCase() && (
+            <Button
+              variant="default"
+              className="w-full h-12 text-xs tracking-[0.2em] uppercase bg-foreground text-background hover:bg-foreground/90 transition-all font-serif"
+              asChild
+            >
+              <Link href={`/compare?target=${hex.replace("#", "")}`}>
+                Compare with My Color (Beta)
+              </Link>
+            </Button>
+          )}
+
         <Button
           variant="outline"
           className="btn-museum h-12 w-full text-xs tracking-[0.2em] uppercase border-foreground/20 hover:bg-foreground hover:text-background transition-colors"

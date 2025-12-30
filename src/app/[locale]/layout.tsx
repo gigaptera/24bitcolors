@@ -58,30 +58,6 @@ export const viewport: { themeColor: string } = {
   themeColor: "#E8E8E8",
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  name: "24bitColors",
-  url: "https://24bitcolors.com",
-  applicationCategory: "LifestyleApplication",
-  operatingSystem: "Web",
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "JPY",
-  },
-  description:
-    "20の質問であなたの好きな色を1677万色の中から特定します。bit診断方式による色の好み診断。",
-  publisher: {
-    "@type": "Organization",
-    name: "24bitColors Team",
-    logo: {
-      "@type": "ImageObject",
-      url: "https://24bitcolors.com/icon",
-    },
-  },
-};
-
 export default async function LocaleLayout({ children, params }: Props) {
   // Ensure that the incoming `locale` is valid
   const { locale } = await params;
@@ -96,6 +72,30 @@ export default async function LocaleLayout({ children, params }: Props) {
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "24bitColors",
+    url: "https://24bitcolors.com",
+    applicationCategory: "LifestyleApplication",
+    operatingSystem: "Web",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "JPY",
+    },
+    description: t("description"),
+    publisher: {
+      "@type": "Organization",
+      name: "24bitColors Team",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://24bitcolors.com/icon",
+      },
+    },
+  };
 
   return (
     <html lang={locale}>

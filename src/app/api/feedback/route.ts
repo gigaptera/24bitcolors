@@ -48,6 +48,7 @@ export async function POST(request: NextRequest) {
       expected_color: body.expected_color || null,
       actual_impression: body.actual_impression || null,
       comment: body.comment || null,
+      reason_tags: body.reason_tags || null,
     });
 
     if (error) {

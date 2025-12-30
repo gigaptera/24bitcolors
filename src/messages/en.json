@@ -30,7 +30,7 @@
     "saved": "Saved!",
     "failed": "Failed to save",
     "heroTagline": "Discover Your True Color",
-    "heroDescription": "The color lying deep within your subconscious.\nBased on your answers to 20 questions,\nwe statistically identify the color you prefer most\nfrom 16.77 million possibilities.",
+    "heroDescription": "Discover the color that resonates with your soul.\nThrough 20 abstract questions, our algorithm unveils your subconscious preference from 16.77 million possibilities.\nNot just a test, but a journey to your true aesthetic.",
     "srOnlyTitle": "Free Color Diagnosis Test",
     "freeNoRegistration": "Free / No Registration",
     "conceptLabel": "The Concept",
@@ -146,6 +146,7 @@
     "labelYourTrueColor": "Your True Color",
     "labelColorSpace": "Color Space",
     "descBelongTo": "You belong to the color nebula\ncalled \"{groupName}\".",
+    "shareText": "My true color is {name} {hex}. Discover yours at the Digital Color Museum.",
     "feedbackQuestion": "How was this diagnosis result?",
     "msgSubmitted": "✓ Feedback submitted",
     "btnSubmit": "Rate and Proceed to Share",
@@ -158,6 +159,13 @@
       "r3": "Okay",
       "r4": "Close",
       "r5": "Perfect"
+    },
+    "reasonTags": {
+      "mismatch": "Color mismatch",
+      "question": "Question issue",
+      "ui": "UX/UI issue",
+      "performance": "Slow / Heavy",
+      "other": "Other"
     }
   },
   "ColorDetail": {
@@ -316,6 +324,26 @@
     "failed": "Failed to save",
     "shareImage": "Share Image",
     "saveImage": "Save Image"
+  },
+  "Compare": {
+    "harmonyTypes": {
+      "identity": "IDENTITY",
+      "complementary": "COMPLEMENTARY",
+      "analogous": "ANALOGOUS",
+      "triadic": "TRIADIC",
+      "vibrant": "VIBRANT",
+      "subtle": "SUBTLE",
+      "neutral": "NEUTRAL"
+    },
+    "harmonyDescriptions": {
+      "identity": "A destined match with the exact same sensibility.",
+      "complementary": "Opposites attract, creating a powerful resonance.",
+      "analogous": "Close wavelengths create a calm and unspoken understanding.",
+      "triadic": "Unique individualities maintaining an exquisite balance.",
+      "vibrant": "Strong contrast creates new energy and excitement.",
+      "subtle": "Similar yet distinct. Enjoy the delicate resonance.",
+      "neutral": "Independent and flat relationship, neither too close nor too far."
+    }
   },
   "Harmonies": {
     "title": "COLOR SCHEMES",

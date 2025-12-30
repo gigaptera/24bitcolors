@@ -10,7 +10,7 @@ import {
   Check,
   ShareNetwork,
 } from "@phosphor-icons/react";
-// import { useTranslations } from "next-intl"; // Not used currently
+import { useLocale } from "next-intl";
 
 interface ShareActionsProps {
   url: string;
@@ -19,7 +19,9 @@ interface ShareActionsProps {
 }
 
 export function ShareActions({ url, text, onShareImage }: ShareActionsProps) {
-  // const t = useTranslations("Share");
+  const locale = useLocale();
+  const hashtags =
+    locale === "ja" ? "24bitColors,色彩診断" : "24bitColors,ColorTest";
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -40,7 +42,7 @@ export function ShareActions({ url, text, onShareImage }: ShareActionsProps) {
   const handleXShare = () => {
     const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
       text
-    )}&url=${encodeURIComponent(url)}&hashtags=24bitColors`;
+    )}&url=${encodeURIComponent(url)}&hashtags=${hashtags}`;
     openWindow(shareUrl);
   };
 
