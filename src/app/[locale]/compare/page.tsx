@@ -164,9 +164,14 @@ export default function ComparePage() {
               />
               <div className="absolute inset-0 rounded-full ring-1 ring-white/10" />
             </div>
-            <p className="font-serif text-sm md:text-base tracking-wide text-foreground/80">
-              {targetName}
-            </p>
+            <div className="flex flex-col items-center gap-2">
+              <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-transparent select-none">
+                SPACER
+              </p>
+              <p className="font-serif text-sm md:text-base tracking-wide text-foreground/80">
+                {targetName}
+              </p>
+            </div>
           </div>
         </div>
 
