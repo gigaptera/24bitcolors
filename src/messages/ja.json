@@ -148,6 +148,12 @@
     "btnSubmit": "フィードバックを送信",
     "btnDetail": "詳細を見る",
     "feedbackRequest": "アルゴリズム精度向上のために\n詳細なフィードバックも歓迎します",
+    "aiInsightTitle": "Deep Dive into {colorName}",
+    "aiInsightSubtitle": "色彩の深層、文化の記憶",
+    "aiPsychology": "色彩心理",
+    "aiCulture": "文化的背景",
+    "aiStory": "色の物語",
+    "aiDisclaimer": "※この解説はAIによって生成されたものであり、その内容や解釈は色彩学や地域文化によって異なる場合があります。一つの視点としてお楽しみください。",
     "linkFeedbackForm": "詳細フィードバックフォームへ →",
     "ratingLabels": {
       "r1": "全然違う",

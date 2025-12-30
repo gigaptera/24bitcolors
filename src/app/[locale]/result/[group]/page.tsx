@@ -5,6 +5,8 @@ import { ResultInteraction } from "@/components/ResultInteraction";
 import { toOklch } from "@/lib/colorNaming";
 import { AmbientBackground } from "@/components/AmbientBackground";
 import { getTranslations } from "next-intl/server";
+import { generateColorInsight } from "@/lib/gemini";
+import { ColorInsightSection } from "@/components/ColorInsightSection";
 
 interface Props {
   params: Promise<{ group: string; locale: string }>;
@@ -77,8 +79,11 @@ export default async function ResultPage({ params, searchParams }: Props) {
 
   const { groupName, groupSlug } = getNearestPoeticName(safeHex);
 
+  // Fetch AI Insight
+  const insight = await generateColorInsight(safeHex, groupName, locale);
+
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden pt-16 md:pt-0">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden pt-16 md:pt-0 pb-32">
       {/* Background Ambience - theme-aware for text readability */}
       <AmbientBackground hex={safeHex} />
 
@@ -119,8 +124,6 @@ export default async function ResultPage({ params, searchParams }: Props) {
 
         {/* Share Section and Buttons */}
         <div className="w-full max-w-md pt-8 space-y-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500">
-          {/* Interactive Section (Rating -> Share -> Card) */}
-          {/* We need the full OKLCH object for the card generator */}
           {(() => {
             // Re-calculate OKLCH for the interaction component
             const c = toOklch(safeHex);
@@ -145,6 +148,13 @@ export default async function ResultPage({ params, searchParams }: Props) {
           })()}
         </div>
       </main>
+
+      {/* Dynamic AI Insights Section */}
+      {insight && (
+        <div className="w-full max-w-5xl px-6 animate-in fade-in duration-1000 delay-700">
+          <ColorInsightSection insight={insight} colorName={groupName} />
+        </div>
+      )}
     </div>
   );
 }

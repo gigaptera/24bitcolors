@@ -32,6 +32,10 @@ export function ResultInteraction({
   const [justSubmitted, setJustSubmitted] = useState(false);
   const [showShareCard, setShowShareCard] = useState(false);
   const [reasonTags, setReasonTags] = useState<string[]>([]);
+
+  const safeHex = hex.startsWith("#") ? hex : `#${hex}`;
+  const { groupName } = getNearestPoeticName(safeHex);
+
   // Helper for localStorage subscription
   const subscribe = (callback: () => void) => {
     window.addEventListener("storage", callback);
@@ -67,8 +71,6 @@ export function ResultInteraction({
     setJustSubmitted(true);
   };
 
-  const safeHex = hex.startsWith("#") ? hex : `#${hex}`;
-
   const ratingLabels = [
     { value: 1, emoji: "1", label: t("ratingLabels.r1") },
     { value: 2, emoji: "2", label: t("ratingLabels.r2") },
@@ -81,7 +83,6 @@ export function ResultInteraction({
     "#",
     ""
   )}`;
-  const { groupName } = getNearestPoeticName(safeHex);
   const shareText = t("shareText", { name: groupName, hex: safeHex });
 
   return (
