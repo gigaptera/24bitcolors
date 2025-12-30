@@ -135,7 +135,7 @@ export default function ComparePage() {
         </div>
 
         {/* Color Comparison Visualization */}
-        <div className="relative w-full max-w-4xl flex items-center justify-center min-h-[300px] md:min-h-[250px] animate-in fade-in zoom-in duration-1000 delay-200">
+        <div className="relative w-full max-w-5xl flex items-center justify-between min-h-[300px] md:min-h-[250px] px-12 md:px-24 animate-in fade-in zoom-in duration-1000 delay-200">
           {/* My Color (Left) */}
           <div className="relative group flex flex-col items-center gap-8 transition-transform hover:scale-105 duration-700">
             <div className="relative">
@@ -145,9 +145,14 @@ export default function ComparePage() {
               />
               <div className="absolute inset-0 rounded-full ring-1 ring-white/10" />
             </div>
-            <p className="font-serif text-sm md:text-base tracking-wide text-foreground/80">
-              {myName}
-            </p>
+            <div className="flex flex-col items-center gap-2">
+              <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-muted-foreground/50">
+                MY COLOR
+              </p>
+              <p className="font-serif text-sm md:text-base tracking-wide text-foreground/80">
+                {myName}
+              </p>
+            </div>
           </div>
 
           {/* Target Color (Right) */}
