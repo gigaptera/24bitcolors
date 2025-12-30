@@ -5,6 +5,14 @@ import { ResultInteraction } from "@/components/ResultInteraction";
 import { toOklch } from "@/lib/colorNaming";
 import { AmbientBackground } from "@/components/AmbientBackground";
 import { getTranslations } from "next-intl/server";
+import { ColorInsightFetcher } from "@/components/ColorInsightFetcher";
+// import { AdUnit } from "@/components/ads/AdUnit";
+
+// Force dynamic is NOT needed for the page itself anymore as we fetch client-side,
+// but keeping it 'auto' (default) is fine.
+// However, if we heavily rely on searchParams, 'force-dynamic' might prevent static generation issues.
+// Let's stick to default behavior or 'force-dynamic' if params vary widely.
+export const dynamic = "force-dynamic";
 
 interface Props {
   params: Promise<{ group: string; locale: string }>;
@@ -78,11 +86,11 @@ export default async function ResultPage({ params, searchParams }: Props) {
   const { groupName, groupSlug } = getNearestPoeticName(safeHex);
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden pt-16 md:pt-0">
+    <div className="min-h-screen w-full flex flex-col items-center justify-start relative pt-24 pb-32">
       {/* Background Ambience - theme-aware for text readability */}
       <AmbientBackground hex={safeHex} />
 
-      <main className="z-10 w-full max-w-3xl px-6 py-12 flex flex-col items-center text-center space-y-12">
+      <main className="z-10 w-full max-w-3xl px-6 flex flex-col items-center text-center space-y-12">
         {/* Color Card */}
         <div className="relative group">
           <div
@@ -93,7 +101,7 @@ export default async function ResultPage({ params, searchParams }: Props) {
         </div>
 
         {/* Text Content */}
-        <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
+        <div className="space-y-6">
           <p className="text-xs font-mono tracking-[0.4em] uppercase text-muted-foreground/60">
             {hex ? t("labelYourTrueColor") : t("labelColorSpace")}
           </p>
@@ -116,35 +124,43 @@ export default async function ResultPage({ params, searchParams }: Props) {
             </p>
           </div>
         </div>
-
-        {/* Share Section and Buttons */}
-        <div className="w-full max-w-md pt-8 space-y-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500">
-          {/* Interactive Section (Rating -> Share -> Card) */}
-          {/* We need the full OKLCH object for the card generator */}
-          {(() => {
-            // Re-calculate OKLCH for the interaction component
-            const c = toOklch(safeHex);
-            // Convert to OklchColor interface format {hue, lightness, chroma, weight}
-            const colorObj = c
-              ? {
-                  hue: c.h ?? 0,
-                  lightness: c.l ?? 0,
-                  chroma: c.c ?? 0,
-                  weight: 1,
-                }
-              : null;
-
-            return (
-              <ResultInteraction
-                hex={safeHex}
-                resultColor={colorObj}
-                groupSlug={groupSlug}
-                fromDiagnosis={from_diagnosis === "true"}
-              />
-            );
-          })()}
-        </div>
       </main>
+
+      {/* Dynamic AI Insights Section (Client Fetching) */}
+      <ColorInsightFetcher
+        hex={safeHex}
+        colorName={groupName}
+        locale={locale}
+      />
+
+      {/* Share Section and Buttons - Moved here */}
+      <div className="w-full max-w-md px-6 pt-16 pb-12 flex flex-col items-center space-y-6 z-10">
+        {(() => {
+          // Re-calculate OKLCH for the interaction component
+          const c = toOklch(safeHex);
+          // Convert to OklchColor interface format {hue, lightness, chroma, weight}
+          const colorObj = c
+            ? {
+                hue: c.h ?? 0,
+                lightness: c.l ?? 0,
+                chroma: c.c ?? 0,
+                weight: 1,
+              }
+            : null;
+
+          return (
+            <ResultInteraction
+              hex={safeHex}
+              resultColor={colorObj}
+              groupSlug={groupSlug}
+              fromDiagnosis={from_diagnosis === "true"}
+            />
+          );
+        })()}
+      </div>
+
+      {/* Ad Placement: After content, before very bottom */}
+      {/* AdUnit temporarily disabled pending Google AdSense approval */}
     </div>
   );
 }

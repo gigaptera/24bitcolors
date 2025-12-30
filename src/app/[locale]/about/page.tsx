@@ -45,10 +45,16 @@ export default function AboutPage() {
     url: "https://24bitcolors.com/about",
     mainEntity: {
       "@type": "Organization",
-      name: t("jsonLdName"),
+      name: "24bitColors",
       url: "https://24bitcolors.com",
       logo: "https://24bitcolors.com/icon.png",
       description: t("organizationDescription"),
+      contactPoint: {
+        "@type": "ContactPoint",
+        email: "contact@gigaptera.com",
+        contactType: "Customer Service",
+        availableLanguage: ["Japanese", "English"],
+      },
     },
   };
 
@@ -185,6 +191,64 @@ export default function AboutPage() {
               <div className="space-y-8 text-base leading-loose text-muted-foreground font-serif">
                 <p>{t("visionBody1")}</p>
                 <p>{t("visionBody2")}</p>
+              </div>
+            </div>
+          </section>
+
+          {/* SECTION 4: TEAM & CONTACT */}
+          <section className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 view-timeline-name:--reveal animate-in fade-in slide-in-from-bottom-12 duration-1000">
+            <div className="md:col-span-3 md:col-start-4 md:text-right">
+              <span className="text-[4rem] md:text-[6rem] leading-none font-serif text-foreground/5 block -mt-4 md:-mt-8">
+                04
+              </span>
+              <span className="block mt-2 text-[10px] font-mono tracking-[0.2em] text-muted-foreground uppercase">
+                {t("lblTeam")}
+              </span>
+            </div>
+
+            <div className="md:col-span-6 border-t border-foreground/10 pt-8 md:pt-0 md:border-t-0">
+              <h2 className="mb-8 text-3xl md:text-4xl font-serif text-foreground">
+                {t("teamTitle")}
+              </h2>
+              <div className="space-y-8 text-base leading-loose text-muted-foreground font-serif">
+                <p>{t("teamBody")}</p>
+              </div>
+
+              {/* Contact Section */}
+              <div className="mt-16 pt-8 border-t border-foreground/5">
+                <h3 className="mb-6 text-xl font-serif text-foreground">
+                  {t("contactTitle")}
+                </h3>
+                <p className="mb-8 text-sm leading-relaxed text-muted-foreground">
+                  {t("contactBody")}
+                </p>
+
+                <div className="flex flex-col gap-4">
+                  <Link
+                    href="/contact"
+                    className="group inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase border-b border-foreground/30 pb-1 hover:border-foreground transition-all w-fit"
+                  >
+                    <span>{t("ctaContact")}</span>
+                    <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Legal Links */}
+              <div className="mt-12 pt-6 border-t border-foreground/5 flex flex-wrap gap-4 text-xs text-muted-foreground">
+                <Link
+                  href="/privacy"
+                  className="hover:text-foreground transition-colors border-b border-transparent hover:border-foreground"
+                >
+                  {t("linkPrivacy")}
+                </Link>
+                <span className="text-muted-foreground/30">•</span>
+                <Link
+                  href="/terms"
+                  className="hover:text-foreground transition-colors border-b border-transparent hover:border-foreground"
+                >
+                  {t("linkTerms")}
+                </Link>
               </div>
             </div>
           </section>

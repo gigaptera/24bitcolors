@@ -21,7 +21,9 @@
     "description": "あなたの色の旅路。過去に選ばれた色彩のコレクションを確認できます。",
     "ogpSubtitle": "あなたの色パレット",
     "noHistory": "コレクションなし",
-    "viewAllHistory": "コレクションを見る"
+    "viewAllHistory": "コレクションを見る",
+    "seasonalTitle": "感性の変遷",
+    "seasonalDescription": "色彩の軌跡から読み解く、あなたの内面的な変化。"
   },
   "Home": {
     "heroTitle": "24bitColors",
@@ -66,6 +68,14 @@
     "visionBody2": "国境や言葉の壁を越えて、人々は何を美しいと感じるのか。\n「色」という共通言語を通じて、\n人間の感性の多様性と普遍性を可視化する。\nそれが私たちの描く未来図です。",
     "ctaStart": "診断を開始する",
     "ctaBack": "トップに戻る",
+    "lblTeam": "TEAM & CONTACT",
+    "teamTitle": "The Team",
+    "teamBody": "24bitColorsは、色彩科学と人間の感性の交差点を探求する個人プロジェクトです。デザイン、アルゴリズム、そしてユーザー体験のすべてに情熱を注いでいます。",
+    "contactTitle": "Get in Touch",
+    "contactBody": "ご質問、フィードバック、または単にご挨拶をしたい方は、お気軽にお問い合わせください。",
+    "ctaContact": "お問い合わせフォームへ",
+    "linkPrivacy": "プライバシーポリシー",
+    "linkTerms": "利用規約",
     "ogpSubtitle": "Find Your True Color"
   },
   "Contact": {
@@ -146,8 +156,15 @@
     "msgSubmitted": "✓ フィードバックを送信しました",
     "shareText": "{name} {hex} #24bitColors",
     "btnSubmit": "フィードバックを送信",
+    "btnCompare": "私の色と比較する (Beta)",
     "btnDetail": "詳細を見る",
     "feedbackRequest": "アルゴリズム精度向上のために\n詳細なフィードバックも歓迎します",
+    "aiInsightTitle": "Deep Dive into {colorName}",
+    "aiInsightSubtitle": "色彩の深層、文化の記憶",
+    "aiPsychology": "色彩心理",
+    "aiCulture": "文化的背景",
+    "aiStory": "色の物語",
+    "aiDisclaimer": "※この解説はAIによって生成されたものであり、その内容や解釈は色彩学や地域文化によって異なる場合があります。一つの視点としてお楽しみください。",
     "linkFeedbackForm": "詳細フィードバックフォームへ →",
     "ratingLabels": {
       "r1": "全然違う",
@@ -155,6 +172,13 @@
       "r3": "まあまあ",
       "r4": "近い",
       "r5": "ピッタリ"
+    },
+    "reasonTags": {
+      "mismatch": "イメージと違う",
+      "question": "質問が難しい",
+      "ui": "操作しにくい",
+      "performance": "重い・遅い",
+      "other": "その他"
     }
   },
   "ColorDetail": {
@@ -317,6 +341,33 @@
     "failed": "保存に失敗しました",
     "shareImage": "画像をシェア",
     "saveImage": "画像を保存"
+  },
+  "Compare": {
+    "harmonyTypes": {
+      "identity": "同一色",
+      "monochromatic": "モノクロマチック",
+      "analogous": "類似色",
+      "dyadic": "ダイアディック",
+      "triadic": "三角配色",
+      "split_complementary": "分立補色",
+      "complementary": "補色",
+      "tonal": "トナール",
+      "vibrant": "高コントラスト",
+      "neutral": "中性的"
+    },
+    "backToMyColor": "自分の色へ戻る",
+    "harmonyDescriptions": {
+      "identity": "まったく同じ色。完璧な調和を奏でます。",
+      "monochromatic": "同じ色相で、明度や彩度が繊細に響き合う洗練された調和です。",
+      "analogous": "言葉にしなくても通じ合える、穏やかで心地よい調和です。",
+      "dyadic": "直角に位置する2色が、動的で活発なエネルギーを生み出します。",
+      "triadic": "それぞれの個性が響き合い、バランスの取れた美しさを生み出します。",
+      "split_complementary": "対比と調和が絶妙に混ざり合う、ドラマチックな関係です。",
+      "complementary": "色相環で正反対に位置し、互いを鮮やかに引き立て合います。",
+      "tonal": "明るさや鮮やかさが揃うことで、色が美しく共鳴する穏やかな調和です。",
+      "vibrant": "高いコントラストが、新鮮な印象と活力を生み出します。",
+      "neutral": "それぞれの個性を保ちながら、自然に調和する関係です。"
+    }
   },
   "Harmonies": {
     "title": "COLOR SCHEMES",

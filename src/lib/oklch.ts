@@ -2,13 +2,32 @@
  * OKLCH色空間ユーティリティ
  * culoriライブラリを使用した正確な色変換
  */
-import { formatHex, clampChroma } from "culori";
+import { formatHex, clampChroma, converter, parse } from "culori";
+
+const fastOklch = converter("oklch");
 
 export interface OklchColor {
   hue: number; // 0-360
   lightness: number; // 0-1
   chroma: number; // 0-0.4
   weight: number; // 重み（診断用）
+}
+
+/**
+ * Hex文字列をOklchColorに変換
+ */
+export function toOklch(hex: string): OklchColor | null {
+  const parsed = parse(hex);
+  if (!parsed) return null;
+  const converted = fastOklch(parsed);
+  if (!converted) return null;
+
+  return {
+    hue: converted.h ?? 0,
+    lightness: converted.l ?? 0,
+    chroma: converted.c ?? 0,
+    weight: 1.0,
+  };
 }
 
 /**

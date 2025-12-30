@@ -14,6 +14,8 @@ export interface FeedbackEntry {
   expected_color?: string;
   actual_impression?: string;
   comment?: string;
+  reason_tags?: string[];
+
   timestamp?: string;
   userAgent?: string;
 }
@@ -40,6 +42,7 @@ export async function saveFeedback(
         expected_color: entry.expected_color,
         actual_impression: entry.actual_impression,
         comment: entry.comment,
+        reason_tags: entry.reason_tags,
       }),
     });
 
