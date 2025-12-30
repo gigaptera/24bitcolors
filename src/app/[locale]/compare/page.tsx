@@ -86,6 +86,8 @@ export default function ComparePage() {
   }
 
   // Case 2: Target exists, but I am not diagnosed
+  // If not diagnosed, we don't know "My Color", so we can't show resonance.
+  // We prompt the user to start diagnosis.
   if (!myHex) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-8 text-center relative overflow-hidden">
@@ -108,7 +110,7 @@ export default function ComparePage() {
   }
 
   // Case 3: Both exist -> Show Resonance
-  const { groupName: myName } = getNearestPoeticName(myHex);
+  const { groupName: myName, groupSlug: mySlug } = getNearestPoeticName(myHex);
   const { groupName: targetName } = getNearestPoeticName(targetHex);
 
   const typeKey = resonance?.harmonyType || "neutral";
@@ -142,7 +144,7 @@ export default function ComparePage() {
             <div className="flex items-center gap-6 md:gap-8 transition-transform hover:scale-105 duration-700 w-full md:w-auto">
               <div className="relative group shrink-0">
                 <div
-                  className="w-28 h-28 md:w-36 md:h-36 rounded-full shadow-2xl border-4 border-background/50 transition-all duration-700"
+                  className="w-28 h-28 md:w-36 md:h-36 rounded-full shadow-2xl border-4 border-background transition-all duration-700 floating-shadow"
                   style={{ backgroundColor: myHex }}
                 />
                 <div className="absolute inset-0 rounded-full ring-1 ring-white/10" />
@@ -172,7 +174,7 @@ export default function ComparePage() {
               </div>
               <div className="relative group shrink-0">
                 <div
-                  className="w-28 h-28 md:w-36 md:h-36 rounded-full shadow-2xl border-4 border-background/50 transition-all duration-700"
+                  className="w-28 h-28 md:w-36 md:h-36 rounded-full shadow-2xl border-4 border-background transition-all duration-700 floating-shadow"
                   style={{ backgroundColor: targetHex }}
                 />
                 <div className="absolute inset-0 rounded-full ring-1 ring-white/10" />
@@ -203,7 +205,9 @@ export default function ComparePage() {
             variant="outline"
             className="w-full h-12 text-xs tracking-[0.2em] uppercase border-foreground/20 hover:bg-foreground hover:text-background transition-colors"
           >
-            <Link href={`/${myHex.replace("#", "")}`}>Back to My Color</Link>
+            <Link href={`/result/${mySlug}?hex=${myHex.replace("#", "")}`}>
+              {t("backToMyColor")}
+            </Link>
           </Button>
         </div>
       </main>
