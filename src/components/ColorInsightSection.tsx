@@ -16,7 +16,7 @@ export function ColorInsightSection({
   const t = useTranslations("Result");
 
   return (
-    <div className="w-full mt-24 pt-16 border-t border-border/40 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+    <div className="w-full mt-24 pt-16 border-t border-border/40">
       {/* Section Header */}
       <div className="text-center mb-16">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 text-primary/70 text-[10px] tracking-[0.2em] uppercase font-mono mb-4 border border-primary/10">
