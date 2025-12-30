@@ -192,7 +192,7 @@ export function ResultInteraction({
               asChild
             >
               <Link href={`/compare?target=${hex.replace("#", "")}`}>
-                Compare with My Color (Beta)
+                {t("btnCompare")}
               </Link>
             </Button>
           )}

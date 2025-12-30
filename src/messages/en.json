@@ -152,6 +152,7 @@
     "feedbackQuestion": "How was this diagnosis result?",
     "msgSubmitted": "✓ Feedback submitted",
     "btnSubmit": "Rate and Proceed to Share",
+    "btnCompare": "Compare w/ My Color (Beta)",
     "btnDetail": "See Details",
     "feedbackRequest": "Help us improve the algorithm by providing detailed feedback.",
     "aiInsightTitle": "Deep Dive into {colorName}",

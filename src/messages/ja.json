@@ -148,6 +148,7 @@
     "msgSubmitted": "✓ フィードバックを送信しました",
     "shareText": "{name} {hex} #24bitColors",
     "btnSubmit": "フィードバックを送信",
+    "btnCompare": "私の色と比較する (Beta)",
     "btnDetail": "詳細を見る",
     "feedbackRequest": "アルゴリズム精度向上のために\n詳細なフィードバックも歓迎します",
     "aiInsightTitle": "Deep Dive into {colorName}",
