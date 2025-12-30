@@ -137,17 +137,17 @@ export default function ComparePage() {
         {/* Color Comparison Visualization */}
         <div className="w-full max-w-6xl space-y-12 animate-in fade-in zoom-in duration-1000 delay-200">
           {/* Color Pair */}
-          <div className="flex items-center justify-between px-8 md:px-16">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-16 md:gap-0 px-8 md:px-16">
             {/* My Color (Left) - Circle then Info */}
-            <div className="flex items-center gap-6 md:gap-8 transition-transform hover:scale-105 duration-700">
-              <div className="relative group">
+            <div className="flex items-center gap-6 md:gap-8 transition-transform hover:scale-105 duration-700 w-full md:w-auto">
+              <div className="relative group shrink-0">
                 <div
                   className="w-28 h-28 md:w-36 md:h-36 rounded-full shadow-2xl border-4 border-background/50 transition-all duration-700"
                   style={{ backgroundColor: myHex }}
                 />
                 <div className="absolute inset-0 rounded-full ring-1 ring-white/10" />
               </div>
-              <div className="flex flex-col items-start gap-1">
+              <div className="flex flex-col items-start gap-1 text-left">
                 <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-muted-foreground/50">
                   MY COLOR
                 </p>
@@ -161,8 +161,8 @@ export default function ComparePage() {
             </div>
 
             {/* Target Color (Right) - Info then Circle */}
-            <div className="flex items-center gap-6 md:gap-8 transition-transform hover:scale-105 duration-700">
-              <div className="flex flex-col items-end gap-1">
+            <div className="flex items-center gap-6 md:gap-8 transition-transform hover:scale-105 duration-700 w-full md:w-auto justify-end md:justify-start">
+              <div className="flex flex-col items-end gap-1 text-right">
                 <p className="font-serif text-lg md:text-xl tracking-wide text-foreground">
                   {targetName}
                 </p>
@@ -170,7 +170,7 @@ export default function ComparePage() {
                   {targetHex.toUpperCase()}
                 </p>
               </div>
-              <div className="relative group">
+              <div className="relative group shrink-0">
                 <div
                   className="w-28 h-28 md:w-36 md:h-36 rounded-full shadow-2xl border-4 border-background/50 transition-all duration-700"
                   style={{ backgroundColor: targetHex }}
