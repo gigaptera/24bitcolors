@@ -34,46 +34,46 @@ export function ColorInsightSection({
       {/* Insight Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto px-4">
         {/* Psychology */}
-        <div className="group space-y-4">
-          <div className="flex items-center gap-3 text-foreground/80">
-            <div className="p-2 rounded-none border border-border group-hover:border-foreground/20 transition-colors">
+        <div className="space-y-4">
+          <div className="flex items-center gap-3 text-foreground">
+            <div className="p-2 rounded-none border border-border">
               <Brain className="w-4 h-4 opacity-70" />
             </div>
             <h3 className="font-serif tracking-wider text-sm uppercase">
               {t("aiPsychology")}
             </h3>
           </div>
-          <p className="text-sm text-foreground/90 leading-relaxed font-serif transition-colors">
+          <p className="text-sm text-foreground leading-relaxed font-serif">
             {insight.psychology}
           </p>
         </div>
 
         {/* Culture */}
-        <div className="group space-y-4">
-          <div className="flex items-center gap-3 text-foreground/80">
-            <div className="p-2 rounded-none border border-border group-hover:border-foreground/20 transition-colors">
+        <div className="space-y-4">
+          <div className="flex items-center gap-3 text-foreground">
+            <div className="p-2 rounded-none border border-border">
               <Globe className="w-4 h-4 opacity-70" />
             </div>
             <h3 className="font-serif tracking-wider text-sm uppercase">
               {t("aiCulture")}
             </h3>
           </div>
-          <p className="text-sm text-foreground/90 leading-relaxed font-serif transition-colors">
+          <p className="text-sm text-foreground leading-relaxed font-serif">
             {insight.culture}
           </p>
         </div>
 
         {/* Story */}
-        <div className="group space-y-4">
-          <div className="flex items-center gap-3 text-foreground/80">
-            <div className="p-2 rounded-none border border-border group-hover:border-foreground/20 transition-colors">
+        <div className="space-y-4">
+          <div className="flex items-center gap-3 text-foreground">
+            <div className="p-2 rounded-none border border-border">
               <BookOpen className="w-4 h-4 opacity-70" />
             </div>
             <h3 className="font-serif tracking-wider text-sm uppercase">
               {t("aiStory")}
             </h3>
           </div>
-          <p className="text-sm text-foreground/90 leading-relaxed font-serif italic transition-colors">
+          <p className="text-sm text-foreground leading-relaxed font-serif italic">
             &quot;{insight.story}&quot;
           </p>
         </div>
