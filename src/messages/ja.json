@@ -21,7 +21,9 @@
     "description": "あなたの色の旅路。過去に選ばれた色彩のコレクションを確認できます。",
     "ogpSubtitle": "あなたの色パレット",
     "noHistory": "コレクションなし",
-    "viewAllHistory": "コレクションを見る"
+    "viewAllHistory": "コレクションを見る",
+    "seasonalTitle": "感性の変遷",
+    "seasonalDescription": "色彩の軌跡から読み解く、あなたの内面的な変化。"
   },
   "Home": {
     "heroTitle": "24bitColors",

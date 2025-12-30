@@ -21,7 +21,9 @@
     "description": "Your color journey. View your personal collection of colors.",
     "ogpSubtitle": "Your Personal Palette",
     "noHistory": "No collection yet",
-    "viewAllHistory": "View All Collections"
+    "viewAllHistory": "View All Collections",
+    "seasonalTitle": "Emotional Transition",
+    "seasonalDescription": "The trajectory of your colors reveals your inner shifts."
   },
   "Home": {
     "heroTitle": "24bitColors",
