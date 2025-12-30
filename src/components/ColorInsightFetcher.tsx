@@ -24,6 +24,11 @@ export function ColorInsightFetcher({
     let isMounted = true;
 
     const fetchInsight = async () => {
+      // Debug log to check what exactly is being sent
+      console.log(
+        `[Fetcher] Requesting insight for: ${hex}, Name: "${colorName}", Locale: ${locale}`
+      );
+
       try {
         const params = new URLSearchParams({
           hex: hex.replace("#", ""),
