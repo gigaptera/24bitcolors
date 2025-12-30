@@ -3,6 +3,7 @@
 import { useTheme } from "@/components/ThemeProvider";
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "@phosphor-icons/react";
+import { Button } from "@/components/ui/button";
 
 /**
  * Theme Toggle with Phosphor Icons
@@ -29,12 +30,13 @@ export function ThemeToggle() {
   const isDark = theme === "dark";
 
   return (
-    <button
+    <Button
+      variant="ghost"
+      size="icon"
       onClick={toggleTheme}
       type="button"
       title={isDark ? t("toggleThemeLight") : t("toggleThemeDark")}
       aria-label={t("toggleThemeLabel")}
-      className="flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-300 hover:bg-black/10 dark:hover:bg-white/10 text-foreground"
     >
       {isDark ? (
         <Moon
@@ -47,6 +49,6 @@ export function ThemeToggle() {
           className="h-5 w-5 animate-in zoom-in spin-in-90 duration-300"
         />
       )}
-    </button>
+    </Button>
   );
 }
