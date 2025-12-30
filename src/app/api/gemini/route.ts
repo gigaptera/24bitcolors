@@ -31,12 +31,21 @@ export async function GET(request: NextRequest) {
     // 1. Check Cache in Supabase
     // We select 'data' column where NAME and locale match
     // This allows sharing insights across the same color group (e.g., "Midnight Blue")
+    console.log(
+      `[Cache Lookup] Checking for name: "${name}", locale: "${locale}"`
+    );
     const { data: cachedData, error: cacheError } = await supabase
       .from("ai_insights")
       .select("data")
       .eq("name", name)
       .eq("locale", locale)
       .single();
+
+    if (cacheError) {
+      console.log(
+        `[Cache Lookup Error] Code: ${cacheError.code}, Msg: ${cacheError.message}`
+      );
+    }
 
     if (cachedData && !cacheError) {
       // Cache Hit! Return immediately
