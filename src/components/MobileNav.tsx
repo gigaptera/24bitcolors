@@ -6,8 +6,8 @@ import {
   SheetDescription,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
-import Link from "next/link";
+import { List } from "@phosphor-icons/react/dist/ssr";
+import { Link } from "@/i18n/routing";
 import { ThemeToggle } from "./ThemeToggle";
 import { LastDiagnosisLink } from "./LastDiagnosisLink";
 
@@ -15,8 +15,8 @@ export function MobileNav() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline" size="icon" className="md:hidden">
-          <Menu className="h-6 w-6" />
+        <Button variant="ghost" size="icon" className="md:hidden">
+          <List weight="light" className="h-6 w-6" />
           <span className="sr-only">Toggle menu</span>
         </Button>
       </SheetTrigger>

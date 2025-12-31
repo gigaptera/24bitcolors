@@ -51,6 +51,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       locale: locale,
       type: "website",
     },
+    twitter: {
+      card: "summary_large_image",
+      title: t("title"),
+      description: t("description"),
+    },
   };
 }
 

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArticleJsonLd } from "@/components/ArticleJsonLd";
 import { getTranslations } from "next-intl/server";
 import { useTranslations } from "next-intl";
+import { LogicFaqSection } from "@/components/LogicFaqSection";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -136,6 +137,9 @@ export default function DiagnosisLogicPage() {
             </div>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <LogicFaqSection />
 
         {/* Footer */}
         <div className="pt-12 flex justify-center opacity-70 hover:opacity-100 transition-opacity">
