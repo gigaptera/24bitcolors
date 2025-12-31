@@ -143,7 +143,16 @@
     "bodyEvolution": "This algorithm is not the final form. We adjust logic daily in response to feedback from users such as \"I want to choose more achromatic colors\" or \"Questions are too similar\". Your diagnosis results and impressions directly lead to accuracy improvement for someone else. Our exploration of color continues to evolve with you.",
     "linkFeedback": "Send Detailed Feedback",
     "backData": "← BACK TO DIAGNOSIS",
-    "ogpSubtitle": "The Logic"
+    "ogpSubtitle": "The Logic",
+    "faq": {
+      "title": "FAQ",
+      "q1": "Is it accurate with only 20 questions?",
+      "a1": "Yes. We calculate the 'question that narrows down candidates most' for each step, enabling efficient identification with few questions.",
+      "q2": "Does the result change with mood?",
+      "a2": "It may change slightly. However, drastic changes (e.g., Red to Blue) are rare; usually, it stays within similar hues or tones.",
+      "q3": "Can I use the result for design?",
+      "a3": "Absolutely. The result page provides color codes and harmonious schemes useful for web and graphic design."
+    }
   },
   "Diagnosis": {
     "title": "Free Color Diagnosis Test",

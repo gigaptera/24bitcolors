@@ -13,17 +13,15 @@ export const contentType = "image/png";
  * Night Museum style - minimal & elegant
  */
 export default async function Image() {
-  // 24 colors from hue wheel (0° to 345° in 15° increments)
-  const hue24 = Array.from({ length: 24 }, (_, i) => {
-    const hue = i * 15;
-    return `hsl(${hue}, 70%, 55%)`;
-  });
-
-  // Group into 6 sets of 4 (2x2 grids)
-  const colorGroups: string[][] = [];
-  for (let i = 0; i < 24; i += 4) {
-    colorGroups.push(hue24.slice(i, i + 4));
-  }
+  // Design System Colors (from icon.tsx)
+  const colors = [
+    { base: "#ef4444", light: "#f87171", dark: "#dc2626", lighter: "#fca5a5" }, // Red
+    { base: "#f59e0b", light: "#fbbf24", dark: "#d97706", lighter: "#fcd34d" }, // Orange/Yellow
+    { base: "#84cc16", light: "#a3e635", dark: "#65a30d", lighter: "#bef264" }, // Lime/Green
+    { base: "#06b6d4", light: "#22d3ee", dark: "#0891b2", lighter: "#67e8f9" }, // Cyan
+    { base: "#3b82f6", light: "#60a5fa", dark: "#2563eb", lighter: "#93c5fd" }, // Blue
+    { base: "#8b5cf6", light: "#a78bfa", dark: "#7c3aed", lighter: "#c4b5fd" }, // Purple
+  ];
 
   return new ImageResponse(
     (
@@ -35,7 +33,7 @@ export default async function Image() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#fcfcfc", // Slightly off-white
+          backgroundColor: "#fcfcfc",
           position: "relative",
         }}
       >
@@ -47,7 +45,7 @@ export default async function Image() {
             color: "#1a1a1a",
             letterSpacing: "0.05em",
             marginBottom: 60,
-            fontFamily: "Georgia, 'Times New Roman', Times, serif",
+            fontFamily: '"Times New Roman", Times, serif', // Matches Header.tsx
           }}
         >
           24bitColors
@@ -60,45 +58,69 @@ export default async function Image() {
             gap: 24,
             padding: 40,
             backgroundColor: "#fff",
-            boxShadow: "0 20px 60px -10px rgba(0,0,0,0.15)", // Card shadow
+            boxShadow: "0 20px 60px -10px rgba(0,0,0,0.15)",
             borderRadius: 4,
           }}
         >
-          {colorGroups.map((group, groupIndex) => (
+          {colors.map((group, groupIndex) => (
             <div
               key={groupIndex}
               style={{
                 display: "flex",
-                flexDirection: "column", // Vertical stacks looks like palettes
-                width: 60,
+                flexDirection: "row",
+                flexWrap: "wrap",
+                width: 128,
                 gap: 8,
               }}
             >
-              {group.map((color, colorIndex) => (
-                <div
-                  key={colorIndex}
-                  style={{
-                    width: 60,
-                    height: 60,
-                    backgroundColor: color,
-                    borderRadius: "50%", // Circles instead of squares
-                  }}
-                />
-              ))}
+              {/* 2x2 Grid per color group */}
+              <div
+                style={{
+                  width: 60,
+                  height: 60,
+                  backgroundColor: group.light,
+                  borderRadius: 4,
+                }}
+              />
+              <div
+                style={{
+                  width: 60,
+                  height: 60,
+                  backgroundColor: group.base,
+                  borderRadius: 4,
+                }}
+              />
+              <div
+                style={{
+                  width: 60,
+                  height: 60,
+                  backgroundColor: group.lighter,
+                  borderRadius: 4,
+                }}
+              />
+              <div
+                style={{
+                  width: 60,
+                  height: 60,
+                  backgroundColor: group.dark,
+                  borderRadius: 4,
+                }}
+              />
             </div>
           ))}
         </div>
 
-        {/* Footer Tagline */}
+        {/* Footer */}
         <div
           style={{
             position: "absolute",
             bottom: 60,
             fontSize: 24,
-            fontFamily: '"Courier New", Courier, monospace',
+            fontFamily: '"Times New Roman", Times, serif', // Unified font family
             color: "#808080",
             letterSpacing: "0.3em",
             textTransform: "uppercase",
+            opacity: 0.8,
           }}
         >
           Digital Color Museum

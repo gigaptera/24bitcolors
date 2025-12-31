@@ -30,6 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // 1. Static Pages
   addRoute("", 1, "weekly"); // Home
+  addRoute("/diagnosis", 0.9, "weekly");
   addRoute("/about", 0.8, "monthly");
   addRoute("/diagnosis/logic", 0.8, "monthly");
   addRoute("/diagnosis/logic/algorithm", 0.7, "monthly");

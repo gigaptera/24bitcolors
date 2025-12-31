@@ -8,6 +8,7 @@ import { Link, usePathname } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useTranslations } from "next-intl";
+import { MobileNav } from "./MobileNav";
 
 export function Header() {
   const pathname = usePathname();
@@ -71,6 +72,8 @@ export function Header() {
             {t("startDiagnosis")}
           </Link>
         </Button>
+
+        <MobileNav />
       </div>
     </header>
   );
